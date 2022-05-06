@@ -1,0 +1,2 @@
+-- local color = require("config").colorscheme
+-- pcall(vim.api.nvim_cmd, "colorscheme " .. color.theme_group)
