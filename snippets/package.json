@@ -1,0 +1,31 @@
+{
+  "name": "my-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "cpp",
+          "cc",
+          "hpp"
+        ],
+        "path": "./snippets/cpp.json"
+      },
+      {
+        "language": [
+          "lua"
+        ],
+        "path": "./snippets/lua.json"
+      },
+      {
+        "language": [
+          "markdown",
+          "md"
+        ],
+        "path": "./snippets/markdown.json"
+      }
+    ]
+  }
+}
