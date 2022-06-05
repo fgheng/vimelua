@@ -293,7 +293,13 @@ return require('packer').startup({ function(use)
     --         -- cmd = { 'CMake' }
     --     }
     -- }
-
+    use { 'michaelb/sniprun',
+        run = 'bash install.sh',
+        config = function()
+            require('plugins.project.sniprun')
+        end,
+        cmd = { 'SnipRun' }
+    }
     ----------------------------------------------------------------------
     --                              debug                               --
     ----------------------------------------------------------------------
