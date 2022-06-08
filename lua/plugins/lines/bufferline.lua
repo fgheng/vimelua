@@ -8,7 +8,7 @@ local icons_signs = require('plugins.theme.icons').signs
 
 bufferline.setup({
     options = {
-        mode = 'buffers', --'tabs', -- buffers
+        mode = 'tabs', --'tabs', -- buffers
         -- numbers = 'ordinal',
         numbers = function(opts)
             return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))

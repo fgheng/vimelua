@@ -8,6 +8,9 @@ vim.cmd [[
     let g:copilot_filtype = {
         \ 'TelescopePrompt': v:false,
         \ 'TelescopeResults': v:false,
+        \ 'dap-ui-debug-prompt': v:false,
+        \ 'dap-prompt': v:false,
+        \ 'prompt': v:false,
     \ }
 
     let g:copilot_no_tab_map = v:true

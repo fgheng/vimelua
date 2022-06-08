@@ -65,6 +65,7 @@ for _, name in ipairs(server_names) do
             end
         end,
         on_init = function (client)
+            -- FIX: 这里有时候提示error occured while processing CursorMoved autocommands for *
             vim.api.nvim_exec(
                 [[
                     augroup lsp_document_highlight
