@@ -1,7 +1,7 @@
-./plugin
-./plugin/*
-./plugin/packer_compiled.lua
-./test.lua
-./time.log
-./test.*
+plugin
+plugin/*
+plugin/packer_compiled.lua
+test.lua
+time.log
+test.*
 .luarc.json
