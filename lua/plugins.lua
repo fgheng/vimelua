@@ -4,7 +4,8 @@ local cmd = vim.cmd
 local packer_boot_strap = false
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-    packer_boot_strap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    packer_boot_strap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+        install_path })
     if packer_boot_strap then
         cmd [[packadd packer.nvim]]
     else
@@ -303,31 +304,41 @@ return require('packer').startup({ function(use)
     ----------------------------------------------------------------------
     --                              debug                               --
     ----------------------------------------------------------------------
-    use {
-        { 'mfussenegger/nvim-dap',
-            module = 'dap',
-            config = function()
-                require('plugins.debug.dap.dap-config')
-            end,
-            keys = {
-                '<F5>',
-                '<F6>',
-            }
-
+    -- use {
+        -- { 'mfussenegger/nvim-dap',
+        --     module = 'dap',
+        --     config = function()
+        --         require('plugins.debug.dap.dap-config')
+        --     end,
+        --     keys = {
+        --         '<F5>',
+        --         '<F6>',
+        --     }
+        --
+        -- },
+        -- { 'rcarriga/nvim-dap-ui',
+        --     config = function()
+        --         require('plugins.debug.dap.dap-ui')
+        --     end,
+        --     after = { 'nvim-dap' },
+        --     opt = true
+        -- },
+        -- { 'theHamsta/nvim-dap-virtual-text',
+        --     config = function()
+        --         require('plugins.debug.dap.nvim-dap-virtual-text')
+        --     end,
+        --     after = { 'nvim-dap' }
+        -- },
+    -- }
+    use { 'sakhnik/nvim-gdb',
+        config = function()
+            require('plugins.debug.nvim-gdb')
+        end,
+        run = 'install.sh',
+        keys = {
+            '<F4>',
         },
-        { 'rcarriga/nvim-dap-ui',
-            config = function()
-                require('plugins.debug.dap.dap-ui')
-            end,
-            after = { 'nvim-dap' },
-            opt = true
-        },
-        { 'theHamsta/nvim-dap-virtual-text',
-            config = function()
-                require('plugins.debug.dap.nvim-dap-virtual-text')
-            end,
-            after = { 'nvim-dap' }
-        },
+        cmd = { 'GdbStart', 'GdbStartLLDB', 'GdbStartPDB', 'GdbStartBashDB' }
     }
 
     ----------------------------------------------------------------------
@@ -643,11 +654,11 @@ return require('packer').startup({ function(use)
         require('packer').sync()
     end
 end,
-config = { -- packer using float window
-    display = {
-        open_fn = function()
-            return require('packer.util').float({ border = 'single' })
-        end
+    config = { -- packer using float window
+        display = {
+            open_fn = function()
+                return require('packer.util').float({ border = 'single' })
+            end
+        }
     }
-}
 })
