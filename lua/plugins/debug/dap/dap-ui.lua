@@ -8,29 +8,33 @@ dapui.setup({
     icons = { expanded = '▾', collapsed = '▸' },
     mappings = {
         -- Use a table to apply multiple mappings
-        expand = { 'l', 'o', '<2-LeftMouse>' },
+        expand = { 'o', '<2-LeftMouse>' },
         open = { 'O', '<CR>' },
         remove = 'd',
         edit = 'e',
         repl = 'r',
         toggle = 't',
     },
-    sidebar = {
-        -- You can change the order of elements in the sidebar
-        elements = {
-            -- Provide as ID strings or tables with 'id' and 'size' keys
-            { id = 'breakpoints', size = 0.15 },
-            { id = 'watches', size = 0.15 },
-            { id = 'stacks', size = 0.35 },
-            { id = 'scopes', size = 0.35 }, -- Can be float or integer > 1
+    layouts = {
+        {
+            elements = {
+                -- Provide as ID strings or tables with 'id' and 'size' keys
+                { id = 'breakpoints', size = 0.15 },
+                { id = 'watches', size = 0.15 },
+                { id = 'stacks', size = 0.35 },
+                { id = 'scopes', size = 0.35 }, -- Can be float or integer > 1
+            },
+            size = 40,
+            position = 'left', -- Can be 'left', 'right', 'top', 'bottom'
         },
-        size = 40,
-        position = 'left', -- Can be 'left', 'right', 'top', 'bottom'
-    },
-    tray = {
-        elements = { 'repl' },
-        size = 15,
-        position = 'bottom', -- Can be 'left', 'right', 'top', 'bottom'
+        {
+            elements = {
+                "repl",
+                "console",
+            },
+            size = 10,
+            position = "bottom",
+        }
     },
     floating = {
         max_height = nil, -- These can be integers or a float between 0 and 1.
@@ -41,6 +45,9 @@ dapui.setup({
         },
     },
     windows = { indent = 1 },
+    render = {
+        max_type_length = nil, -- Can be integer or nil.
+    }
 })
 
 
