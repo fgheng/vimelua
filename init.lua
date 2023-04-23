@@ -2,6 +2,7 @@ require("core")
 require("plugins")
 require("ui")
 
+
 if vim.g.neovide then
     vim.defer_fn(function()
         local g = vim.g
