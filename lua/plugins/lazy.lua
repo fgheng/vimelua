@@ -49,14 +49,12 @@ require("lazy").setup(
             "kosayoda/nvim-lightbulb",
             enabled = true,
             config = function()
-                -- vim.defer_fn(function()
-                --     require("plugins.lsp.nvim-lightbulb")
-                -- end, 100)
                 vim.schedule(function()
                     require("plugins.lsp.nvim-lightbulb")
                 end)
             end,
-            event = { "InsertEnter", "CursorMoved" },
+            -- event = { "InsertEnter", "CursorMoved" },
+            event = { "LspAttach" },
         },
         {
             "weilbith/nvim-code-action-menu",
@@ -97,6 +95,28 @@ require("lazy").setup(
                 require("plugins.lsp.lsp_lines")
             end,
             event = { "InsertEnter", "CursorMoved" },
+        },
+        -- 1. rename
+        -- 2. code action
+        -- 3. definition reference
+        -- 4. hover
+        -- 5. signature help
+        -- 6. lightbulb
+        -- 7. outline
+        {
+            "glepnir/lspsaga.nvim",
+            enabled = false,
+            config = function()
+                vim.schedule(function()
+                    require("plugins.lsp.lspsaga")
+                end)
+            end,
+            dependencies = {
+                { "nvim-tree/nvim-web-devicons" },
+                --Please make sure you install markdown and markdown_inline parser
+                { "nvim-treesitter/nvim-treesitter" },
+            },
+            event = "LspAttach",
         },
 
         ----------------------------------------------------------------------
@@ -268,7 +288,7 @@ require("lazy").setup(
                 require("plugins.file_explorer.nvim-tree")
             end,
             dependencies = {
-                { "kyazdani42/nvim-web-devicons" },
+                { "nvim-tree/nvim-web-devicons" },
             },
             cmd = { "NvimTreeOpen", "NvimTreeToggle" },
             keys = { "<F2>", "<leader>e" },
@@ -345,7 +365,7 @@ require("lazy").setup(
             "sindrets/diffview.nvim",
             dependencies = {
                 { "nvim-lua/plenary.nvim" },
-                { "kyazdani42/nvim-web-devicons" },
+                { "nvim-tree/nvim-web-devicons" },
             },
             config = function()
                 require("plugins.git.diffview")
@@ -456,6 +476,15 @@ require("lazy").setup(
             },
         },
         {
+            "chomosuke/term-edit.nvim",
+            lazy = true,
+            ft = { "toggleterm", "floaterm" },
+            version = "1.*",
+            config = function()
+                require("plugins.editor.term-edit")
+            end,
+        },
+        {
             "samjwill/nvim-unception",
             enabled = false,
             init = function() end,
@@ -468,15 +497,6 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         --                          editor support                          --
         ----------------------------------------------------------------------
-        {
-            "chomosuke/term-edit.nvim",
-            lazy = true,
-            ft = { "toggleterm", "floaterm" },
-            version = "1.*",
-            config = function()
-                require("plugins.editor.term-edit")
-            end,
-        },
         {
             "famiu/bufdelete.nvim",
             cmd = { "Bdelete", "Bwipeout" },
@@ -494,6 +514,7 @@ require("lazy").setup(
         {
             "nvim-treesitter/nvim-treesitter",
             enabled = true,
+            lazy = true,
             config = function()
                 vim.defer_fn(function()
                     require("plugins.editor.nvim-treesitter")
@@ -510,13 +531,7 @@ require("lazy").setup(
                 { "nvim-treesitter/nvim-treesitter-context" },
                 { "andymass/vim-matchup" },
             },
-            -- event = { "BufRead" },
-            -- event = { "VeryLazy" },
-            event = {
-                "InsertEnter",
-                "CursorMoved",
-                "WinScrolled",
-            },
+            event = { "LspAttach" },
         },
         {
             "andymass/vim-matchup",
@@ -537,7 +552,8 @@ require("lazy").setup(
                     require("plugins.editor.vim-illuminate")
                 end, 10)
             end,
-            event = { "CursorMoved" },
+            -- event = { "CursorMoved" },
+            event = { "LspAttach" },
         },
         {
             "tzachar/local-highlight.nvim",
@@ -912,7 +928,7 @@ require("lazy").setup(
         --                              ui                               --
         ----------------------------------------------------------------------
         {
-            "kyazdani42/nvim-web-devicons",
+            "nvim-tree/nvim-web-devicons",
             lazy = true,
         },
         {
@@ -994,7 +1010,7 @@ require("lazy").setup(
                 end)
             end,
             dependencies = {
-                { "kyazdani42/nvim-web-devicons" },
+                { "nvim-tree/nvim-web-devicons" },
                 { "arkav/lualine-lsp-progress" },
                 -- { "SmiteshP/nvim-navic" },
             },
@@ -1021,7 +1037,7 @@ require("lazy").setup(
                 end)
             end,
             dependencies = {
-                "kyazdani42/nvim-web-devicons",
+                "nvim-tree/nvim-web-devicons",
             },
             -- event = { "WinNew" },
             -- event = { "BufAdd" },
