@@ -7,7 +7,7 @@ require("colorful-winsep").setup({
     -- timer refresh rate
     interval = 30,
     -- This plugin will not be activated for filetype in the following table.
-    no_exec_files = { "packer", "TelescopePrompt", "mason", "CompetiTest", "NvimTree", "neo-tree" },
+    no_exec_files = { "packer", "TelescopePrompt", "mason", "CompetiTest" },
     -- Symbols for separator lines, the order: horizontal, vertical, top left, top right, bottom left, bottom right.
     symbols = { "━", "┃", "┏", "┓", "┗", "┛" },
     close_event = function()

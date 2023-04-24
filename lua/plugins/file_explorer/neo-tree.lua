@@ -292,9 +292,7 @@ local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "<F2>", "<cmd>NeoTreeRevealToggle<cr>", opts)
 vim.keymap.set("n", "<leader>e", function()
-    vim.ui.input({ prompt = "open([dir, git_base](dir), [position](left)): ", default = "" }, function(input)
-        if input ~= nil then
-            vim.api.nvim_command("Neotree " .. input)
-        end
+    vim.ui.input({ prompt = "NeoTree", default = "" }, function(input)
+        vim.api.nvim_command("Neotree " .. input)
     end)
 end, opts)

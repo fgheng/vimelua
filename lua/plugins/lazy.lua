@@ -755,7 +755,7 @@ require("lazy").setup(
         },
         {
             "nvim-zh/colorful-winsep.nvim",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.windows.colorful-winsep")
             end,
