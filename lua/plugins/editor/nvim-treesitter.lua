@@ -9,19 +9,9 @@ treesitter_config.setup({
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
-        -- disable = {'css', 'markdown'}
-        disable = disable_languages,
-        -- function(lang, bufnr)
-        -- if vim.bo.filetype == "help" then
-        --     return true
-        -- elseif vim.bo.filetype == "txt" then
-        --     return true
-        -- elseif vim.bo.filetype == "norg" then
-        --     return true
-        -- else
-        --     return false
-        -- end
-        -- end,
+        disable = function (lang, bufnr)
+            return vim.api.nvim_buf_line_count(bufnr) > 3000
+        end
     },
 
     indent = {
