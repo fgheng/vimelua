@@ -1,41 +1,16 @@
 ----------------------------------------------------------------------
---                      mason-lspconfig config                      --
+--                            lsp config                            --
 ----------------------------------------------------------------------
--- local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
--- if not mason_lspconfig_ok then
---     vim.notify("mason-lspconfig not found")
---     return
--- end
-local mason_lspconfig = require("mason-lspconfig")
-
-local server_names = require("config").lsp_servers
-mason_lspconfig.setup({
-    ensure_installed = server_names,
-})
-
--- ----------------------------------------------------------------------
--- --              some plugins that depends on lspconfig              --
--- ----------------------------------------------------------------------
--- local navic_ok, navic = pcall(require, 'nvim-navic')
-
-----------------------------------------------------------------------
---                         nvim-lsp config                          --
-----------------------------------------------------------------------
--- local lsp_config_ok, lspconfig = pcall(require, "lspconfig")
--- if not lsp_config_ok then
---     vim.notify("lspconfig not found")
---     return
--- end
 local lspconfig = require("lspconfig")
-
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-mason_lspconfig.setup_handlers({
+local handlers = {
     function(server_name) -- default handler (optional)
         if server_name ~= "jdtls" then
             lspconfig[server_name].setup({
-                -- on_init = function(client) end,
-                -- on_attach = function(client, bufnr) end,
+                on_init = function(client)
+                    -- vim.lsp.buf_attach_client(0, client)
+                end,
+                on_attach = function(client, bufnr)
+                end,
             })
         end
     end,
@@ -123,6 +98,16 @@ mason_lspconfig.setup_handlers({
     --         single_file_support = true
     --     })
     -- end
+}
+
+----------------------------------------------------------------------
+--                           mason-config                           --
+----------------------------------------------------------------------
+local mason_lspconfig = require("mason-lspconfig")
+local server_names = require("config").lsp_servers
+mason_lspconfig.setup({
+    ensure_installed = server_names,
+    handlers = handlers,
 })
 
 vim.defer_fn(function()
@@ -145,7 +130,7 @@ vim.defer_fn(function()
     keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
     vim.keymap.set("n", "K", function()
         if vim.bo.filetype == "help" then
-            vim.api.nvim_command("tag " .. vim.fn.expand("<cword>"))
+            vim.api.nvim_feedkeys("<c-]>", "n", true)
         else
             vim.lsp.buf.hover()
         end

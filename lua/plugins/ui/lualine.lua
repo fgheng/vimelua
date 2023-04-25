@@ -197,6 +197,7 @@ local noice_command = {
     cond = function()
         return package.loaded["noice"] and require("noice").api.status.command.has()
     end,
+    color = { fg = "ff9e64" },
 }
 
 local noice_mode = {
@@ -206,6 +207,17 @@ local noice_mode = {
     cond = function()
         return package.loaded["noice"] and require("noice").api.status.mode.has()
     end,
+}
+
+local noice_msg = {
+    require("noice").api.status.message.get_hl,
+    cond = require("noice").api.status.message.has
+}
+
+local noice_search = {
+    require("noice").api.status.search.get,
+    cond = require("noice").api.status.search.has,
+    color = { fg = "ff9e64" },
 }
 
 ----------------------------------------------------------------------
@@ -244,6 +256,8 @@ lualine.setup({
             lsp_progress,
         },
         lualine_x = {
+            noice_msg,
+            noice_search,
             noice_command,
             noice_mode,
             lazy,
@@ -252,7 +266,7 @@ lualine.setup({
             "fileformat",
             filetype,
 
-            "searchcount",
+            -- "searchcount",
             progress,
 
             location,

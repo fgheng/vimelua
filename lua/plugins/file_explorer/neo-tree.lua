@@ -168,8 +168,8 @@ neo_tree.setup({
             ["<c-t>"] = "open_tabnew",
             ["h"] = "close_node",
             ["H"] = "close_all_subnodes",
-            ["z"] = "close_all_nodes",
-            ["Z"] = "expand_all_nodes",
+            -- ["z"] = "close_all_nodes",
+            -- ["Z"] = "expand_all_nodes",
             ["a"] = {
                 "add",
                 config = {
