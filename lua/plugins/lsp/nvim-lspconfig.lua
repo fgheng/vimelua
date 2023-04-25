@@ -143,6 +143,13 @@ vim.defer_fn(function()
     keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
     keymap("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
     keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+    vim.keymap.set("n", "K", function()
+        if vim.bo.filetype == "help" then
+            vim.api.nvim_command("tag " .. vim.fn.expand("<cword>"))
+        else
+            vim.lsp.buf.hover()
+        end
+    end, opts)
     keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
     keymap("n", "?", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
     -- keymap("n", "<m-j>", "<cmd>lua vim.diagnostic.goto_next({float = false})<cr>", opts)
