@@ -7,7 +7,7 @@ require("notify").setup({
     minimum_width = 50,
     timeout = 5000,
     top_down = false,
-    fps = 60,
+    fps = 30,
     on_open = function(win)
         vim.api.nvim_win_set_config(win, { zindex = 1000 })
     end,

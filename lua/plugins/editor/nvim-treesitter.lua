@@ -10,7 +10,7 @@ treesitter_config.setup({
         enable = true,
         additional_vim_regex_highlighting = false,
         disable = function (lang, bufnr)
-            return vim.api.nvim_buf_line_count(bufnr) > 3000
+            return vim.api.nvim_buf_line_count(bufnr) > 2000
         end
     },
 

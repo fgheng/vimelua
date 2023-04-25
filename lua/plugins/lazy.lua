@@ -948,7 +948,7 @@ require("lazy").setup(
         },
         {
             "rcarriga/nvim-notify",
-            enabled = true,
+            enabled = false,
             lazy = true,
             config = function()
                 if vim.g.neovide then
