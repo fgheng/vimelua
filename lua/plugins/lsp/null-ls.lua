@@ -79,46 +79,46 @@ vim.defer_fn(function()
     end
 end, 10)
 
-----------------------------------------------------------------------
---                             key map                              --
-----------------------------------------------------------------------
-local keymap_func = function(client, bufnr)
-    local opts = { silent = true, noremap = true }
-    -- local keymap = vim.api.nvim_set_keymap
-    -- keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({async = false})<cr>", opts)
-    -- keymap("v", "<leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", opts)
-
-    vim.keymap.set("n", "<leader>f", function()
-        local buf = vim.api.nvim_get_current_buf()
-        local ft = vim.bo[buf].filetype
-        local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
-
-        vim.lsp.buf.format({
-            filter = function(client)
-                if have_nls then
-                    -- apply whatever logic you want (in this example, we'll only use null-ls)
-                    return client.name == "null-ls"
-                end
-                return client.name ~= "null-ls"
-            end,
-        })
-    end, opts)
-
-    vim.keymap.set("v", "<leader>f", function()
-        local buf = vim.api.nvim_get_current_buf()
-        local ft = vim.bo[buf].filetype
-        local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
-
-        vim.lsp.buf.format({
-            filter = function(client)
-                if have_nls then
-                    -- apply whatever logic you want (in this example, we'll only use null-ls)
-                    return client.name == "null-ls"
-                end
-                return client.name ~= "null-ls"
-            end,
-        })
-    end, opts)
-end
-
-require("utils").on_attach(keymap_func)
+-- ----------------------------------------------------------------------
+-- --                             key map                              --
+-- ----------------------------------------------------------------------
+-- local keymap_func = function(client, bufnr)
+--     local opts = { silent = true, noremap = true }
+--     -- local keymap = vim.api.nvim_set_keymap
+--     -- keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({async = false})<cr>", opts)
+--     -- keymap("v", "<leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", opts)
+--
+--     vim.keymap.set("n", "<leader>f", function()
+--         local buf = vim.api.nvim_get_current_buf()
+--         local ft = vim.bo[buf].filetype
+--         local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+--
+--         vim.lsp.buf.format({
+--             filter = function(client)
+--                 if have_nls then
+--                     -- apply whatever logic you want (in this example, we'll only use null-ls)
+--                     return client.name == "null-ls"
+--                 end
+--                 return client.name ~= "null-ls"
+--             end,
+--         })
+--     end, opts)
+--
+--     vim.keymap.set("v", "<leader>f", function()
+--         local buf = vim.api.nvim_get_current_buf()
+--         local ft = vim.bo[buf].filetype
+--         local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+--
+--         vim.lsp.buf.format({
+--             filter = function(client)
+--                 if have_nls then
+--                     -- apply whatever logic you want (in this example, we'll only use null-ls)
+--                     return client.name == "null-ls"
+--                 end
+--                 return client.name ~= "null-ls"
+--             end,
+--         })
+--     end, opts)
+-- end
+--
+-- require("utils").on_attach(keymap_func)

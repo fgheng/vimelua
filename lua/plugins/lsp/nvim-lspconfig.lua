@@ -66,36 +66,36 @@ local key_map_function = function(_, bufnr)
     keymap("n", "?", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
     keymap("n", "<m-j>", "<cmd>lua vim.diagnostic.goto_next({float = true})<cr>", opts)
     keymap("n", "<m-k>", "<cmd>lua vim.diagnostic.goto_prev({float = true})<cr>", opts)
-    -- keymap("n", "<leader>f", function()
-    --     local buf = vim.api.nvim_get_current_buf()
-    --     local ft = vim.bo[buf].filetype
-    --     local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
-    --
-    --     vim.lsp.buf.format({
-    --         filter = function(client)
-    --             if have_nls then
-    --                 -- apply whatever logic you want (in this example, we'll only use null-ls)
-    --                 return client.name == "null-ls"
-    --             end
-    --             return client.name ~= "null-ls"
-    --         end,
-    --     })
-    -- end, opts)
-    -- vim.keymap.set("v", "<leader>f", function()
-    --     local buf = vim.api.nvim_get_current_buf()
-    --     local ft = vim.bo[buf].filetype
-    --     local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
-    --
-    --     vim.lsp.buf.format({
-    --         filter = function(client)
-    --             if have_nls then
-    --                 -- apply whatever logic you want (in this example, we'll only use null-ls)
-    --                 return client.name == "null-ls"
-    --             end
-    --             return client.name ~= "null-ls"
-    --         end,
-    --     })
-    -- end, opts)
+    keymap("n", "<leader>f", function()
+        local buf = vim.api.nvim_get_current_buf()
+        local ft = vim.bo[buf].filetype
+        local have_nls = package.loaded["null-ls"] and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+
+        vim.lsp.buf.format({
+            filter = function(client)
+                if have_nls then
+                    -- apply whatever logic you want (in this example, we'll only use null-ls)
+                    return client.name == "null-ls"
+                end
+                return client.name ~= "null-ls"
+            end,
+        })
+    end, opts)
+    vim.keymap.set("v", "<leader>f", function()
+        local buf = vim.api.nvim_get_current_buf()
+        local ft = vim.bo[buf].filetype
+        local have_nls = package.loaded["null-ls"] and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+
+        vim.lsp.buf.format({
+            filter = function(client)
+                if have_nls then
+                    -- apply whatever logic you want (in this example, we'll only use null-ls)
+                    return client.name == "null-ls"
+                end
+                return client.name ~= "null-ls"
+            end,
+        })
+    end, opts)
 end
 
 local lsp_highlight = function(client, bufnr)
@@ -121,4 +121,4 @@ local lsp_highlight = function(client, bufnr)
 end
 
 require("utils").on_attach(key_map_function)
-require("utils").on_attach(lsp_highlight)
+-- require("utils").on_attach(lsp_highlight)

@@ -211,12 +211,12 @@ local noice_mode = {
 
 local noice_msg = {
     require("noice").api.status.message.get_hl,
-    cond = require("noice").api.status.message.has
+    cond = package.loaded["noice"] and require("noice").api.status.message.has
 }
 
 local noice_search = {
     require("noice").api.status.search.get,
-    cond = require("noice").api.status.search.has,
+    cond = package.loaded["noice"] and require("noice").api.status.search.has,
     color = { fg = "ff9e64" },
 }
 

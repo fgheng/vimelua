@@ -42,11 +42,11 @@ require("lazy").setup(
             keys = {
                 { mode = "n", "<leader>f" },
             },
-            event = {
-                "InsertEnter",
-                --     "CursorMoved",
-            },
-            -- event = {"LspAttach"}
+            -- event = {
+            --     "InsertEnter",
+            --     -- "CursorMoved",
+            -- },
+            event = {"LspAttach"}
         },
         {
             "kosayoda/nvim-lightbulb",
