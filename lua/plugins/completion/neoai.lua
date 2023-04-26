@@ -67,7 +67,7 @@ require("neoai").setup({
 ----------------------------------------------------------------------
 local opts = { silent = true, noremap = true }
 
-vim.keymap.set("v", "<leader>aa", function()
+vim.keymap.set("v", "<cr>", function()
     vim.ui.input({ prompt = "prompts:", default = "" }, function(input)
         input = input ~= nil and input .. " \n" or ""
 
@@ -81,7 +81,7 @@ vim.keymap.set("v", "<leader>aa", function()
         end
     end)
 end)
-vim.keymap.set("n", "<leader>aa", "<cmd>NeoAI<cr>", opts)
+vim.keymap.set("n", "<cr>", "<cmd>NeoAI<cr>", opts)
 
 vim.keymap.set("v", "<leader>ai", function()
     vim.ui.input({ prompt = "prompts:", default = "" }, function(input)

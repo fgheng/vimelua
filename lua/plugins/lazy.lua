@@ -189,8 +189,10 @@ require("lazy").setup(
                 "NeoAIInjectContextCode",
             },
             keys = {
-                { mode = "n", "<leader>aa" },
-                { mode = "v", "<leader>aa" },
+                { mode = "n", "<cr>" },
+                { mode = "v", "<cr>" },
+                -- { mode = "n", "<leader>aa" },
+                -- { mode = "v", "<leader>aa" },
                 { mode = "n", "<leader>ai" },
                 { mode = "v", "<leader>ai" },
                 { mode = "v", "<leader>as" },
@@ -261,7 +263,7 @@ require("lazy").setup(
             },
             cmd = { "Telescope" },
             keys = {
-                { mode = "n", "<CR>" },
+                { mode = "n", "<space><space>" },
                 { mode = "n", "<space>f" },
                 { mode = "n", "<space>s" },
                 { mode = "v", "<space>s" },

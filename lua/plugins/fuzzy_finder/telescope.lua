@@ -145,7 +145,7 @@ local opts = { silent = true, noremap = true }
 local keymap = vim.api.nvim_set_keymap
 -- keymap('n', '<space><space>', '<cmd>Telescope<cr>', opts)
 -- keymap('n', '<CR>', '<cmd>Telescope<cr>', opts)
-vim.keymap.set("n", "<CR>", function()
+vim.keymap.set("n", "<space><space>", function()
     if vim.bo.filetype ~= "qf" then
         vim.api.nvim_command("Telescope")
     else
