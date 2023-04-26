@@ -71,9 +71,7 @@ vim.keymap.set("v", "<leader>aa", function()
     vim.ui.input({ prompt = "prompts:", default = "" }, function(input)
         input = input ~= nil and input .. " \n" or ""
 
-        local start_pos = vim.api.nvim_buf_get_mark(0, "<")
-        local end_pos = vim.api.nvim_buf_get_mark(0, ">")
-        local selected_text = vim.api.nvim_buf_get_lines(0, start_pos[1] - 1, end_pos[1], false)
+        local selected_text = require("utils").getVisualSelection()
         selected_text = table.concat(selected_text, "\n")
 
         if string.len(selected_text) == 0 and string.len(input) == 0 then
@@ -88,10 +86,7 @@ vim.keymap.set("n", "<leader>aa", "<cmd>NeoAI<cr>", opts)
 vim.keymap.set("v", "<leader>ai", function()
     vim.ui.input({ prompt = "prompts:", default = "" }, function(input)
         input = input ~= nil and input .. " \n" or ""
-
-        local start_pos = vim.api.nvim_buf_get_mark(0, "<")
-        local end_pos = vim.api.nvim_buf_get_mark(0, ">")
-        local selected_text = vim.api.nvim_buf_get_lines(0, start_pos[1] - 1, end_pos[1], false)
+        local selected_text = require("utils").getVisualSelection()
         selected_text = table.concat(selected_text, "\n")
 
         if string.len(selected_text) == 0 and string.len(input) == 0 then

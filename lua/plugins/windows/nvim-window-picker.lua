@@ -41,7 +41,7 @@ require("window-picker").setup({
         -- filter using buffer options
         bo = {
             -- if the file type is one of following, the window will be ignored
-            filetype = { "neo-tree", "notify" },
+            filetype = { "neo-tree", "notify", "aerial"},
 
             -- if the buffer type is one of following, the window will be ignored
             buftype = { "terminal" },
