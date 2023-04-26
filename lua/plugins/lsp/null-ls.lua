@@ -38,22 +38,6 @@ local sources = {
     null_ls.builtins.hover.printenv,
 }
 
--- format on save
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-                vim.lsp.buf.format({ bufnr = bufnr })
-            end,
-        })
-    end
-end
-
 null_ls.setup({
     -- on_init = function(new_client, _)
     --     new_client.offset_encoding = "utf-16"
@@ -78,6 +62,24 @@ vim.defer_fn(function()
         vim.notify("mason-null-ls not found")
     end
 end, 10)
+
+----------------------------------------------------------------------
+--                        format after save                         --
+----------------------------------------------------------------------
+local on_attach = function(client, bufnr)
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+                vim.lsp.buf.format({ bufnr = bufnr })
+            end,
+        })
+    end
+end
 
 -- ----------------------------------------------------------------------
 -- --                             key map                              --

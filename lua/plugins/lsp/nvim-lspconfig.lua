@@ -2,45 +2,38 @@
 --                            lsp config                            --
 ----------------------------------------------------------------------
 local lspconfig = require("lspconfig")
-local handlers = {
-    function(server_name) -- default handler (optional)
-        if server_name ~= "jdtls" then
-            local opts = {
-                on_init = function(client, bufnr)
-                end,
-                on_attach = function(client, bufnr)
-                end,
-            }
-
-            local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
-            if status_ok then
-                opts = vim.tbl_deep_extend("force", server, opts)
-            end
-
-            if server_name == "lua_ls" then
-                lspconfig["sumneko_lua"].setup(opts)
-            else
-                lspconfig[server_name].setup(opts)
-            end
-        end
-    end,
-}
-
-----------------------------------------------------------------------
---                           mason-config                           --
-----------------------------------------------------------------------
 local mason_lspconfig = require("mason-lspconfig")
 local server_names = require("config").lsp_servers
+
 mason_lspconfig.setup({
     ensure_installed = server_names,
-    handlers = handlers,
-})
+    handlers = {
+        function(server_name) -- default handler (optional)
+            if server_name ~= "jdtls" then
+                local opts = {
+                    on_init = function(client, bufnr) end,
+                    on_attach = function(client, bufnr) end,
+                }
 
+                local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
+                if status_ok then
+                    opts = vim.tbl_deep_extend("force", server, opts)
+                end
+
+                if server_name == "lua_ls" then
+                    lspconfig["sumneko_lua"].setup(opts)
+                else
+                    lspconfig[server_name].setup(opts)
+                end
+            end
+        end,
+    },
+})
 
 ----------------------------------------------------------------------
 --                              keymap                              --
 ----------------------------------------------------------------------
-local key_map_function = function(_, bufnr)
+local func_keymap = function(_, bufnr)
     local opts = { silent = true, noremap = true, buffer = bufnr }
     local keymap = vim.keymap.set
 
@@ -69,7 +62,8 @@ local key_map_function = function(_, bufnr)
     keymap("n", "<leader>f", function()
         local buf = vim.api.nvim_get_current_buf()
         local ft = vim.bo[buf].filetype
-        local have_nls = package.loaded["null-ls"] and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+        local have_nls = package.loaded["null-ls"]
+            and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
 
         vim.lsp.buf.format({
             filter = function(client)
@@ -84,7 +78,8 @@ local key_map_function = function(_, bufnr)
     vim.keymap.set("v", "<leader>f", function()
         local buf = vim.api.nvim_get_current_buf()
         local ft = vim.bo[buf].filetype
-        local have_nls = package.loaded["null-ls"] and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+        local have_nls = package.loaded["null-ls"]
+            and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
 
         vim.lsp.buf.format({
             filter = function(client)
@@ -98,7 +93,7 @@ local key_map_function = function(_, bufnr)
     end, opts)
 end
 
-local lsp_highlight = function(client, bufnr)
+local func_lsp_highlight = function(client, bufnr)
     if client.supports_method("textDocument/documentHighlight") then
         vim.api.nvim_create_augroup("lsp_document_highlight", {
             clear = false,
@@ -120,5 +115,21 @@ local lsp_highlight = function(client, bufnr)
     end
 end
 
-require("utils").on_attach(key_map_function)
--- require("utils").on_attach(lsp_highlight)
+local func_format_on_save = function(client, bufnr)
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+                vim.lsp.buf.format({ bufnr = bufnr })
+            end,
+        })
+    end
+end
+
+require("utils").on_attach(func_keymap)
+-- require("utils").on_attach(func_format_on_save)
+-- require("utils").on_attach(func_lsp_highlight)

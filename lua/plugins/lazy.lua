@@ -27,7 +27,6 @@ require("lazy").setup(
             dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
             event = {
                 "InsertEnter",
-                -- "CursorMoved",
             },
         },
         {
@@ -42,11 +41,7 @@ require("lazy").setup(
             keys = {
                 { mode = "n", "<leader>f" },
             },
-            -- event = {
-            --     "InsertEnter",
-            --     -- "CursorMoved",
-            -- },
-            event = {"LspAttach"}
+            event = { "LspAttach" },
         },
         {
             "kosayoda/nvim-lightbulb",
