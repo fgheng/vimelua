@@ -1,4 +1,46 @@
-local key_map_function = function(bufnr)
+----------------------------------------------------------------------
+--                            lsp config                            --
+----------------------------------------------------------------------
+local lspconfig = require("lspconfig")
+local handlers = {
+    function(server_name) -- default handler (optional)
+        if server_name ~= "jdtls" then
+            local opts = {
+                on_init = function(client, bufnr)
+                end,
+                on_attach = function(client, bufnr)
+                end,
+            }
+
+            local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
+            if status_ok then
+                opts = vim.tbl_deep_extend("force", server, opts)
+            end
+
+            if server_name == "lua_ls" then
+                lspconfig["sumneko_lua"].setup(opts)
+            else
+                lspconfig[server_name].setup(opts)
+            end
+        end
+    end,
+}
+
+----------------------------------------------------------------------
+--                           mason-config                           --
+----------------------------------------------------------------------
+local mason_lspconfig = require("mason-lspconfig")
+local server_names = require("config").lsp_servers
+mason_lspconfig.setup({
+    ensure_installed = server_names,
+    handlers = handlers,
+})
+
+
+----------------------------------------------------------------------
+--                              keymap                              --
+----------------------------------------------------------------------
+local key_map_function = function(_, bufnr)
     local opts = { silent = true, noremap = true, buffer = bufnr }
     local keymap = vim.keymap.set
 
@@ -77,43 +119,6 @@ local lsp_highlight = function(client, bufnr)
         })
     end
 end
-----------------------------------------------------------------------
---                            lsp config                            --
-----------------------------------------------------------------------
-local lspconfig = require("lspconfig")
-local handlers = {
-    function(server_name) -- default handler (optional)
-        if server_name ~= "jdtls" then
-            local opts = {
-                on_init = function(client, bufnr)
-                    vim.lsp.buf_attach_client(bufnr, client)
-                end,
-                on_attach = function(client, bufnr)
-                    key_map_function(bufnr)
-                    -- lsp_highlight(client, bufnr)
-                end,
-            }
 
-            local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
-            if status_ok then
-                opts = vim.tbl_deep_extend("force", server, opts)
-            end
-
-            if server_name == "lua_ls" then
-                lspconfig["sumneko_lua"].setup(opts)
-            else
-                lspconfig[server_name].setup(opts)
-            end
-        end
-    end,
-}
-
-----------------------------------------------------------------------
---                           mason-config                           --
-----------------------------------------------------------------------
-local mason_lspconfig = require("mason-lspconfig")
-local server_names = require("config").lsp_servers
-mason_lspconfig.setup({
-    ensure_installed = server_names,
-    handlers = handlers,
-})
+require("utils").on_attach(key_map_function)
+require("utils").on_attach(lsp_highlight)
