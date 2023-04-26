@@ -20,13 +20,12 @@ require("lazy").setup(
         {
             "neovim/nvim-lspconfig",
             config = function()
-                vim.schedule(function()
-                    require("plugins.lsp.nvim-lspconfig")
-                end)
+                require("plugins.lsp.nvim-lspconfig")
             end,
             dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
             event = {
                 "InsertEnter",
+                -- "BufReadPre",
             },
         },
         {
@@ -42,6 +41,10 @@ require("lazy").setup(
                 { mode = "n", "<leader>f" },
             },
             event = { "LspAttach" },
+            -- event = {
+            --     -- "CursorMoved",
+            --     "InsertEnter",
+            -- },
         },
         {
             "kosayoda/nvim-lightbulb",
@@ -51,7 +54,10 @@ require("lazy").setup(
                     require("plugins.lsp.nvim-lightbulb")
                 end)
             end,
-            -- event = { "InsertEnter", "CursorMoved" },
+            -- event = {
+            --     "InsertEnter",
+            --     "CursorMoved",
+            -- },
             event = { "LspAttach" },
         },
         {
@@ -114,7 +120,7 @@ require("lazy").setup(
                 --Please make sure you install markdown and markdown_inline parser
                 { "nvim-treesitter/nvim-treesitter" },
             },
-            event = "LspAttach",
+            -- event = "LspAttach",
         },
 
         ----------------------------------------------------------------------
@@ -135,9 +141,6 @@ require("lazy").setup(
             "zbirenbaum/copilot.lua",
             enabled = true,
             config = function()
-                -- vim.defer_fn(function()
-                --     require("plugins.completion.copilot")
-                -- end, 100)
                 vim.schedule(function()
                     require("plugins.completion.copilot")
                 end)
@@ -534,6 +537,10 @@ require("lazy").setup(
                 { "andymass/vim-matchup" },
             },
             event = { "LspAttach" },
+            -- event = {
+            --     -- "CursorMoved",
+            --     "InsertEnter",
+            -- },
         },
         {
             "andymass/vim-matchup",

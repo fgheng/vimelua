@@ -11,12 +11,12 @@ mason_lspconfig.setup({
         function(server_name) -- default handler (optional)
             if server_name ~= "jdtls" then
                 local opts = {
-                    -- init_options = function(client, bufnr)
-                    --         print("not attach to buffer " .. bufnr)
-                    --     if not vim.lsp.buf_is_attached() then
-                    --         vim.lsp.buf_attach(client.id, bufnr)
-                    --     end
-                    -- end,
+                    init_options = function(client, bufnr)
+                        print("not attach to buffer " .. bufnr)
+                        -- if not vim.lsp.buf_is_attached() then
+                        --     vim.lsp.buf_attach(client.id, bufnr)
+                        -- end
+                    end,
 
                     on_attach = function(client, bufnr) end,
                 }
@@ -54,7 +54,7 @@ local func_keymap = function(_, bufnr)
     keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
     keymap("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
     keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-    keymap('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    -- keymap('n', '<c-n>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set("n", "K", function()
         if vim.bo.filetype == "help" then
             vim.api.nvim_feedkeys("<c-]>", "n", true)
@@ -137,6 +137,11 @@ local func_format_on_save = function(client, bufnr)
     end
 end
 
-require("utils").on_attach(func_keymap)
--- require("utils").on_attach(func_format_on_save)
--- require("utils").on_attach(func_lsp_highlight)
+-- vim.schedule(function()
+-- end)
+
+vim.defer_fn(function()
+    require("utils").on_attach(func_keymap)
+    -- require("utils").on_attach(func_format_on_save)
+    -- require("utils").on_attach(func_lsp_highlight)
+end, 100)
