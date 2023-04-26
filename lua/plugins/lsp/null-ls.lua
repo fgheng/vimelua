@@ -17,7 +17,6 @@ local sources = {
         extra_args = { "--style", "{BasedOnStyle: Google, IndentWidth: 4}" },
     }),
 
-
     -- diagnostics
     null_ls.builtins.diagnostics.write_good,
     null_ls.builtins.diagnostics.codespell,
@@ -64,10 +63,10 @@ null_ls.setup({
     -- on_attach = on_attach,
 })
 
+----------------------------------------------------------------------
+--                auto install linter and formatter                 --
+----------------------------------------------------------------------
 vim.defer_fn(function()
-    ----------------------------------------------------------------------
-    --                auto install linter and formatter                 --
-    ----------------------------------------------------------------------
     local mason_null_ls_ok, mason_null_ls = pcall(require, "mason-null-ls")
     if mason_null_ls_ok then
         mason_null_ls.setup({
@@ -78,10 +77,12 @@ vim.defer_fn(function()
     else
         vim.notify("mason-null-ls not found")
     end
+end, 10)
 
-    ----------------------------------------------------------------------
-    --                             key map                              --
-    ----------------------------------------------------------------------
+----------------------------------------------------------------------
+--                             key map                              --
+----------------------------------------------------------------------
+local keymap_func = function(client, bufnr)
     local opts = { silent = true, noremap = true }
     -- local keymap = vim.api.nvim_set_keymap
     -- keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({async = false})<cr>", opts)
@@ -118,4 +119,6 @@ vim.defer_fn(function()
             end,
         })
     end, opts)
-end, 10)
+end
+
+require("utils").on_attach(keymap_func)

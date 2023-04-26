@@ -365,6 +365,7 @@ require("lazy").setup(
             end,
             cmd = { "Gitsigns" },
             event = { "BufRead" },
+            -- event = {"VeryLazy"}
         },
         {
             "sindrets/diffview.nvim",
@@ -396,6 +397,7 @@ require("lazy").setup(
             dependencies = { "vim-test.vim-test" },
             build = ":UpdateRemotePlugins",
             event = { "BufRead" },
+            -- event = {"VeryLazy"}
         },
         -- cmake
         {
@@ -693,6 +695,7 @@ require("lazy").setup(
                 require("plugins.editor.nvim-lastplace")
             end,
             event = { "BufRead" },
+            -- event = {"VeryLazy"}
         },
         {
             "mvllow/modes.nvim",

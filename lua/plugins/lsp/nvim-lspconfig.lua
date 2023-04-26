@@ -1,121 +1,6 @@
-----------------------------------------------------------------------
---                            lsp config                            --
-----------------------------------------------------------------------
-local lspconfig = require("lspconfig")
-local handlers = {
-    function(server_name) -- default handler (optional)
-        if server_name ~= "jdtls" then
-            lspconfig[server_name].setup({
-                on_init = function(client)
-                    -- vim.lsp.buf_attach_client(0, client)
-                end,
-                on_attach = function(client, bufnr)
-                end,
-            })
-        end
-    end,
-    ["rust_analyzer"] = function()
-        lspconfig.rust_analyzer.setup({})
-    end,
-    ["lua_ls"] = function()
-        lspconfig.sumneko_lua.setup({
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        globals = { "vim" },
-                    },
-                    workspace = {
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.stdpath("config") .. "/lua"] = true,
-                        },
-                    },
-                },
-            },
-        })
-    end,
-    ["clangd"] = function()
-        lspconfig.clangd.setup({
-            -- capabilities = capabilities,
-            cmd = {
-                "clangd",
-                "--offset-encoding=utf-16",
-                -- "--malloc-trim=true",
-                "--background-index=true", -- 后台建立索引，并持久化到disk
-                -- "--completion-style=detailed",
-                -- '--cross-file-rename=true',
-                "--header-insertion=iwyu",
-                "--pch-storage=memory",
-                -- 启用这项时，补全函数时，将会给参数提供占位符，键入后按 Tab 可以切换到下一占位符
-                "--function-arg-placeholders=false",
-                -- "--log=verbose",
-                "--ranking-model=decision_forest",
-                -- 输入建议中，已包含头文件的项与还未包含头文件的项会以圆点加以区分
-                "--header-insertion-decorators",
-                "--pch-storage=memory",
-                "-j=12",
-                -- "--pretty",
-            },
-        })
-    end,
-    ["pyright"] = function()
-        lspconfig.pyright.setup({
-            settings = {
-                python = {
-                    analysis = {
-                        typeCheckingMode = "off",
-                    },
-                },
-            },
-        })
-    end,
-    ["jsonls"] = function()
-        lspconfig.jsonls.setup({
-            settings = {
-                json = {
-                    format = {
-                        enable = true,
-                    },
-                    validate = {
-                        enable = true,
-                    },
-                },
-            },
-        })
-    end,
-    -- ["bashls"] = function()
-    -- 	lspconfig.bashls.setup({})
-    -- end,
-    -- ['jdtls'] = function()
-    --     lspconfig.jdtls.setup({
-    --         cmd = {
-    --             'jdtls',
-    --             '-data',
-    --             vim.fn.getcwd() .. '/../java-workspace/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-    --         },
-    --         root_dir = lspconfig.util.root_pattern('.git', 'pom.xml', 'build.xml', 'settings.gradle',
-    --             'settings.gradle.kts', vim.fn.getcwd()),
-    --         single_file_support = true
-    --     })
-    -- end
-}
-
-----------------------------------------------------------------------
---                           mason-config                           --
-----------------------------------------------------------------------
-local mason_lspconfig = require("mason-lspconfig")
-local server_names = require("config").lsp_servers
-mason_lspconfig.setup({
-    ensure_installed = server_names,
-    handlers = handlers,
-})
-
-vim.defer_fn(function()
-    ----------------------------------------------------------------------
-    --                             key map                              --
-    ----------------------------------------------------------------------
-    local opts = { silent = true, noremap = true }
-    local keymap = vim.api.nvim_set_keymap
+local key_map_function = function(bufnr)
+    local opts = { silent = true, noremap = true, buffer = bufnr }
+    local keymap = vim.keymap.set
 
     keymap("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', opts)
     keymap("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<cr>', opts)
@@ -137,12 +22,98 @@ vim.defer_fn(function()
     end, opts)
     keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
     keymap("n", "?", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-    -- keymap("n", "<m-j>", "<cmd>lua vim.diagnostic.goto_next({float = false})<cr>", opts)
-    -- keymap("n", "<m-k>", "<cmd>lua vim.diagnostic.goto_prev({float = false})<cr>", opts)
     keymap("n", "<m-j>", "<cmd>lua vim.diagnostic.goto_next({float = true})<cr>", opts)
     keymap("n", "<m-k>", "<cmd>lua vim.diagnostic.goto_prev({float = true})<cr>", opts)
-    -- keymap('n', '?', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
-    -- keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({async = false})<cr>", opts)
-    -- keymap("v", "<leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", opts)
-    -- vim.api.nvim_create_user_command("format", vim.lsp.buf.format, {async = false})
-end, 100)
+    -- keymap("n", "<leader>f", function()
+    --     local buf = vim.api.nvim_get_current_buf()
+    --     local ft = vim.bo[buf].filetype
+    --     local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+    --
+    --     vim.lsp.buf.format({
+    --         filter = function(client)
+    --             if have_nls then
+    --                 -- apply whatever logic you want (in this example, we'll only use null-ls)
+    --                 return client.name == "null-ls"
+    --             end
+    --             return client.name ~= "null-ls"
+    --         end,
+    --     })
+    -- end, opts)
+    -- vim.keymap.set("v", "<leader>f", function()
+    --     local buf = vim.api.nvim_get_current_buf()
+    --     local ft = vim.bo[buf].filetype
+    --     local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+    --
+    --     vim.lsp.buf.format({
+    --         filter = function(client)
+    --             if have_nls then
+    --                 -- apply whatever logic you want (in this example, we'll only use null-ls)
+    --                 return client.name == "null-ls"
+    --             end
+    --             return client.name ~= "null-ls"
+    --         end,
+    --     })
+    -- end, opts)
+end
+
+local lsp_highlight = function(client, bufnr)
+    if client.supports_method("textDocument/documentHighlight") then
+        vim.api.nvim_create_augroup("lsp_document_highlight", {
+            clear = false,
+        })
+        vim.api.nvim_clear_autocmds({
+            buffer = bufnr,
+            group = "lsp_document_highlight",
+        })
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            group = "lsp_document_highlight",
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+        })
+        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+            group = "lsp_document_highlight",
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+        })
+    end
+end
+----------------------------------------------------------------------
+--                            lsp config                            --
+----------------------------------------------------------------------
+local lspconfig = require("lspconfig")
+local handlers = {
+    function(server_name) -- default handler (optional)
+        if server_name ~= "jdtls" then
+            local opts = {
+                on_init = function(client, bufnr)
+                    vim.lsp.buf_attach_client(bufnr, client)
+                end,
+                on_attach = function(client, bufnr)
+                    key_map_function(bufnr)
+                    -- lsp_highlight(client, bufnr)
+                end,
+            }
+
+            local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
+            if status_ok then
+                opts = vim.tbl_deep_extend("force", server, opts)
+            end
+
+            if server_name == "lua_ls" then
+                lspconfig["sumneko_lua"].setup(opts)
+            else
+                lspconfig[server_name].setup(opts)
+            end
+        end
+    end,
+}
+
+----------------------------------------------------------------------
+--                           mason-config                           --
+----------------------------------------------------------------------
+local mason_lspconfig = require("mason-lspconfig")
+local server_names = require("config").lsp_servers
+mason_lspconfig.setup({
+    ensure_installed = server_names,
+    handlers = handlers,
+})
