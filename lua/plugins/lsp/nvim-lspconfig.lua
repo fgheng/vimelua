@@ -11,7 +11,13 @@ mason_lspconfig.setup({
         function(server_name) -- default handler (optional)
             if server_name ~= "jdtls" then
                 local opts = {
-                    on_init = function(client, bufnr) end,
+                    -- init_options = function(client, bufnr)
+                    --         print("not attach to buffer " .. bufnr)
+                    --     if not vim.lsp.buf_is_attached() then
+                    --         vim.lsp.buf_attach(client.id, bufnr)
+                    --     end
+                    -- end,
+
                     on_attach = function(client, bufnr) end,
                 }
 
@@ -48,6 +54,7 @@ local func_keymap = function(_, bufnr)
     keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
     keymap("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
     keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+    keymap('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set("n", "K", function()
         if vim.bo.filetype == "help" then
             vim.api.nvim_feedkeys("<c-]>", "n", true)
@@ -75,7 +82,7 @@ local func_keymap = function(_, bufnr)
             end,
         })
     end, opts)
-    vim.keymap.set("v", "<leader>f", function()
+    keymap("v", "<leader>f", function()
         local buf = vim.api.nvim_get_current_buf()
         local ft = vim.bo[buf].filetype
         local have_nls = package.loaded["null-ls"]
