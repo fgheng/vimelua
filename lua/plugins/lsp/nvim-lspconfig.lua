@@ -11,13 +11,6 @@ mason_lspconfig.setup({
         function(server_name) -- default handler (optional)
             if server_name ~= "jdtls" then
                 local opts = {
-                    init_options = function(client, bufnr)
-                        -- print("not attach to buffer " .. bufnr)
-                        -- if not vim.lsp.buf_is_attached() then
-                        --     vim.lsp.buf_attach(client.id, bufnr)
-                        -- end
-                    end,
-
                     on_attach = function(client, bufnr) end,
                 }
 
