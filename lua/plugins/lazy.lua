@@ -850,7 +850,6 @@ require("lazy").setup(
             config = function()
                 require("plugins.wiki.neorg")
             end,
-            -- event = { "VeryLazy" },
         },
         {
             "nvim-orgmode/orgmode",
