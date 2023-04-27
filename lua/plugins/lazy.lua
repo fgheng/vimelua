@@ -189,10 +189,8 @@ require("lazy").setup(
             keys = {
                 { mode = "n", "<cr>" },
                 { mode = "v", "<cr>" },
-                -- { mode = "n", "<leader>aa" },
-                -- { mode = "v", "<leader>aa" },
-                { mode = "n", "<leader>ai" },
-                { mode = "v", "<leader>ai" },
+                { mode = "v", "<space>k" },
+                { mode = "n", "<space>k" },
                 { mode = "v", "<leader>as" },
                 { mode = "n", "<leader>ag" },
             },

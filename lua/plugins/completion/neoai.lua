@@ -67,10 +67,50 @@ require("neoai").setup({
 ----------------------------------------------------------------------
 local opts = { silent = true, noremap = true }
 
+vim.keymap.set("v", "<space>k", function()
+    vim.ui.input({ prompt = "prompt:", default = "" }, function(input)
+        if input == nil then
+            return
+        end
+
+        input = input .. "\n"
+
+        local selected_text = require("utils").getVisualSelection()
+        selected_text = table.concat(selected_text, "\n")
+
+        if string.len(selected_text) == 0 and string.len(input) == 0 then
+            vim.notify("no content")
+        else
+            if vim.bo.modifiable then
+                vim.api.nvim_command("NeoAIInject " .. input .. selected_text)
+            else
+                vim.notify("current file is not modifiable, show info in float window")
+                vim.api.nvim_command("NeoAI " .. input .. selected_text)
+            end
+        end
+    end)
+end, opts)
+
+vim.keymap.set("n", "<space>k", function()
+    vim.ui.input({ prompt = "prompt:", default = "" }, function(input)
+        if input == nil then
+            return
+        end
+        if input == "" then
+            vim.notify("no content")
+        else
+            vim.api.nvim_command("NeoAIInject " .. input)
+        end
+    end)
+end, opts)
+
 vim.keymap.set("v", "<cr>", function()
     vim.ui.input({ prompt = "prompts:", default = "" }, function(input)
-        input = input ~= nil and input .. " \n" or ""
+        if input == nil then
+            return
+        end
 
+        input = input .. "\n"
         local selected_text = require("utils").getVisualSelection()
         selected_text = table.concat(selected_text, "\n")
 
@@ -82,33 +122,3 @@ vim.keymap.set("v", "<cr>", function()
     end)
 end)
 vim.keymap.set("n", "<cr>", "<cmd>NeoAI<cr>", opts)
-
-vim.keymap.set("v", "<leader>ai", function()
-    vim.ui.input({ prompt = "prompts:", default = "" }, function(input)
-        input = input ~= nil and input .. " \n" or ""
-        local selected_text = require("utils").getVisualSelection()
-        selected_text = table.concat(selected_text, "\n")
-
-        if string.len(selected_text) == 0 and string.len(input) == 0 then
-            vim.notify("no content")
-        else
-            if vim.bo.modifiable then
-                vim.api.nvim_command("NeoAIInject " .. input .. selected_text)
-            else
-                vim.api.nvim_command("NeoAI " .. input .. selected_text)
-            end
-        end
-    end)
-end)
-vim.keymap.set("n", "<leader>ai", function()
-    local selected_text = vim.api.nvim_get_current_line()
-    if string.len(selected_text) == 0 then
-        vim.notify("no content")
-    else
-        if vim.bo.modifiable then
-            vim.api.nvim_command("NeoAIInject " .. selected_text)
-        else
-            vim.api.nvim_command("NeoAI " .. selected_text)
-        end
-    end
-end)
