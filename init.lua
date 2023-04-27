@@ -37,6 +37,6 @@ if vim.g.neovide then
     end
 
     vim.cmd([[
-            set guifont=ComicMono\ Nerd\ Font:h13
+            set guifont=ComicMono\ Nerd\ Font:h20
         ]])
 end
