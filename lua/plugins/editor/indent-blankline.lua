@@ -13,7 +13,7 @@ cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 -- cmd [[highlight IndentBlanklineContextChar guifg=#F8BD96 gui=nocombine]]
 
 require("indent_blankline").setup({
-    space_char_blankline = " ",
+    -- space_char_blankline = " ",
     -- char_highlight_list = {
     --     "IndentBlanklineIndent1",
     --     "IndentBlanklineIndent2",
@@ -23,10 +23,10 @@ require("indent_blankline").setup({
     --     "IndentBlanklineIndent6",
     -- },
     show_current_context = true,
-    show_current_context_start = true,
-    show_end_of_line = true,
+    -- show_current_context_start = true,
+    -- show_end_of_line = true,
     user_treesitter = true,
-    show_traiing_blankline_indent = false,
+    show_trailing_blankline_indent = false,
     buftype_exclude = { "terminal", "nofile" },
     filetype_exclude = {
         "startify",

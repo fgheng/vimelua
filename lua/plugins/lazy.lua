@@ -631,13 +631,14 @@ require("lazy").setup(
         {
             "lukas-reineke/indent-blankline.nvim",
             config = function()
-                require("plugins.editor.indent-blankline")
+                    require("plugins.editor.indent-blankline")
             end,
             cmd = {
                 "IndentBlanklineToggle",
                 "IndentBlanklineEnable",
                 "IndentBlanklineRefresh",
             },
+            event = { "BufReadPost" },
         },
         {
             "petertriho/nvim-scrollbar",

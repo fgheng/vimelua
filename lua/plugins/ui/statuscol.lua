@@ -8,7 +8,7 @@ local cfg = {
     -- thousands = false, -- or line number thousands separator string ("." / ",")
     -- relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
     -- -- Builtin 'statuscolumn' options
-    ft_ignore = { "neo-tree", "NvimTree" }, -- lua table with filetypes for which 'statuscolumn' will be unset
+    ft_ignore = { "neo-tree", "NvimTree", "gitcommit" }, -- lua table with filetypes for which 'statuscolumn' will be unset
     bt_ignore = { "terminal", "nofile" }, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
     -- -- Default segments (fold -> sign -> line number + separator), explained below
     segments = {
