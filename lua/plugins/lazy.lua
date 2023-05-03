@@ -638,7 +638,7 @@ require("lazy").setup(
                 "IndentBlanklineEnable",
                 "IndentBlanklineRefresh",
             },
-            event = { "BufReadPost" },
+            -- event = { "BufReadPost" },
         },
         {
             "petertriho/nvim-scrollbar",
