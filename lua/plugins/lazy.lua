@@ -23,10 +23,10 @@ require("lazy").setup(
                 require("plugins.lsp.nvim-lspconfig")
             end,
             dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-            event = {
-                "InsertEnter",
-                -- "BufReadPre",
-            },
+            -- event = {
+            --     "InsertEnter",
+            -- },
+            event = { "BufReadPre", "BufNewFile" },
         },
         {
             "jose-elias-alvarez/null-ls.nvim",
@@ -536,7 +536,7 @@ require("lazy").setup(
             },
             event = { "LspAttach" },
             -- event = {
-            --     -- "CursorMoved",
+            --     "CursorMoved",
             --     "InsertEnter",
             -- },
         },
@@ -868,7 +868,15 @@ require("lazy").setup(
             "nvim-lua/plenary.nvim",
             lazy = true,
         },
-
+        {
+            "kevinhwang91/nvim-ufo",
+            enabled = true,
+            dependencies = { "kevinhwang91/promise-async" },
+            config = function()
+                require("plugins.utils.nvim-ufo")
+            end,
+            event = { "LspAttach" },
+        },
         {
             "Pocco81/AutoSave.nvim",
             enabled = false,
@@ -952,7 +960,7 @@ require("lazy").setup(
         },
         {
             "rcarriga/nvim-notify",
-            enabled = false,
+            enabled = true,
             lazy = true,
             config = function()
                 if vim.g.neovide then
@@ -1009,9 +1017,6 @@ require("lazy").setup(
             "nvim-lualine/lualine.nvim",
             enabled = true,
             config = function()
-                -- vim.defer_fn(function()
-                --     require("plugins.ui.lualine")
-                -- end, 10)
                 vim.schedule(function()
                     require("plugins.ui.lualine")
                 end)
@@ -1030,15 +1035,12 @@ require("lazy").setup(
             config = function()
                 require("plugins.ui.heirline")
             end,
-            event = "BufEnter",
+            event = "VeryLazy",
         },
         {
             "akinsho/bufferline.nvim",
             enabled = true,
             config = function()
-                -- vim.defer_fn(function()
-                --     require("plugins.ui.bufferline")
-                -- end, 10)
                 vim.schedule(function()
                     require("plugins.ui.bufferline")
                 end)
@@ -1053,13 +1055,13 @@ require("lazy").setup(
         },
         {
             "luukvbaal/statuscol.nvim",
-            enabled = false,
-            lazy = true,
+            enabled = true,
             config = function()
-                require("plugins.ui.statuscol")
+                vim.schedule(function()
+                    require("plugins.ui.statuscol")
+                end)
             end,
-            -- event = { "BufRead" },
-            -- event = { "VeryLazy" },
+            event = { "BufReadPost" },
         },
         {
             "nanozuki/tabby.nvim",
@@ -1090,7 +1092,7 @@ require("lazy").setup(
             lazy = false,
             config = function()
                 vim.defer_fn(function()
-                    vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                    vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
                 end, 10)
             end,
             cond = function()
@@ -1103,7 +1105,7 @@ require("lazy").setup(
             lazy = false,
             config = function()
                 vim.defer_fn(function()
-                    vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                    vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
                 end, 10)
             end,
             cond = function()
@@ -1143,7 +1145,7 @@ require("lazy").setup(
             lazy = false,
             config = function()
                 vim.o.background = require("config").colorscheme.background
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "vscode.*") ~= nil
@@ -1167,7 +1169,7 @@ require("lazy").setup(
             priority = 1000,
             lazy = false,
             config = function()
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "mellow.*") ~= nil
@@ -1179,7 +1181,7 @@ require("lazy").setup(
             priority = 1000,
             lazy = false,
             config = function()
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "catppuccin.*") ~= nil
@@ -1190,7 +1192,7 @@ require("lazy").setup(
             priority = 1000,
             lazy = false,
             config = function()
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "horizon.*") ~= nil
@@ -1201,7 +1203,7 @@ require("lazy").setup(
             priority = 1000,
             lazy = false,
             config = function()
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "onedark.*") ~= nil
@@ -1227,7 +1229,7 @@ require("lazy").setup(
                 --     vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
                 -- end, 1)
                 -- vim.schedule(function()
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
                 -- end)
             end,
             cond = function()
@@ -1241,7 +1243,7 @@ require("lazy").setup(
             config = function()
                 -- vim.cmd([[colorscheme sonokai]])
                 -- vim.cmd([[let g:sonokai_style = 'maia']])
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
+                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "sonokai.*") ~= nil

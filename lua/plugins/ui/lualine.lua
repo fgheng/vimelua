@@ -210,12 +210,16 @@ local noice_mode = {
 }
 
 local noice_msg = {
-    require("noice").api.status.message.get_hl,
+    function()
+        require("noice").api.status.message.get_hl()
+    end,
     cond = package.loaded["noice"] and require("noice").api.status.message.has
 }
 
 local noice_search = {
-    require("noice").api.status.search.get,
+    function ()
+        require("noice").api.status.search.get()
+    end,
     cond = package.loaded["noice"] and require("noice").api.status.search.has,
     color = { fg = "ff9e64" },
 }

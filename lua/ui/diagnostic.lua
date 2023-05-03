@@ -41,7 +41,7 @@ local config = {
     virtual_lines = {
         only_current_line = true,
     },
-    signs = true,
+    signs = false,
     -- signs = {
     -- 	active = false,
     -- },

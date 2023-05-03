@@ -17,7 +17,7 @@ require("smoothcursor").setup({
         },
         tail = { cursor = nil, texthl = "SmoothCursor" },
     },
-    flyin_effect = nil, -- "bottom" or "top"
+    flyin_effect = top, -- "bottom" or "top"
     speed = 50, -- max is 100 to stick to your current position
     intervals = 35, -- tick interval
     priority = 1, -- set marker priority

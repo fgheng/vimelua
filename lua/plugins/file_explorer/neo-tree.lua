@@ -53,7 +53,7 @@ neo_tree.setup({
         sources = { -- table
             {
                 source = "filesystem", -- string
-                display_name = "  Files ", -- string | nil
+                display_name = "   Files ", -- string | nil
             },
             {
                 source = "buffers", -- string
@@ -293,6 +293,8 @@ local keymap = vim.api.nvim_set_keymap
 keymap("n", "<F2>", "<cmd>NeoTreeRevealToggle<cr>", opts)
 vim.keymap.set("n", "<leader>e", function()
     vim.ui.input({ prompt = "NeoTree", default = "" }, function(input)
-        vim.api.nvim_command("Neotree " .. input)
+        if input ~= nil then
+            vim.api.nvim_command("Neotree " .. input)
+        end
     end)
 end, opts)

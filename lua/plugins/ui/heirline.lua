@@ -1,3 +1,4 @@
+local status = require("utils.status")
 require("heirline").setup({
     statusline = { -- statusline
     },
@@ -5,5 +6,10 @@ require("heirline").setup({
     },
     tabline = { -- bufferline
     },
-    statuscolumn = vim.fn.has("nvim-0.9") == 1 and {} or nil,
+    statuscolumn = {
+        status.component.foldcolumn(),
+        status.component.fill(),
+        status.component.numbercolumn(),
+        status.component.signcolumn()
+    }
 })

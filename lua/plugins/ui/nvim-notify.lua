@@ -5,9 +5,9 @@ require("notify").setup({
     stages = "fade_in_slide_out",
     -- max_width = 80,
     minimum_width = 50,
-    timeout = 5000,
-    top_down = false,
-    fps = 30,
+    -- timeout = 5000,
+    -- top_down = false,
+    -- fps = 30,
     on_open = function(win)
         vim.api.nvim_win_set_config(win, { zindex = 1000 })
     end,

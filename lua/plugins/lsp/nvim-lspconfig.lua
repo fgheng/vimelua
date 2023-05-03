@@ -1,9 +1,27 @@
 ----------------------------------------------------------------------
+--                               lsp                                --
+----------------------------------------------------------------------
+local lsp = vim.lsp
+lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
+    border = "rounded",
+    silent = true,
+})
+lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
+    border = "rounded",
+    silent = true,
+})
+----------------------------------------------------------------------
 --                            lsp config                            --
 ----------------------------------------------------------------------
 local lspconfig = require("lspconfig")
 local mason_lspconfig = require("mason-lspconfig")
 local server_names = require("config").lsp_servers
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+}
 
 mason_lspconfig.setup({
     ensure_installed = server_names,
@@ -12,6 +30,7 @@ mason_lspconfig.setup({
             if server_name ~= "jdtls" then
                 local opts = {
                     on_attach = function(client, bufnr) end,
+                    capabilities = capabilities,
                 }
 
                 local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
@@ -46,8 +65,6 @@ local func_keymap = function(_, bufnr)
     -- keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
     keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
     keymap("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-    keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-    -- keymap('n', '<c-n>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set("n", "K", function()
         if vim.bo.filetype == "help" then
             vim.api.nvim_feedkeys("<c-]>", "n", true)
