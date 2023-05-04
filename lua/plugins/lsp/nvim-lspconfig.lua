@@ -27,7 +27,7 @@ mason_lspconfig.setup({
     ensure_installed = server_names,
     handlers = {
         function(server_name) -- default handler (optional)
-            if server_name ~= "jdtls" then
+            -- if server_name ~= "jdtls" then
                 local opts = {
                     on_attach = function(client, bufnr) end,
                     capabilities = capabilities,
@@ -43,7 +43,7 @@ mason_lspconfig.setup({
                 else
                     lspconfig[server_name].setup(opts)
                 end
-            end
+            -- end
         end,
     },
 })

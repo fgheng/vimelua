@@ -7,18 +7,18 @@ require("smoothcursor").setup({
         enable = true, -- enable fancy mode
         head = { cursor = "", texthl = "SmoothCursor", linehl = nil }, -- ▷
         body = {
-            { cursor = "", texthl = "SmoothCursorRed" },
-            { cursor = "", texthl = "SmoothCursorOrange" },
-            { cursor = "", texthl = "SmoothCursorYellow" },
-            { cursor = "", texthl = "SmoothCursorGreen" },
-            { cursor = "•", texthl = "SmoothCursorAqua" },
-            { cursor = ".", texthl = "SmoothCursorBlue" },
-            { cursor = ".", texthl = "SmoothCursorPurple" },
+            { cursor = "│", texthl = "SmoothCursorRed" },
+            { cursor = "│", texthl = "SmoothCursorOrange" },
+            { cursor = "│", texthl = "SmoothCursorYellow" },
+            { cursor = "│", texthl = "SmoothCursorGreen" },
+            { cursor = "│", texthl = "SmoothCursorAqua" },
+            { cursor = "│", texthl = "SmoothCursorBlue" },
+            { cursor = "│", texthl = "SmoothCursorPurple" },
         },
         tail = { cursor = nil, texthl = "SmoothCursor" },
     },
     flyin_effect = top, -- "bottom" or "top"
-    speed = 50, -- max is 100 to stick to your current position
+    speed = 80, -- max is 100 to stick to your current position
     intervals = 35, -- tick interval
     priority = 1, -- set marker priority
     timeout = 3000, -- timeout for animation
