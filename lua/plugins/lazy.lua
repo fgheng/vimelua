@@ -159,10 +159,9 @@ require("lazy").setup(
                 "hrsh7th/cmp-nvim-lsp",
                 "hrsh7th/cmp-buffer",
                 "hrsh7th/cmp-path",
-                "davidmh/cmp-nerdfonts",
-                -- "hrsh7th/cmp-cmdline",
-                -- "hrsh7th/cmp-copilot",
+                -- "davidmh/cmp-nerdfonts",
                 "hrsh7th/cmp-nvim-lsp-signature-help",
+                -- "zbirenbaum/copilot-cmp",
             },
             event = "InsertEnter",
         },
@@ -632,7 +631,7 @@ require("lazy").setup(
         {
             "lukas-reineke/indent-blankline.nvim",
             config = function()
-                    require("plugins.editor.indent-blankline")
+                require("plugins.editor.indent-blankline")
             end,
             cmd = {
                 "IndentBlanklineToggle",
