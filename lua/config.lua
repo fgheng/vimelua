@@ -19,8 +19,8 @@ _M.wiki_home = "~/notes"
 _M.colorscheme = {
     background = "dark",
     background_color = "#ffffff",
-    theme_group = "vscode",
-    theme = "vscode",
+    theme_group = "nightfox",
+    theme = "nightfox",
 }
 
 ----------------------------------------------------------------------

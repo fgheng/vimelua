@@ -23,9 +23,7 @@ require("lazy").setup(
                 require("plugins.lsp.nvim-lspconfig")
             end,
             dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-            -- event = {
-            --     "InsertEnter",
-            -- },
+            -- event = { "InsertEnter", },
             event = { "BufReadPre", "BufNewFile" },
         },
         {
@@ -441,11 +439,11 @@ require("lazy").setup(
         },
         {
             "sakhnik/nvim-gdb",
-            enabled = false,
+            enabled = true,
             config = function()
                 require("plugins.debug.nvim-gdb")
             end,
-            build = "install.sh",
+            -- build = "install.sh",
             keys = {
                 "<F4>",
             },
@@ -517,11 +515,10 @@ require("lazy").setup(
         {
             "nvim-treesitter/nvim-treesitter",
             enabled = true,
-            lazy = true,
             config = function()
-                vim.defer_fn(function()
-                    require("plugins.editor.nvim-treesitter")
-                end, 10)
+                -- vim.defer_fn(function()
+                require("plugins.editor.nvim-treesitter")
+                -- end, 10)
                 -- vim.schedule(function()
                 --     require("plugins.editor.nvim-treesitter")
                 -- end)
@@ -534,11 +531,8 @@ require("lazy").setup(
                 { "nvim-treesitter/nvim-treesitter-context" },
                 { "andymass/vim-matchup" },
             },
-            event = { "LspAttach" },
-            -- event = {
-            --     "CursorMoved",
-            --     "InsertEnter",
-            -- },
+            event = { "BufReadPre" },
+            -- event = { "CursorMoved", "InsertEnter", },
         },
         {
             "andymass/vim-matchup",
@@ -553,7 +547,7 @@ require("lazy").setup(
         },
         {
             "RRethy/vim-illuminate", -- highlight all world of current cursor in current buffer
-            enabled = true,
+            enabled = false,
             config = function()
                 vim.defer_fn(function()
                     require("plugins.editor.vim-illuminate")
@@ -985,7 +979,7 @@ require("lazy").setup(
             -- 8. lualine noice-command, noice-mode
             -- 9. cmdline popup
             "folke/noice.nvim",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.ui.noice")
             end,
@@ -1111,19 +1105,6 @@ require("lazy").setup(
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "nightfox.*") ~= nil
-            end,
-        },
-        {
-            "projekt0n/github-nvim-theme",
-            priority = 1000,
-            lazy = false,
-            config = function()
-                vim.defer_fn(function()
-                    vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
-                end, 10)
-            end,
-            cond = function()
-                return string.match(require("config").colorscheme.theme_group, "github.*") ~= nil
             end,
         },
         {

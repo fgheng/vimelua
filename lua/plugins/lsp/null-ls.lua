@@ -19,7 +19,7 @@ local sources = {
 
     -- diagnostics
     null_ls.builtins.diagnostics.write_good,
-    null_ls.builtins.diagnostics.codespell,
+    -- null_ls.builtins.diagnostics.codespell,
     null_ls.builtins.diagnostics.cppcheck,
     -- null_ls.builtins.diagnostics.clang_check,
     -- null_ls.builtins.diagnostics.cpplint.with({

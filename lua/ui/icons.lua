@@ -225,7 +225,7 @@ _M = {
     arrow_left = "",
     arrow_down = "",
 
-    search = "🔎", -- 
+    search = " ", --🔎 
 
     flash = "",
     bulb = "💡",

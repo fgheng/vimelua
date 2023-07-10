@@ -1,18 +1,18 @@
 
-vim.api.nvim_command([[
-    let g:nvimgdb_disable_start_keymaps = 1
-    let g:nvimgdb_use_find_executables = 0
-    let g:nvimgdb_use_cmake_to_find_executables = 0
-    let g:nvimgdb_config = {
-      \ 'sign_current_line': '▶',
-      \ 'sign_breakpoint': [ '●', '●²', '●³', '●⁴', '●⁵', '●⁶', '●⁷', '●⁸', '●⁹', '●ⁿ' ],
-      \ 'sign_breakpoint_priority': 10,
-      \ 'termwin_command': 'belowright 20sp new',
-      \ 'codewin_command': 'new',
-      \ 'set_scroll_off': 5,
-      \ 'jump_bottom_gdb_buf': v:false,
-    \ }
-]])
+-- vim.api.nvim_command([[
+--     let g:nvimgdb_disable_start_keymaps = 1
+--     let g:nvimgdb_use_find_executables = 0
+--     let g:nvimgdb_use_cmake_to_find_executables = 0
+--     let g:nvimgdb_config = {
+--       \ 'sign_current_line': '▶',
+--       \ 'sign_breakpoint': [ '●', '●²', '●³', '●⁴', '●⁵', '●⁶', '●⁷', '●⁸', '●⁹', '●ⁿ' ],
+--       \ 'sign_breakpoint_priority': 10,
+--       \ 'termwin_command': 'belowright 20sp new',
+--       \ 'codewin_command': 'new',
+--       \ 'set_scroll_off': 5,
+--       \ 'jump_bottom_gdb_buf': v:false,
+--     \ }
+-- ]])
 
 _G.StartGdbSession = function()
     local exec_file = vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
