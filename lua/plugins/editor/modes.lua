@@ -7,7 +7,7 @@ require("modes").setup({
     },
 
     -- Set opacity for cursorline and number background
-    line_opacity = 0.5,
+    line_opacity = 0.1,
 
     -- Enable cursor highlights
     set_cursor = true,
@@ -21,7 +21,7 @@ require("modes").setup({
 
     -- Disable modes highlights in specified filetypes
     -- Please PR commonly ignored filetypes
-    ignore_filetypes = { 'TelescopePrompt' }
+    ignore_filetypes = { 'TelescopePrompt', 'NvimTree' }
 })
 
 -- vim.defer_fn(function()
