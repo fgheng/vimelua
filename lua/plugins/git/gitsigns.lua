@@ -50,7 +50,7 @@ gitsigns.setup({
     --     untracked = { text = "┆" },
     -- },
 
-    current_line_blame = true,
+    current_line_blame = false,
     numhl = true,
     linehl = false,
     word_diff = false,
@@ -109,8 +109,8 @@ gitsigns.setup({
         map({ "n", "v" }, "gu", gs.reset_hunk)
         map("n", "gU", gs.reset_buffer)
         map("n", "gp", gs.preview_hunk)
-        map("n", "gb", gs.blame_line)
-        map("n", "gtb", gs.toggle_current_line_blame)
+        -- map("n", "gb", gs.blame_line)
+        map("n", "gb", gs.toggle_current_line_blame)
         map("n", "gtw", "<cmd>Gitsigns toggle_word_diff<CR>")
         map("n", "gtl", "<cmd>Gitsigns toggle_linehl<CR>")
         map("n", "gtd", "<cmd>Gitsigns toggle_deleted<cr>")
