@@ -525,7 +525,7 @@ require("lazy").setup(
             end,
             dependencies = {
                 -- { "theHamsta/nvim-treesitter-pairs" },
-                -- { "windwp/nvim-ts-autotag" }, -- <div> </div>
+                { "windwp/nvim-ts-autotag" }, -- <div> </div>
                 -- { "nvim-treesitter/nvim-treesitter-textobjects" },
                 { "mrjones2014/nvim-ts-rainbow" },
                 { "nvim-treesitter/nvim-treesitter-context" },
@@ -592,7 +592,7 @@ require("lazy").setup(
         },
         {
             "ur4ltz/surround.nvim",
-            enabled = false,
+            enabled = true,
             config = function()
                 require("plugins.editor.surround")
             end,
@@ -604,7 +604,7 @@ require("lazy").setup(
         },
         {
             "echasnovski/mini.surround",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.editor.mini-surround")
             end,
@@ -727,7 +727,7 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         {
             "s1n7ax/nvim-window-picker",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.windows.nvim-window-picker")
             end,
@@ -837,12 +837,16 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         {
             "nvim-neorg/neorg",
-            enabled = false,
+            enabled = true,
             run = ":Neorg sync-parsers", -- This is the important bit!
-            ft = { "norg" },
+            ft = { "norg", "md", "markdown" },
+            cmd = { "Neorg" },
             config = function()
                 require("plugins.wiki.neorg")
             end,
+            -- dependencies = {
+            --     "john-cena/cool-neorg-plugin",
+            -- },
         },
         {
             "nvim-orgmode/orgmode",
@@ -864,6 +868,14 @@ require("lazy").setup(
             lazy = true,
         },
         {
+            "rktjmp/lush.nvim",
+            enabled = true,
+            config = function()
+                require("plugins.utils.lush")
+            end,
+            cmd = { "LushRunTutorial" },
+        },
+        {
             "kevinhwang91/nvim-ufo",
             enabled = true,
             dependencies = { "kevinhwang91/promise-async" },
@@ -882,7 +894,7 @@ require("lazy").setup(
         },
         {
             "SmiteshP/nvim-navic",
-            enabled = false,
+            enabled = true,
             lazy = true,
             -- init = function()
             --     require("utils").on_attach(function(client, buffer)
@@ -979,13 +991,13 @@ require("lazy").setup(
             -- 8. lualine noice-command, noice-mode
             -- 9. cmdline popup
             "folke/noice.nvim",
-            enabled = false,
+            enabled = true,
             config = function()
                 require("plugins.ui.noice")
             end,
             requires = {
                 "MunifTanjim/nui.nvim",
-                "rcarriga/nvim-notify",
+                -- "rcarriga/nvim-notify",
             },
             event = { "VeryLazy" },
         },

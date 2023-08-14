@@ -292,10 +292,10 @@ lualine.setup({
     winbar = {
         -- lualine_a = {},
         -- lualine_b = {},
-        -- lualine_c = {
-        --     -- filename_winbar_act,
-        --     -- navic,
-        -- },
+        lualine_c = {
+            filename_winbar_act,
+            navic,
+        },
         -- lualine_x = {},
         -- lualine_y = {
         --     -- time_winbar,
@@ -305,10 +305,10 @@ lualine.setup({
     inactive_winbar = {
         -- lualine_a = {},
         -- lualine_b = {},
-        -- lualine_c = {
-        --     -- filename_winbar_intact,
-        --     -- navic,
-        -- },
+        lualine_c = {
+            filename_winbar_intact,
+            navic,
+        },
         -- lualine_x = {
         --     -- time_winbar,
         -- },

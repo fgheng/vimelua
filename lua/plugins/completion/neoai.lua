@@ -29,8 +29,11 @@ require("neoai").setup({
                 .. context
         end,
     },
-    open_api_key_env = "OPENAI_API_KEY",
-    open_api_base_env = "OPENAI_API_BASE",
+    open_ai = {
+        api_key = {
+            env = "OPENAI_API_KEY"
+        }
+    },
     shortcuts = {
         {
             name = "textify",

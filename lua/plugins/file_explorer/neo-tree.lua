@@ -160,7 +160,7 @@ neo_tree.setup({
             ["<2-LeftMouse>"] = "open",
             ["l"] = window_open,
             ["o"] = window_open_close,
-            ["<cr>"] = window_open_close,
+            -- ["<cr>"] = window_open_close,
             ["<esc>"] = "revert_preview",
             ["P"] = { "toggle_preview", config = { use_float = true } },
             ["<c-s>"] = "open_split",
