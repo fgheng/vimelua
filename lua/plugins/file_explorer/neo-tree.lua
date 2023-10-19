@@ -20,7 +20,7 @@ local chdir_or_open = function(state)
     end
 end
 
-local window_open = function (state)
+local window_open = function(state)
     local node = state.tree:get_node()
     if node.type == "directory" or node:has_children() then
         if not node:is_expanded() then -- if unexpanded, expand
@@ -32,7 +32,7 @@ local window_open = function (state)
     end
 end
 
-local window_open_close = function (state)
+local window_open_close = function(state)
     local node = state.tree:get_node()
     if node.type == "directory" or node:has_children() then
         state.commands.toggle_node(state)
@@ -291,10 +291,17 @@ local opts = { silent = true, noremap = true }
 local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "<F2>", "<cmd>NeoTreeRevealToggle<cr>", opts)
-vim.keymap.set("n", "<leader>e", function()
-    vim.ui.input({ prompt = "NeoTree", default = "" }, function(input)
-        if input ~= nil then
-            vim.api.nvim_command("Neotree " .. input)
-        end
-    end)
+vim.keymap.set("n", "<leader>ee", function()
+    vim.api.nvim_command("Neotree left")
+    -- vim.ui.input({ prompt = "NeoTree", default = "" }, function(input)
+    --     if input ~= nil then
+    --         vim.api.nvim_command("Neotree " .. input)
+    --     end
+    -- end)
+end, opts)
+vim.keymap.set("n", "<leader>er", function()
+    vim.api.nvim_command("Neotree right")
+end, opts)
+vim.keymap.set("n", "<leader>ef", function()
+    vim.api.nvim_command("Neotree float")
 end, opts)

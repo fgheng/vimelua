@@ -1,6 +1,8 @@
 ----------------------------------------------------------------------
 --                               lsp                                --
 ----------------------------------------------------------------------
+vim.lsp.set_log_level("off")
+
 local lsp = vim.lsp
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
     border = "rounded",

@@ -46,7 +46,7 @@ require("lazy").setup(
         },
         {
             "kosayoda/nvim-lightbulb",
-            enabled = true,
+            enabled = false,
             config = function()
                 vim.schedule(function()
                     require("plugins.lsp.nvim-lightbulb")
@@ -877,7 +877,7 @@ require("lazy").setup(
         },
         {
             "kevinhwang91/nvim-ufo",
-            enabled = true,
+            enabled = false,
             dependencies = { "kevinhwang91/promise-async" },
             config = function()
                 require("plugins.utils.nvim-ufo")
