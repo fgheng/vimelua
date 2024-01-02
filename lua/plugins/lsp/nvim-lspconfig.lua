@@ -41,7 +41,7 @@ mason_lspconfig.setup({
                 end
 
                 if server_name == "lua_ls" then
-                    lspconfig["sumneko_lua"].setup(opts)
+                    lspconfig["lua_ls"].setup(opts)
                 else
                     lspconfig[server_name].setup(opts)
                 end

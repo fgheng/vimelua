@@ -122,6 +122,11 @@ require("lazy").setup(
             -- event = "LspAttach",
         },
 
+        {
+            "hinell/lsp-timeout.nvim",
+            dependencies = { "neovim/nvim-lspconfig" },
+        },
+
         ----------------------------------------------------------------------
         --                            completion                            --
         ----------------------------------------------------------------------
@@ -165,6 +170,7 @@ require("lazy").setup(
         },
         {
             "Bryley/neoai.nvim",
+            enabled = false,
             config = function()
                 require("plugins.completion.neoai")
             end,
