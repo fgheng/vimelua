@@ -29,23 +29,17 @@ mason_lspconfig.setup({
     ensure_installed = server_names,
     handlers = {
         function(server_name) -- default handler (optional)
-            -- if server_name ~= "jdtls" then
-                local opts = {
-                    on_attach = function(client, bufnr) end,
-                    capabilities = capabilities,
-                }
+            local opts = {
+                on_attach = function(client, bufnr) end,
+                capabilities = capabilities,
+            }
 
-                local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
-                if status_ok then
-                    opts = vim.tbl_deep_extend("force", server, opts)
-                end
+            local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
+            if status_ok then
+                opts = vim.tbl_deep_extend("force", server, opts)
+            end
 
-                if server_name == "lua_ls" then
-                    lspconfig["lua_ls"].setup(opts)
-                else
-                    lspconfig[server_name].setup(opts)
-                end
-            -- end
+            lspconfig[server_name].setup(opts)
         end,
     },
 })

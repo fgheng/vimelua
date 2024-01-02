@@ -23,8 +23,8 @@ require("lazy").setup(
                 require("plugins.lsp.nvim-lspconfig")
             end,
             dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-            -- event = { "InsertEnter", },
-            event = { "BufReadPre", "BufNewFile" },
+            event = { "InsertEnter" },
+            -- event = { "BufReadPre", "BufNewFile" },
         },
         {
             "jose-elias-alvarez/null-ls.nvim",
@@ -238,6 +238,9 @@ require("lazy").setup(
             keys = {
                 "<leader>dm",
                 "<leader>dl",
+            },
+            dependencies = {
+                "nvim-treesitter/nvim-treesitter"
             },
         },
 
@@ -530,15 +533,15 @@ require("lazy").setup(
                 -- end)
             end,
             dependencies = {
-                -- { "theHamsta/nvim-treesitter-pairs" },
-                { "windwp/nvim-ts-autotag" }, -- <div> </div>
-                -- { "nvim-treesitter/nvim-treesitter-textobjects" },
-                { "mrjones2014/nvim-ts-rainbow" },
-                { "nvim-treesitter/nvim-treesitter-context" },
-                { "andymass/vim-matchup" },
+                -- -- { "theHamsta/nvim-treesitter-pairs" },
+                -- { "windwp/nvim-ts-autotag" }, -- <div> </div>
+                -- -- { "kvim-treesitter/nvim-treesitter-textobjects" },
+                -- { "mrjones2014/nvim-ts-rainbow" },
+                -- { "nvim-treesitter/nvim-treesitter-context" },
+                -- { "andymass/vim-matchup" },
             },
-            event = { "BufReadPre" },
-            -- event = { "CursorMoved", "InsertEnter", },
+            -- event = { "BufReadPre" },
+            event = { "CursorMoved", "InsertEnter", },
         },
         {
             "andymass/vim-matchup",
