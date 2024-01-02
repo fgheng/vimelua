@@ -27,7 +27,8 @@ require("lazy").setup(
             -- event = { "BufReadPre", "BufNewFile" },
         },
         {
-            "jose-elias-alvarez/null-ls.nvim",
+            -- "jose-elias-alvarez/null-ls.nvim",
+            "nvimtools/none-ls.nvim",
             enabled = true,
             config = function()
                 vim.schedule(function()
@@ -559,10 +560,10 @@ require("lazy").setup(
             enabled = true,
             event = "InsertEnter",
             config = function()
-                vim.schedule(function ()
+                vim.schedule(function()
                     require("plugins.editor.neotab")
                 end)
-            end
+            end,
         },
         {
             "RRethy/vim-illuminate", -- highlight all world of current cursor in current buffer
@@ -643,15 +644,16 @@ require("lazy").setup(
         },
         {
             "lukas-reineke/indent-blankline.nvim",
+            main = "ibl",
             config = function()
                 require("plugins.editor.indent-blankline")
             end,
-            cmd = {
-                "IndentBlanklineToggle",
-                "IndentBlanklineEnable",
-                "IndentBlanklineRefresh",
-            },
-            -- event = { "BufReadPost" },
+            -- cmd = {
+            --     "IndentBlanklineToggle",
+            --     "IndentBlanklineEnable",
+            --     "IndentBlanklineRefresh",
+            -- },
+            event = { "BufReadPost" },
         },
         {
             "petertriho/nvim-scrollbar",
