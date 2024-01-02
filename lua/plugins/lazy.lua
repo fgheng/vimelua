@@ -240,7 +240,7 @@ require("lazy").setup(
                 "<leader>dl",
             },
             dependencies = {
-                "nvim-treesitter/nvim-treesitter"
+                "nvim-treesitter/nvim-treesitter",
             },
         },
 
@@ -541,11 +541,11 @@ require("lazy").setup(
                 -- { "andymass/vim-matchup" },
             },
             -- event = { "BufReadPre" },
-            event = { "CursorMoved", "InsertEnter", },
+            event = { "CursorMoved", "InsertEnter" },
         },
         {
             "andymass/vim-matchup",
-            enabled = true,
+            enabled = false,
             lazy = true,
             config = function()
                 vim.schedule(function()
@@ -553,6 +553,16 @@ require("lazy").setup(
                 end)
             end,
             -- event = { "CursorMoved" },
+        },
+        {
+            "kawre/neotab.nvim",
+            enabled = true,
+            event = "InsertEnter",
+            config = function()
+                vim.schedule(function ()
+                    require("plugins.editor.neotab")
+                end)
+            end
         },
         {
             "RRethy/vim-illuminate", -- highlight all world of current cursor in current buffer
