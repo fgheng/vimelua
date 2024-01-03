@@ -23,8 +23,8 @@ require("lazy").setup(
                 require("plugins.lsp.nvim-lspconfig")
             end,
             dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-            event = { "InsertEnter" },
-            -- event = { "BufReadPre", "BufNewFile" },
+            -- event = { "InsertEnter" },
+            event = { "BufReadPre", "BufNewFile" },
         },
         {
             -- "jose-elias-alvarez/null-ls.nvim",
@@ -125,6 +125,18 @@ require("lazy").setup(
 
         {
             "hinell/lsp-timeout.nvim",
+            init = function()
+                vim.g["lsp-timeout-config"] = {
+                    stopTimeout = 1000,        -- Stop unused lsp servers after 1s (for testing).
+                    startTimeout = 2000,             -- Force server restart if nvim can't in 2s.
+                    silent = true,                   -- Notifications disabled
+                    filetypes = {                    -- Exclude servers that miss behave on LSP stop/start.
+                        ignore = { 'markdown', 'java' }
+                    },
+                }
+            end,
+            config = function ()
+            end,
             dependencies = { "neovim/nvim-lspconfig" },
         },
 
@@ -538,7 +550,7 @@ require("lazy").setup(
                 -- { "windwp/nvim-ts-autotag" }, -- <div> </div>
                 -- -- { "kvim-treesitter/nvim-treesitter-textobjects" },
                 -- { "mrjones2014/nvim-ts-rainbow" },
-                -- { "nvim-treesitter/nvim-treesitter-context" },
+                { "nvim-treesitter/nvim-treesitter-context" },
                 -- { "andymass/vim-matchup" },
             },
             -- event = { "BufReadPre" },

@@ -16,7 +16,7 @@ if vim.g.neovide then
     g.neovide_confirm_quit = true
     g.neovide_fullscreen = false
     g.neovide_profiler = false
-    g.neovide_input_use_logo = true -- true on macOS
+    g.neovide_input_use_logo = true          -- true on macOS
     g.neovide_input_macos_alt_is_meta = true -- macos meta is alt
 
     --cursor

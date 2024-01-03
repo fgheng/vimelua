@@ -46,6 +46,9 @@ opt.shortmess = opt.shortmess .. "c" -- Shut off completion messages
 opt.guicursor = "n-v-c-sm:blinkon01,i-ci-ve:ver25-blinkon01,r-cr-o:hor20"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
+opt.foldmethod = "expr"
+opt.foldcolumn = "1"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- opt.fillchars = "vert:⎹,vertleft:⎹,vertright:⎹,horiz:⸻,horizup:⸻,horizdown:⸻,fold: ,foldopen:│,foldclose:│,foldsep:│,eob:,msgsep:"
 
 -- opt.colorcolumn = 80

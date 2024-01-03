@@ -1,11 +1,11 @@
 require("smoothcursor").setup({
-    cursor = "", -- cursor shape (need nerd font)
+    cursor = "▷", -- cursor shape (need nerd font)
     texthl = "SmoothCursor", -- highlight group, default is { bg = nil, fg = "#FFD400" }
     linehl = "cursorLine", -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
     type = "exp", -- define cursor movement calculate function, "default" or "exp" (exponential).
     fancy = {
         enable = false, -- enable fancy mode
-        head = { cursor = "", texthl = "SmoothCursor", linehl = nil }, -- ▷
+        head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil }, -- 
         body = {
             { cursor = "│", texthl = "SmoothCursorRed" },
             { cursor = "│", texthl = "SmoothCursorOrange" },
@@ -17,7 +17,7 @@ require("smoothcursor").setup({
         },
         tail = { cursor = nil, texthl = "SmoothCursor" },
     },
-    flyin_effect = top, -- "bottom" or "top"
+    flyin_effect = "top", -- "bottom" or "top"
     speed = 80, -- max is 100 to stick to your current position
     intervals = 35, -- tick interval
     priority = 1, -- set marker priority

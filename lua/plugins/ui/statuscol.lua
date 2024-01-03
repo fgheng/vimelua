@@ -1,27 +1,66 @@
 local builtin = require("statuscol.builtin")
 local cfg = {
-    -- setopt = true, -- Whether to set the 'statuscolumn' option, may be set to false for those who
-    -- -- want to use the click handlers in their own 'statuscolumn': _G.Sc[SFL]a().
-    -- -- Although I recommend just using the segments field below to build your
-    -- -- statuscolumn to benefit from the performance optimizations in this plugin.
-    -- -- builtin.lnumfunc number string options
-    -- thousands = false, -- or line number thousands separator string ("." / ",")
-    -- relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
-    -- -- Builtin 'statuscolumn' options
-    ft_ignore = { "neo-tree", "NvimTree", "gitcommit" }, -- lua table with filetypes for which 'statuscolumn' will be unset
-    bt_ignore = { "terminal", "nofile" }, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
-    -- -- Default segments (fold -> sign -> line number + separator), explained below
+    setopt = true, -- Whether to set the 'statuscolumn' option, may be set to false for those who
+    -- want to use the click handlers in their own 'statuscolumn': _G.Sc[SFL]a().
+    -- Although I recommend just using the segments field below to build your
+    -- statuscolumn to benefit from the performance optimizations in this plugin.
+    -- builtin.lnumfunc number string options
+    thousands = false, -- or line number thousands separator string ("." / ",")
+    relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
+    -- Builtin 'statuscolumn' options
+    ft_ignore = nil, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
+    bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
+    -- Default segments (fold -> sign -> line number + separator), explained below
     segments = {
-        -- { text = { "%C" }, click = "v:lua.ScFa" },
-        -- { text = { "%s" }, click = "v:lua.ScSa" },
+        { text = { "%s" }, click = "v:lua.ScSa" },
+        {
+            text = {
+                " ", -- whitespace padding
+                function(args) -- custom line number highlight function
+                    return ((args.lnum % 2 > 0) and "%#DiffDelete#%=" or "%#DiffAdd#%=") .. "%l"
+                end,
+                " ", -- whitespace padding
+            },
+            condition = {
+                true, -- always shown
+                function(args) -- shown only for the current window
+                    return vim.api.nvim_get_current_win() == args.win
+                end,
+                builtin.notempty, -- only shown when the rest of the statuscolumn is not empty
+            },
+        },
+        {
+            text = {
+                function()
+                    return "%="
+                end,
+                " ",
+                builtin.foldfunc,
+                args = {
+                    fold = {
+                        width = 1, -- current width of the fold column
+                        -- 'fillchars' option values:
+                        close = "", -- foldclose
+                        open = "", -- foldopen
+                        sep = " ", -- foldsep
+                    },
+                },
+            },
+            condition = {
+                true,
+                function(args)
+                    return args.fold.width > 0
+                end,
+                true,
+            },
+        },
         -- {
         --     text = { builtin.lnumfunc, " " },
         --     condition = { true, builtin.not_empty },
         --     click = "v:lua.ScLa",
         -- },
-        { text = { "%s" }, click = "v:lua.ScSa" },
-        { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
-        { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
+        -- { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+        -- { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
     },
     clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
     -- "a" for Alt, "c" for Ctrl and "m" for Meta.
