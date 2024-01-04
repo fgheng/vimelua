@@ -13,38 +13,31 @@ local cfg = {
     -- Default segments (fold -> sign -> line number + separator), explained below
     segments = {
         { text = { "%s" }, click = "v:lua.ScSa" },
-        {
-            text = {
-                " ", -- whitespace padding
-                function(args) -- custom line number highlight function
-                    return ((args.lnum % 2 > 0) and "%#DiffDelete#%=" or "%#DiffAdd#%=") .. "%l"
-                end,
-                " ", -- whitespace padding
-            },
-            condition = {
-                true, -- always shown
-                function(args) -- shown only for the current window
-                    return vim.api.nvim_get_current_win() == args.win
-                end,
-                builtin.notempty, -- only shown when the rest of the statuscolumn is not empty
-            },
-        },
+        { text = { builtin.lnumfunc, "" }, click = "v:lua.ScLa" },
+        -- {
+        --     text = {
+        --         "", -- whitespace padding
+        --         function(args) -- custom line number highlight function
+        --             -- return ((args.lnum % 2 > 0) and "%#DiffDelete#%=" or "%#DiffAdd#%=") .. "%l"
+        --             return ((args.lnum % 2 > 0) and "%#DiffDelete#%=" or "%#DiffAdd#%=") .. "%l"
+        --         end,
+        --         "", -- whitespace padding
+        --     },
+        --     condition = {
+        --         true, -- always shown
+        --         function(args) -- shown only for the current window
+        --             return vim.api.nvim_get_current_win() == args.win
+        --         end,
+        --         builtin.notempty, -- only shown when the rest of the statuscolumn is not empty
+        --     },
+        -- },
         {
             text = {
                 function()
                     return "%="
                 end,
-                " ",
                 builtin.foldfunc,
-                args = {
-                    fold = {
-                        width = 1, -- current width of the fold column
-                        -- 'fillchars' option values:
-                        close = "", -- foldclose
-                        open = "", -- foldopen
-                        sep = " ", -- foldsep
-                    },
-                },
+                " ",
             },
             condition = {
                 true,
@@ -53,14 +46,8 @@ local cfg = {
                 end,
                 true,
             },
+            click = "v:lua.ScFa",
         },
-        -- {
-        --     text = { builtin.lnumfunc, " " },
-        --     condition = { true, builtin.not_empty },
-        --     click = "v:lua.ScLa",
-        -- },
-        -- { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
-        -- { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
     },
     clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
     -- "a" for Alt, "c" for Ctrl and "m" for Meta.
