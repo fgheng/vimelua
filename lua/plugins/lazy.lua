@@ -125,19 +125,19 @@ require("lazy").setup(
 
         {
             "hinell/lsp-timeout.nvim",
-            init = function()
-                vim.g["lsp-timeout-config"] = {
-                    stopTimeout = 1000,        -- Stop unused lsp servers after 1s (for testing).
-                    startTimeout = 2000,             -- Force server restart if nvim can't in 2s.
-                    silent = true,                   -- Notifications disabled
-                    filetypes = {                    -- Exclude servers that miss behave on LSP stop/start.
-                        ignore = { 'markdown', 'java' }
+            enabled = false,
+            config = function()
+                vim.g.lspTimeoutConfig = {
+                    stopTimeout = 1000, -- Stop unused lsp servers after 1s (for testing).
+                    startTimeout = 2000, -- Force server restart if nvim can't in 2s.
+                    silent = false, -- Notifications disabled
+                    filetypes = { -- Exclude servers that miss behave on LSP stop/start.
+                        ignore = { "markdown", "java" },
                     },
                 }
             end,
-            config = function ()
-            end,
             dependencies = { "neovim/nvim-lspconfig" },
+            event = { "LspAttach" },
         },
 
         ----------------------------------------------------------------------
@@ -927,7 +927,7 @@ require("lazy").setup(
         },
         {
             "SmiteshP/nvim-navic",
-            enabled = true,
+            enabled = false,
             lazy = true,
             -- init = function()
             --     require("utils").on_attach(function(client, buffer)
@@ -985,9 +985,9 @@ require("lazy").setup(
                 require("plugins.utils.pantran")
             end,
             keys = {
-                {mode = "n", "<leader>rr"},
-                {mode = "x", "<leader>rr"},
-            }
+                { mode = "n", "<leader>rr" },
+                { mode = "x", "<leader>rr" },
+            },
         },
 
         ----------------------------------------------------------------------

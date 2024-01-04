@@ -289,32 +289,32 @@ lualine.setup({
         lualine_z = {},
     },
     tabline = {},
-    winbar = {
-        -- lualine_a = {},
-        -- lualine_b = {},
-        lualine_c = {
-            filename_winbar_act,
-            navic,
-        },
-        -- lualine_x = {},
-        -- lualine_y = {
-        --     -- time_winbar,
-        -- },
-        -- lualine_z = {},
-    },
-    inactive_winbar = {
-        -- lualine_a = {},
-        -- lualine_b = {},
-        lualine_c = {
-            filename_winbar_intact,
-            navic,
-        },
-        -- lualine_x = {
-        --     -- time_winbar,
-        -- },
-        -- lualine_y = {},
-        -- lualine_z = {},
-    },
+    -- winbar = {
+    --     -- lualine_a = {},
+    --     -- lualine_b = {},
+    --     lualine_c = {
+    --         filename_winbar_act,
+    --         navic,
+    --     },
+    --     -- lualine_x = {},
+    --     -- lualine_y = {
+    --     --     -- time_winbar,
+    --     -- },
+    --     -- lualine_z = {},
+    -- },
+    -- inactive_winbar = {
+    --     -- lualine_a = {},
+    --     -- lualine_b = {},
+    --     lualine_c = {
+    --         filename_winbar_intact,
+    --         navic,
+    --     },
+    --     -- lualine_x = {
+    --     --     -- time_winbar,
+    --     -- },
+    --     -- lualine_y = {},
+    --     -- lualine_z = {},
+    -- },
     extensions = {},
 })
 

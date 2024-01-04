@@ -11,6 +11,16 @@ function M.on_attach(on_attach)
     })
 end
 
+function M.on_deattach(on_deattach)
+    vim.api.nvim_create_autocmd("LspDe", {
+        callback = function(args)
+            local buffer = args.buf
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            on_attach(client, buffer)
+        end,
+    })
+end
+
 -- 在这个函数中返回获取的可视区域文本
 function M.getVisualSelection()
     local start_pos = vim.api.nvim_buf_get_mark(0, "<")
