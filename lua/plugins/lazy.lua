@@ -549,9 +549,9 @@ require("lazy").setup(
                 -- -- { "theHamsta/nvim-treesitter-pairs" },
                 -- { "windwp/nvim-ts-autotag" }, -- <div> </div>
                 -- -- { "kvim-treesitter/nvim-treesitter-textobjects" },
-                -- { "mrjones2014/nvim-ts-rainbow" },
+                { "mrjones2014/nvim-ts-rainbow" },
                 { "nvim-treesitter/nvim-treesitter-context" },
-                -- { "andymass/vim-matchup" },
+                { "andymass/vim-matchup" },
             },
             -- event = { "BufReadPre" },
             event = { "CursorMoved", "InsertEnter" },
@@ -669,7 +669,7 @@ require("lazy").setup(
         },
         {
             "petertriho/nvim-scrollbar",
-            enabled = false,
+            enabled = true,
             config = function()
                 require("plugins.editor.nvim-scrollbar")
             end,
@@ -689,7 +689,7 @@ require("lazy").setup(
         },
         {
             "kevinhwang91/nvim-hlslens",
-            enabled = false, -- using noice
+            enabled = true, -- using noice
             config = function()
                 require("plugins.editor.nvim-hlslens")
             end,
@@ -1035,7 +1035,7 @@ require("lazy").setup(
             -- 8. lualine noice-command, noice-mode
             -- 9. cmdline popup
             "folke/noice.nvim",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.ui.noice")
             end,
@@ -1077,8 +1077,8 @@ require("lazy").setup(
                 { "arkav/lualine-lsp-progress" },
                 -- { "SmiteshP/nvim-navic" },
             },
-            -- event = { "BufRead" },
-            event = { "VeryLazy" },
+            event = { "BufRead" },
+            -- event = { "VeryLazy" },
         },
         {
             "rebelot/heirline.nvim",

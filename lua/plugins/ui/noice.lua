@@ -2,7 +2,7 @@ local icons = require("ui.icons")
 require("noice").setup({
     -- view: notify, mini, hover, popupmenu, popup, split, cmdline cmdline_popup, messages
     cmdline = {
-        enabled = true, -- enables the Noice cmdline UI
+        enabled = false, -- enables the Noice cmdline UI
         view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
         opts = {}, -- global options for the cmdline. See section on views
         ---@type table<string, CmdlineFormat>
@@ -119,7 +119,7 @@ require("noice").setup({
             ["cmp.entry.get_documentation"] = false,
         },
         hover = {
-            enabled = true,
+            enabled = false,
             view = nil, -- when nil, use defaults from documentation
             ---@type NoiceViewOptions
             opts = {}, -- merged with defaults from documentation
@@ -207,7 +207,6 @@ require("noice").setup({
     ---@type NoiceFormatOptions
     format = {}, --- @see section on formatting
 })
-
 -- vim.keymap.set("n", "<c-d>", function()
 --     if not require("noice.lsp").scroll(4) then
 --         return "<c-d>"
