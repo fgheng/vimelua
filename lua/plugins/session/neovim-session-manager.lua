@@ -26,8 +26,8 @@ vim.api.nvim_create_autocmd({ "SessionLoadPost" }, {
     group = config_group,
     callback = function()
         -- local cwd = vim.uv.cwd()
-        -- vim.api.nvim_command("NeotreeShow " .. cwd)
-        vim.api.nvim_command("NeoTreeShow ")
+        vim.api.nvim_command("NeoTreeClose")
+        vim.api.nvim_command("NeoTreeShow")
     end,
 })
 

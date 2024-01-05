@@ -325,7 +325,7 @@ require("lazy").setup(
                 "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
                 "MunifTanjim/nui.nvim",
             },
-            cmd = { "Neotree", "NeoTreeShow" },
+            cmd = { "Neotree", "NeoTreeShow", "NeoTreeClose" },
             keys = {
                 "<F2>",
                 "<leader>e",
@@ -896,6 +896,24 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         --                              utils                               --
         ----------------------------------------------------------------------
+        -- lazy.nvim:
+        {
+            "smoka7/multicursors.nvim",
+            event = "VeryLazy",
+            dependencies = {
+                "smoka7/hydra.nvim",
+            },
+            opts = {},
+            cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+            keys = {
+                {
+                    mode = { "v", "n" },
+                    "<Leader>m",
+                    "<cmd>MCstart<cr>",
+                    desc = "Create a selection for selected text or word under the cursor",
+                },
+            },
+        },
         {
             "nvim-lua/plenary.nvim",
             lazy = true,
