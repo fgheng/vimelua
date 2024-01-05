@@ -25,7 +25,9 @@ local config_group = vim.api.nvim_create_augroup("vimeGroup_neo_tree", {})
 vim.api.nvim_create_autocmd({ "SessionLoadPost" }, {
     group = config_group,
     callback = function()
-        vim.api.nvim_command("Neotree")
+        -- local cwd = vim.uv.cwd()
+        -- vim.api.nvim_command("NeotreeShow " .. cwd)
+        vim.api.nvim_command("NeoTreeShow ")
     end,
 })
 

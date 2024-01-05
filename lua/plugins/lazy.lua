@@ -325,7 +325,7 @@ require("lazy").setup(
                 "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
                 "MunifTanjim/nui.nvim",
             },
-            cmd = { "Neotree" },
+            cmd = { "Neotree", "NeoTreeShow" },
             keys = {
                 "<F2>",
                 "<leader>e",
