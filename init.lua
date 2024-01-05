@@ -20,11 +20,12 @@ if vim.g.neovide then
     g.neovide_input_macos_alt_is_meta = true -- macos meta is alt
 
     --cursor
-    -- g.neovide_cursor_animation_length=0.05
-    -- g.neovide_cursor_trail_size = 0.8
-    -- g.neovide_cursor_antialiasing = true
-    -- g.neovide_cursor_unfocused_outline_width = 0.5
-    g.neovide_cursor_vfx_mode = "wireframe" -- railgun torpedo pixiedust sonicboom  ripple wireframe
+    g.neovide_cursor_animation_length=0.05
+    g.neovide_cursor_trail_size = 0.8
+    g.neovide_cursor_antialiasing = true
+    g.neovide_cursor_unfocused_outline_width = 0.5
+    -- g.neovide_cursor_vfx_mode = "wireframe" -- railgun torpedo pixiedust sonicboom  ripple wireframe
+    g.neovide_cursor_vfx_mode = "railgun" -- railgun torpedo pixiedust sonicboom  ripple wireframe
 
     if vim.o.background == "light" then
         vim.cmd([[

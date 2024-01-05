@@ -870,7 +870,7 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         {
             "nvim-neorg/neorg",
-            enabled = true,
+            enabled = false,
             run = ":Neorg sync-parsers", -- This is the important bit!
             ft = { "norg", "md", "markdown" },
             cmd = { "Neorg" },

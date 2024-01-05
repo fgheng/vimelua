@@ -27,7 +27,7 @@ _M.colorscheme = {
 --                        treesitter config                         --
 ----------------------------------------------------------------------
 _M.treesitter_languages = {
-    -- "cpp",
+    "cpp",
     "c",
     "bash",
     "lua",
