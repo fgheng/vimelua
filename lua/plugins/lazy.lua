@@ -669,7 +669,7 @@ require("lazy").setup(
         },
         {
             "petertriho/nvim-scrollbar",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.editor.nvim-scrollbar")
             end,
