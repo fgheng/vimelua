@@ -55,17 +55,19 @@ telescope.setup({
             "absolute",
         },
         file_ignore_patterns = { "node_modules" },
-        layout_strategy = "vertical",
         -- layout_strategy = 'bottom_pane',
-        layout_config = {
-            anchor = "N",
-            height = 0.6,
-            width = { 0.4, max = 100, min = 60 },
-            mirror = true,
-            prompt_position = "top",
-        },
+        -- 
+        -- layout_strategy = "vertical",
+        -- layout_config = {
+        --     anchor = "N",
+        --     height = 0.6,
+        --     width = { 0.4, max = 100, min = 60 },
+        --     mirror = true,
+        --     prompt_position = "top",
+        -- },
+        layout_strategy = 'bottom_pane',
         sorting_strategy = "ascending",
-        -- themes = 'cursor',
+        -- themes = 'ivy',
         winblend = 0,
         color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" },
@@ -79,7 +81,7 @@ telescope.setup({
         },
         jumplist = {
             show_line = false,
-            trim_text = true,
+            trim_text = false,
             fname_width = 10,
         },
         lsp_references = {
@@ -87,11 +89,11 @@ telescope.setup({
             include_current_line = false,
             fname_width = 10,
             show_line = false,
-            trim_text = true,
+            trim_text = false,
         },
         lsp_definitions = {
             show_line = false,
-            trim_text = true,
+            trim_text = false,
         },
         diagnostic = {
             bufnr = 0, -- current buffer or nil for all buffers
@@ -121,24 +123,24 @@ telescope.setup({
         --             "--no-ignore-vcs",
         --         },
         --         search_dirs = {
-        --             "~/",
+        --             "~/workspace",
         --         },
         --     },
         -- },
-        -- file_browser = {
-        --     -- theme = 'ivy',
-        --     -- disables netrw and use telescope-file-browser in its place
-        --     hijack_netrw = true,
-        -- },
+        file_browser = {
+            -- theme = 'ivy',
+            -- disables netrw and use telescope-file-browser in its place
+            hijack_netrw = true,
+        },
     },
 })
 
--- telescope.load_extension("ui-select") -- using dressing
+telescope.load_extension("ui-select") -- using dressing
 telescope.load_extension("fzf")
 telescope.load_extension("live_grep_args")
 telescope.load_extension("lazy")
 -- telescope.load_extension("repo")
--- telescope.load_extension("file_browser")
+telescope.load_extension("file_browser")
 
 local tb = require("telescope.builtin")
 local opts = { silent = true, noremap = true }
@@ -156,7 +158,7 @@ keymap("n", "<space>f", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<space>s", '<cmd>lua require("telescope").extensions.live_grep_args.live_grep_args()<cr>', opts)
 vim.keymap.set("v", "<space>s", function()
     local selected_text = require("utils").getVisualSelection()
-    selected_text = table.concat(selected_text, "")
+    selected_text = table.concat(selected_text, "")[0]
     tb.live_grep({ default_text = selected_text })
 end, opts)
 keymap("n", "<space>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
@@ -176,7 +178,7 @@ keymap("n", "<space>o", "<cmd>Telescope lsp_document_symbols<cr>", opts)
 vim.keymap.set("v", "<space>o", function()
     local text = require("utils").getVisualSelection()
     local selected_text = require("utils").getVisualSelection()
-    selected_text = table.concat(selected_text, "")
+    selected_text = table.concat(selected_text, "")[0]
     tb.lsp_document_symbols({ default_text = text })
 end, opts)
 keymap("n", "<space>O", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
@@ -184,6 +186,7 @@ vim.keymap.set("v", "<space>O", function()
     local text = require("utils").getVisualSelection()
     tb.lsp_workspace_symbols({ default_text = text })
 end, opts)
+vim.keymap.set("n", "<space>e", "<cmd>Telescope file_browser<CR>", opts)
 
 ----------------------------------------------------------------------
 --                               fzf                                --

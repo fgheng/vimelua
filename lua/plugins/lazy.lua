@@ -245,6 +245,7 @@ require("lazy").setup(
         },
         {
             "s1n7ax/nvim-comment-frame",
+            enabled = false,
             config = function()
                 require("plugins.comment.nvim-comment-frame")
             end,
@@ -274,13 +275,15 @@ require("lazy").setup(
                 { "nvim-telescope/telescope-live-grep-args.nvim" },
                 { "nvim-telescope/telescope-symbols.nvim" },
                 { "tsakirist/telescope-lazy.nvim" },
-                -- { "nvim-telescope/telescope-ui-select.nvim" },
-                -- { "cljoly/telescope-repo.nvim" },
+                { "nvim-telescope/telescope-ui-select.nvim" },
+                { "cljoly/telescope-repo.nvim" },
+                {"nvim-telescope/telescope-file-browser.nvim"}
             },
             cmd = { "Telescope" },
             keys = {
                 { mode = "n", "<space><space>" },
                 { mode = "n", "<space>f" },
+                { mode = "n", "<space>e" },
                 { mode = "n", "<space>s" },
                 { mode = "v", "<space>s" },
                 { mode = "n", "<space>g" },
@@ -536,7 +539,7 @@ require("lazy").setup(
         },
         {
             "nvim-treesitter/nvim-treesitter",
-            enabled = true,
+            enabled = false,
             config = function()
                 -- vim.defer_fn(function()
                 require("plugins.editor.nvim-treesitter")
@@ -1040,7 +1043,7 @@ require("lazy").setup(
                     end, 10)
                 end
             end,
-            -- event = { "BufRead" },
+            event = { "BufRead" },
         },
         {
             -- 1. hover
@@ -1071,10 +1074,10 @@ require("lazy").setup(
             "stevearc/dressing.nvim",
             enabled = true,
             init = function() -- this is fast
-                vim.ui.select = function(...)
-                    require("lazy").load({ plugins = { "dressing.nvim" } })
-                    return vim.ui.select(...)
-                end
+                -- vim.ui.select = function(...)
+                --     require("lazy").load({ plugins = { "dressing.nvim" } })
+                --     return vim.ui.select(...)
+                -- end
 
                 vim.ui.input = function(...)
                     require("lazy").load({ plugins = { "dressing.nvim" } })

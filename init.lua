@@ -41,3 +41,6 @@ if vim.g.neovide then
             set guifont=ComicMono\ Nerd\ Font:h20
         ]])
 end
+
+-- debug
+-- print(vim.inspect(myTable))
