@@ -276,14 +276,14 @@ require("lazy").setup(
                 { "nvim-telescope/telescope-symbols.nvim" },
                 { "tsakirist/telescope-lazy.nvim" },
                 { "nvim-telescope/telescope-ui-select.nvim" },
-                { "cljoly/telescope-repo.nvim" },
-                {"nvim-telescope/telescope-file-browser.nvim"}
+                -- { "cljoly/telescope-repo.nvim" },
+                -- {"nvim-telescope/telescope-file-browser.nvim"}
             },
             cmd = { "Telescope" },
             keys = {
                 { mode = "n", "<space><space>" },
                 { mode = "n", "<space>f" },
-                { mode = "n", "<space>e" },
+                -- { mode = "n", "<space>e" },
                 { mode = "n", "<space>s" },
                 { mode = "v", "<space>s" },
                 { mode = "n", "<space>g" },
@@ -299,6 +299,7 @@ require("lazy").setup(
                 { mode = "v", "<space>/" },
                 { mode = "n", "<space>?" },
                 { mode = "v", "<space>?" },
+                { mode = "n", "<leader>sl" },
             },
         },
 
@@ -1067,7 +1068,7 @@ require("lazy").setup(
             event = { "VeryLazy" },
         },
         {
-            -- 1. telescope ui select
+            -- 1. [x] telescope ui select
             -- 2. code action menu
             -- 3. renamer.nvim
             -- 4. input here

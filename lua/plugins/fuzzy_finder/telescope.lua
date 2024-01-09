@@ -56,7 +56,7 @@ telescope.setup({
         },
         file_ignore_patterns = { "node_modules" },
         -- layout_strategy = 'bottom_pane',
-        -- 
+        --
         -- layout_strategy = "vertical",
         -- layout_config = {
         --     anchor = "N",
@@ -65,7 +65,7 @@ telescope.setup({
         --     mirror = true,
         --     prompt_position = "top",
         -- },
-        layout_strategy = 'bottom_pane',
+        layout_strategy = "bottom_pane",
         sorting_strategy = "ascending",
         -- themes = 'ivy',
         winblend = 0,
@@ -127,11 +127,11 @@ telescope.setup({
         --         },
         --     },
         -- },
-        file_browser = {
-            -- theme = 'ivy',
-            -- disables netrw and use telescope-file-browser in its place
-            hijack_netrw = true,
-        },
+        -- file_browser = {
+        --     -- theme = 'ivy',
+        --     -- disables netrw and use telescope-file-browser in its place
+        --     hijack_netrw = true,
+        -- },
     },
 })
 
@@ -140,7 +140,7 @@ telescope.load_extension("fzf")
 telescope.load_extension("live_grep_args")
 telescope.load_extension("lazy")
 -- telescope.load_extension("repo")
-telescope.load_extension("file_browser")
+-- telescope.load_extension("file_browser")
 
 local tb = require("telescope.builtin")
 local opts = { silent = true, noremap = true }
@@ -159,6 +159,7 @@ keymap("n", "<space>s", '<cmd>lua require("telescope").extensions.live_grep_args
 vim.keymap.set("v", "<space>s", function()
     local selected_text = require("utils").getVisualSelection()
     selected_text = table.concat(selected_text, "")[0]
+    print(vim.inspect(selected_text))
     tb.live_grep({ default_text = selected_text })
 end, opts)
 keymap("n", "<space>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
@@ -186,7 +187,7 @@ vim.keymap.set("v", "<space>O", function()
     local text = require("utils").getVisualSelection()
     tb.lsp_workspace_symbols({ default_text = text })
 end, opts)
-vim.keymap.set("n", "<space>e", "<cmd>Telescope file_browser<CR>", opts)
+-- vim.keymap.set("n", "<space>e", "<cmd>Telescope file_browser<CR>", opts)
 
 ----------------------------------------------------------------------
 --                               fzf                                --
@@ -203,3 +204,8 @@ vim.keymap.set("n", "<space>e", "<cmd>Telescope file_browser<CR>", opts)
 ----------------------------------------------------------------------
 --                                rg                                --
 ----------------------------------------------------------------------
+-- foo bar	foo bar	search for „foo bar“
+-- "foo bar" baz	foo bar, baz	search for „foo bar“ in dir „baz“
+-- --no-ignore "foo bar	--no-ignore, foo bar	search for „foo bar“ ignoring ignores
+-- "foo" --iglob **/test/**	search for „foo“ in any „test“ path	
+-- "foo" ../other-project	foo, ../other-project	search for „foo“ in ../other-project
