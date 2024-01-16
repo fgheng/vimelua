@@ -772,7 +772,7 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         {
             "s1n7ax/nvim-window-picker",
-            enabled = false,
+            enabled = true,
             config = function()
                 require("plugins.windows.nvim-window-picker")
             end,

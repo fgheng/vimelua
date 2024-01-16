@@ -41,6 +41,15 @@ local window_open_close = function(state)
     end
 end
 
+local set_root_or_open = function(state)
+    local node = state.tree:get_node()
+    if node.type == "directory" or node:has_children() then
+        state.commands.set_root(state)
+    else
+        state.commands.open_with_window_picker(state)
+    end
+end
+
 ----------------------------------------------------------------------
 --                              config                              --
 ----------------------------------------------------------------------
@@ -160,7 +169,6 @@ neo_tree.setup({
             ["<2-LeftMouse>"] = "open",
             ["l"] = window_open,
             ["o"] = window_open_close,
-            -- ["<cr>"] = window_open_close,
             ["<esc>"] = "revert_preview",
             ["P"] = { "toggle_preview", config = { use_float = true } },
             ["<c-s>"] = "open_split",
@@ -234,8 +242,7 @@ neo_tree.setup({
         -- instead of relying on nvim autocmd events.
         window = {
             mappings = {
-                ["<bs>"] = "navigate_up",
-                ["`"] = "set_root",
+                ["<cr>"] = set_root_or_open,
                 ["."] = "toggle_hidden",
                 ["/"] = "fuzzy_finder",
                 ["D"] = "fuzzy_finder_directory",
