@@ -219,6 +219,16 @@ require("lazy").setup(
                 { mode = "n", "<leader>ag" },
             },
         },
+        {
+            "fgheng/ai.vim",
+            enabled = true,
+            config = function()
+                require("plugins.completion.ai")
+            end,
+            keys = {
+                {mode="n", "<c-a>"}
+            }
+        },
 
         ----------------------------------------------------------------------
         --                             comment                              --
