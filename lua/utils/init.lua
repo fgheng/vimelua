@@ -21,19 +21,17 @@ function M.on_deattach(on_deattach)
     })
 end
 
--- 在这个函数中返回获取的可视区域文本
 function M.getVisualSelection()
-    local start_pos = vim.api.nvim_buf_get_mark(0, "<")
-    local end_pos = vim.api.nvim_buf_get_mark(0, ">")
-    local selected_text = vim.api.nvim_buf_get_lines(0, start_pos[1] - 1, end_pos[1], false)
-    if start_pos[1] == end_pos[1] then
-        selected_text[1] = string.sub(selected_text[1], start_pos[2] + 1, end_pos[2] + 1)
-    else
-        selected_text[1] = string.sub(selected_text[1], start_pos[2] + 1)
-        selected_text[#selected_text] = string.sub(selected_text[#selected_text], 1, end_pos[2] + 1)
-    end
+    vim.cmd([[noau normal! "vy"]])
+    local text = vim.fn.getreg("v")
+    vim.fn.setreg("v", {})
 
-    return selected_text
+    text = string.gsub(text, "\n", "")
+    if #text > 0 then
+        return text
+    else
+        return ""
+    end
 end
 
 return M
