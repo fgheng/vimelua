@@ -226,7 +226,9 @@ require("lazy").setup(
                 require("plugins.completion.ai")
             end,
             keys = {
-                {mode="n", "<c-a>"}
+                {mode="n", "<leader>a"},
+                {mode="v", "<leader>a"},
+                {mode="i", "<leader>a"}
             }
         },
 
@@ -1019,8 +1021,9 @@ require("lazy").setup(
             keys = { { mode = "n", ";t" } },
         },
         {
+            -- translate
             "potamides/pantran.nvim",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.utils.pantran")
             end,
