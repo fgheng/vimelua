@@ -1,28 +1,14 @@
 local config = require("config")
-
 require("neorg").setup({
-    -- configuration here
     load = {
-        -- ["core.defaults"] = {},
-        -- ["core.norg.dirman"] = {
-        --     config = {
-        --         workspaces = {
-        --             work = config.wiki_home .. "/work",
-        --             home = config.wiki_home .. "/home",
-        --         },
-        --     },
-        -- },
-        ["core.defaults"] = {},
-        ["core.dirman"] = {
+        ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.concealer"] = {}, -- Adds pretty icons to your documents
+        ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
                 workspaces = {
-                    work = config.wiki_home .. "/work",
-                    home = config.wiki_home .. "/home",
+                    notes = "~/notes",
                 },
             },
         },
-        ["core.concealer"] = {},
-        -- ["core.completion"] = {},
-        -- ["cool.module"] = {}
     },
 })

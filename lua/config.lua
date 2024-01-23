@@ -42,8 +42,6 @@ _M.treesitter_languages = {
     "markdown",
     "markdown_inline",
     "regex",
-    -- "norg",
-    -- "org"
 }
 
 _M.treesitter_disable_languages = {
@@ -62,6 +60,8 @@ _M.lsp_servers = {
     "bashls",
     "jdtls",
     "gopls",
+    "bufls",
+    "cmake",
 }
 
 ----------------------------------------------------------------------

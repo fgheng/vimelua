@@ -226,10 +226,10 @@ require("lazy").setup(
                 require("plugins.completion.ai")
             end,
             keys = {
-                {mode="n", "<leader>a"},
-                {mode="v", "<leader>a"},
-                {mode="i", "<leader>a"}
-            }
+                { mode = "n", "<leader>a" },
+                { mode = "v", "<leader>a" },
+                { mode = "i", "<leader>a" },
+            },
         },
 
         ----------------------------------------------------------------------
@@ -560,7 +560,7 @@ require("lazy").setup(
         },
         {
             "nvim-treesitter/nvim-treesitter",
-            enabled = false,
+            enabled = true,
             config = function()
                 -- vim.defer_fn(function()
                 require("plugins.editor.nvim-treesitter")
@@ -572,10 +572,10 @@ require("lazy").setup(
             dependencies = {
                 -- -- { "theHamsta/nvim-treesitter-pairs" },
                 -- { "windwp/nvim-ts-autotag" }, -- <div> </div>
-                -- -- { "kvim-treesitter/nvim-treesitter-textobjects" },
-                { "mrjones2014/nvim-ts-rainbow" },
+                -- -- { "nvim-treesitter/nvim-treesitter-textobjects" },
+                -- { "mrjones2014/nvim-ts-rainbow" },
                 { "nvim-treesitter/nvim-treesitter-context" },
-                { "andymass/vim-matchup" },
+                -- { "andymass/vim-matchup" },
             },
             -- event = { "BufReadPre" },
             event = { "CursorMoved", "InsertEnter" },
@@ -895,15 +895,13 @@ require("lazy").setup(
         {
             "nvim-neorg/neorg",
             enabled = false,
-            run = ":Neorg sync-parsers", -- This is the important bit!
+            build = ":Neorg sync-parsers",
             ft = { "norg", "md", "markdown" },
-            cmd = { "Neorg" },
+            -- tag = "*",
+            dependencies = { "nvim-lua/plenary.nvim" },
             config = function()
                 require("plugins.wiki.neorg")
             end,
-            -- dependencies = {
-            --     "john-cena/cool-neorg-plugin",
-            -- },
         },
         {
             "nvim-orgmode/orgmode",
@@ -915,6 +913,30 @@ require("lazy").setup(
             dependencies = {
                 "nvim-treesitter/nvim-treesitter",
             },
+        },
+        {
+            "zk-org/zk-nvim",
+            config = function()
+                require("plugins.wiki.zk-nvim")
+            end,
+            cmd = {
+                "ZkNew",
+                "ZkNotes",
+                "ZkTags",
+            },
+            keys = {
+                { mode = "n", "<space>zl" },
+                { mode = "n", "<space>zt" },
+                { mode = "n", "<space>zn" },
+                { mode = "v", "<space>zs" },
+            },
+        },
+        {
+            "jakewvincent/mkdnflow.nvim",
+            ft = { "markdown", "md" },
+            config = function()
+                require("plugins.wiki.mkdnflow")
+            end,
         },
 
         ----------------------------------------------------------------------
@@ -1023,7 +1045,7 @@ require("lazy").setup(
         {
             -- translate
             "potamides/pantran.nvim",
-            enabled = false,
+            enabled = true,
             config = function()
                 require("plugins.utils.pantran")
             end,
@@ -1122,6 +1144,13 @@ require("lazy").setup(
             },
             event = { "BufRead" },
             -- event = { "VeryLazy" },
+        },
+        {
+            "Bekaboo/dropbar.nvim",
+            config = function()
+                require("plugins.ui.dropbar")
+            end,
+            event = { "BufRead" },
         },
         {
             "rebelot/heirline.nvim",
@@ -1369,7 +1398,7 @@ require("lazy").setup(
         },
         dev = {
             -- directory where you store your local plugin projects
-            path = "~/projects",
+            path = "~/workspace/neovim-dev",
             ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
             patterns = {}, -- For example {"folke"}
         },
