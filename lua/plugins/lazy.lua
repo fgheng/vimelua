@@ -560,7 +560,7 @@ require("lazy").setup(
         },
         {
             "nvim-treesitter/nvim-treesitter",
-            enabled = true,
+            enabled = false,
             config = function()
                 -- vim.defer_fn(function()
                 require("plugins.editor.nvim-treesitter")
@@ -573,7 +573,7 @@ require("lazy").setup(
                 -- -- { "theHamsta/nvim-treesitter-pairs" },
                 -- { "windwp/nvim-ts-autotag" }, -- <div> </div>
                 -- -- { "nvim-treesitter/nvim-treesitter-textobjects" },
-                -- { "mrjones2014/nvim-ts-rainbow" },
+                { "mrjones2014/nvim-ts-rainbow" },
                 { "nvim-treesitter/nvim-treesitter-context" },
                 -- { "andymass/vim-matchup" },
             },
