@@ -36,7 +36,8 @@ require("dropbar").setup({
                     return
                 end
                 menu:close()
-                require("dropbar.api").pick(vim.v.count ~= 0 and vim.v.count)
+                -- require("dropbar.api").pick(vim.v.count ~= 0 and vim.v.count)
+                require("dropbar.api").pick()
             end,
             ["l"] = function()
                 local menu = require("dropbar.api").get_current_dropbar_menu()
@@ -50,13 +51,23 @@ require("dropbar").setup({
                 end
             end,
             ["<CR>"] = function()
+                -- local menu = utils.menu.get_current()
+                -- if not menu then
+                --     return
+                -- else
+                --     menu:click_at()
+                --     utils.menu.exec("close")
+                --     utils.bar.exec("update_current_context_hl")
+                -- end
                 local menu = utils.menu.get_current()
                 if not menu then
                     return
-                else
-                    menu:click_at()
-                    utils.menu.exec("close")
-                    utils.bar.exec("update_current_context_hl")
+                end
+                local cursor = vim.api.nvim_win_get_cursor(menu.win)
+                local entry = menu.entries[cursor[1]]
+                local component = entry:first_clickable(entry.padding.left + entry.components[1]:bytewidth())
+                if component then
+                    menu:click_on(component, nil, 1, "l")
                 end
             end,
             ["q"] = close,
@@ -65,6 +76,7 @@ require("dropbar").setup({
     },
 })
 
-vim.keymap.set("n", "<c-->", function()
-    require("dropbar.api").pick(vim.v.count ~= 0 and vim.v.count)
+vim.keymap.set("n", "<c-=>", function()
+    -- require("dropbar.api").pick(vim.v.count ~= 0 and vim.v.count)
+    require("dropbar.api").pick()
 end)

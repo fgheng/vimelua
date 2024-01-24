@@ -1236,20 +1236,6 @@ require("lazy").setup(
             end,
         },
         {
-            "HUAHUAI23/nvim-quietlight",
-            priority = 1000,
-            lazy = false,
-            config = function()
-                vim.defer_fn(function()
-                    vim.opt.background = "light"
-                    vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
-                end, 10)
-            end,
-            cond = function()
-                return string.match(require("config").colorscheme.theme_group, "quietlight.*") ~= nil
-            end,
-        },
-        {
             "Mofiqul/vscode.nvim",
             priority = 1000,
             lazy = false,
