@@ -99,7 +99,7 @@ require("mkdnflow").setup({
         MkdnYankFileAnchorLink = { "n", "yfa" },
         MkdnIncreaseHeading = { "n", "+" },
         MkdnDecreaseHeading = { "n", "-" },
-        MkdnToggleToDo = { { "n", "v" }, "<c-space>" },
+        MkdnToggleToDo = { { "n", "v", "i" }, "<c-space>" },
         MkdnNewListItem = false,
         MkdnNewListItemBelowInsert = { "n", "o" },
         MkdnNewListItemAboveInsert = { "n", "O" },

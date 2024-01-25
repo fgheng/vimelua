@@ -76,7 +76,7 @@ require("dropbar").setup({
     },
 })
 
-vim.keymap.set("n", "<c-=>", function()
+vim.keymap.set("n", "<M-->", function()
     -- require("dropbar.api").pick(vim.v.count ~= 0 and vim.v.count)
     require("dropbar.api").pick()
 end)

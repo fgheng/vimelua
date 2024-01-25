@@ -70,6 +70,6 @@ vim.schedule(function()
     local opts = { silent = true, noremap = true }
     vim.api.nvim_set_keymap("n", "<m-h>", "<cmd>BufferLineCyclePrev<cr>", opts)
     vim.api.nvim_set_keymap("n", "<m-l>", "<cmd>BufferLineCycleNext<cr>", opts)
-    vim.api.nvim_set_keymap("n", "<m-q>", "<cmd>BufferLinePickClose<cr>", opts)
+    vim.api.nvim_set_keymap("n", "<m-x>", "<cmd>BufferLinePickClose<cr>", opts)
     vim.api.nvim_set_keymap("n", "<m-b>", "<cmd>BufferLinePick<cr>", opts)
 end)

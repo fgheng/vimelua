@@ -16,11 +16,11 @@ if vim.g.neovide then
     g.neovide_confirm_quit = true
     g.neovide_fullscreen = false
     g.neovide_profiler = false
-    g.neovide_input_use_logo = true          -- true on macOS
+    g.neovide_input_use_logo = true -- true on macOS
     g.neovide_input_macos_alt_is_meta = true -- macos meta is alt
 
     --cursor
-    g.neovide_cursor_animation_length=0.05
+    g.neovide_cursor_animation_length = 0.05
     g.neovide_cursor_trail_size = 0.8
     g.neovide_cursor_antialiasing = true
     g.neovide_cursor_unfocused_outline_width = 0.5
@@ -43,11 +43,11 @@ if vim.g.neovide then
 
     -- Allow clipboard copy paste in neovim
     vim.g.neovide_input_use_logo = true
-    vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true})
-    vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true})
-    vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true})
-    vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true})
-    vim.api.nvim_set_keymap('t', '<D-v>', '<C-\\><C-o>"+p', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("t", "<D-v>", '<C-\\><C-o>"+p', { noremap = true, silent = true })
 end
 
 -- debug

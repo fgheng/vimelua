@@ -129,19 +129,11 @@ require("lazy").setup(
             },
             -- event = "LspAttach",
         },
-
         {
             "hinell/lsp-timeout.nvim",
             enabled = false,
             config = function()
-                vim.g.lspTimeoutConfig = {
-                    stopTimeout = 1000, -- Stop unused lsp servers after 1s (for testing).
-                    startTimeout = 2000, -- Force server restart if nvim can't in 2s.
-                    silent = false, -- Notifications disabled
-                    filetypes = { -- Exclude servers that miss behave on LSP stop/start.
-                        ignore = { "markdown", "java" },
-                    },
-                }
+                require("plugins.lsp.lsp-timeout")
             end,
             dependencies = { "neovim/nvim-lspconfig" },
             event = { "LspAttach" },
@@ -264,7 +256,7 @@ require("lazy").setup(
         },
         {
             "s1n7ax/nvim-comment-frame",
-            enabled = false,
+            enabled = true,
             config = function()
                 require("plugins.comment.nvim-comment-frame")
             end,
@@ -546,6 +538,10 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         {
             "famiu/bufdelete.nvim",
+            enabled = false,
+            config = function ()
+                require("plugins.editor.bufdelete")
+            end,
             cmd = { "Bdelete", "Bwipeout" },
         },
         {

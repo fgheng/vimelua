@@ -1,58 +1,12 @@
-local ok, wf = pcall(require, "vim.lsp._watchfiles")
-if ok then
-    -- disable lsp watcher. Too slow on linux
-    wf._watchfunc = function()
-        return function() end
-    end
-end
+-- local ok, wf = pcall(require, "vim.lsp._watchfiles")
+-- if ok then
+--     -- disable lsp watcher. Too slow on linux
+--     wf._watchfunc = function()
+--         return function() end
+--     end
+-- end
 ----------------------------------------------------------------------
---                               lsp                                --
-----------------------------------------------------------------------
-vim.lsp.set_log_level("off")
-
-local lsp = vim.lsp
-lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
-    border = "rounded",
-    silent = true,
-})
-lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
-    border = "rounded",
-    silent = true,
-})
-----------------------------------------------------------------------
---                            lsp config                            --
-----------------------------------------------------------------------
-local lspconfig = require("lspconfig")
-local mason_lspconfig = require("mason-lspconfig")
-local server_names = require("config").lsp_servers
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = true,
-    lineFoldingOnly = true,
-}
-
-mason_lspconfig.setup({
-    ensure_installed = server_names,
-    handlers = {
-        function(server_name) -- default handler (optional)
-            local opts = {
-                on_attach = function(client, bufnr) end,
-                capabilities = capabilities,
-            }
-
-            local status_ok, server = pcall(require, "plugins.lsp.languages." .. server_name)
-            if status_ok then
-                opts = vim.tbl_deep_extend("force", server, opts)
-            end
-
-            lspconfig[server_name].setup(opts)
-        end,
-    },
-})
-
-----------------------------------------------------------------------
---                              keymap                              --
+--                        some functions                            --
 ----------------------------------------------------------------------
 local func_keymap = function(_, bufnr)
     local opts = { silent = true, noremap = true, buffer = bufnr }
@@ -151,35 +105,102 @@ local func_format_on_save = function(client, bufnr)
     end
 end
 
--- vim.schedule(function()
--- end)
+----------------------------------------------------------------------
+--                            lsp config                            --
+----------------------------------------------------------------------
+vim.lsp.set_log_level("off")
 
-vim.defer_fn(function()
-    require("utils").on_attach(func_keymap)
-    -- require("utils").on_attach(func_format_on_save)
-    -- require("utils").on_attach(func_lsp_highlight)
+local lsp = vim.lsp
+lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
+    border = "rounded",
+    silent = true,
+})
+lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
+    border = "rounded",
+    silent = true,
+})
 
-    -- vim.api.nvim_create_user_command("LspRestart", function(kwargs)
-    --     local name = kwargs.fargs[1]
-    --     for _, client in ipairs(vim.get_clients({ name = name })) do
-    --         local bufs = lsp.get_buffers_by_client_id(client.id)
-    --         client.stop()
-    --         vim.wait(30000, function()
-    --             return lsp.get_client_by_id(client.id) == nil
-    --         end)
-    --         local client_id = lsp.start_client(client.config)
-    --         if client_id then
-    --             for _, buf in ipairs(bufs) do
-    --                 lsp.buf_attach_client(buf, client_id)
-    --             end
-    --         end
-    --     end
-    -- end, {
-    --     nargs = 1,
-    --     complete = function()
-    --         return vim.tbl_map(function(c)
-    --             return c.name
-    --         end, vim.get_clients())
-    --     end,
-    -- })
-end, 100)
+local lspconfig = require("lspconfig")
+local mason_lspconfig = require("mason-lspconfig")
+local server_names = require("config").lsp_servers
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = true,
+    lineFoldingOnly = true,
+}
+
+mason_lspconfig.setup({
+    ensure_installed = server_names,
+    handlers = {
+        function(server_name)
+            local opts = {
+                on_attach = function(client, bufnr)
+                    func_keymap(client, bufnr)
+                    func_lsp_highlight(client, bufnr)
+                end,
+                capabilities = capabilities,
+            }
+
+            local status_ok, server_config = pcall(require, "plugins.lsp.languages." .. server_name)
+            if status_ok then
+                opts = vim.tbl_deep_extend("force", server_config, opts)
+                lspconfig[server_name].setup(opts)
+            end
+        end,
+    },
+})
+
+-- vim.api.nvim_create_user_command("LspRestart", function(kwargs)
+--     local name = kwargs.fargs[1]
+--     for _, client in ipairs(vim.get_clients({ name = name })) do
+--         local bufs = lsp.get_buffers_by_client_id(client.id)
+--         client.stop()
+--         vim.wait(30000, function()
+--             return lsp.get_client_by_id(client.id) == nil
+--         end)
+--         local client_id = lsp.start_client(client.config)
+--         if client_id then
+--             for _, buf in ipairs(bufs) do
+--                 lsp.buf_attach_client(buf, client_id)
+--             end
+--         end
+--     end
+-- end, {
+--     nargs = 1,
+--     complete = function()
+--         return vim.tbl_map(function(c)
+--             return c.name
+--         end, vim.get_clients())
+--     end,
+-- })
+
+-- vim.defer_fn(function()
+--     require("utils").on_attach(func_keymap)
+--     -- require("utils").on_attach(func_format_on_save)
+--     -- require("utils").on_attach(func_lsp_highlight)
+--
+--     -- vim.api.nvim_create_user_command("LspRestart", function(kwargs)
+--     --     local name = kwargs.fargs[1]
+--     --     for _, client in ipairs(vim.get_clients({ name = name })) do
+--     --         local bufs = lsp.get_buffers_by_client_id(client.id)
+--     --         client.stop()
+--     --         vim.wait(30000, function()
+--     --             return lsp.get_client_by_id(client.id) == nil
+--     --         end)
+--     --         local client_id = lsp.start_client(client.config)
+--     --         if client_id then
+--     --             for _, buf in ipairs(bufs) do
+--     --                 lsp.buf_attach_client(buf, client_id)
+--     --             end
+--     --         end
+--     --     end
+--     -- end, {
+--     --     nargs = 1,
+--     --     complete = function()
+--     --         return vim.tbl_map(function(c)
+--     --             return c.name
+--     --         end, vim.get_clients())
+--     --     end,
+--     -- })
+-- end, 100)
