@@ -21,7 +21,7 @@ require("window-picker").setup({
     -- "always" means to always use winbar,
     -- "never" means to never use winbar
     -- "smart" means to use winbar if cmdheight=0 and statusline if cmdheight > 0
-    use_winbar = "never", -- "always" | "never" | "smart"
+    use_winbar = "always", -- "always" | "never" | "smart"
 
     -- if you want to manually filter out the windows, pass in a function that
     -- takes two parameters. you should return window ids that should be
@@ -44,7 +44,7 @@ require("window-picker").setup({
             filetype = { "neo-tree", "notify", "aerial"},
 
             -- if the buffer type is one of following, the window will be ignored
-            buftype = { "terminal" },
+            buftype = { "terminal", "quickfix", "locallist" },
         },
 
         -- filter using window options
@@ -78,8 +78,7 @@ require("window-picker").setup({
     end,
 })
 
-local opts = { silent = true, noremap = true }
 vim.keymap.set("n", "-", function()
     local picked_window_id = window_picker.pick_window() or vim.api.nvim_get_current_win()
     vim.api.nvim_set_current_win(picked_window_id)
-end, { desc = "Pick a window" }, opts)
+end, { silent = true, noremap = true, desc = "Pick a window" })

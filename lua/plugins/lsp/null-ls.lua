@@ -103,6 +103,8 @@ local keymap_func = function(client, bufnr)
                 end
                 return client.name ~= "null-ls"
             end,
+            async = false,
+            timeout = 0
         })
     end, opts)
 
@@ -119,6 +121,8 @@ local keymap_func = function(client, bufnr)
                 end
                 return client.name ~= "null-ls"
             end,
+            async = false,
+            timeout = 0
         })
     end, opts)
 end

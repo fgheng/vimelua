@@ -3,12 +3,12 @@ return {
         python = {
             analysis = {
                 autoSearchPaths = true,
-                typeCheckingMode = "on",
+                typeCheckingMode = "off",
                 inlayHints = {
+                    callArgumentNames = "partial",
                     functionReturnTypes = true,
                     pytestParameters = true,
                     variableTypes = true,
-                    callArgumentNames = "partial"
                 },
             },
         },

@@ -17,6 +17,8 @@ telescope.setup({
                 ["<c-k>"] = "move_selection_previous",
                 ["<M-j>"] = "move_selection_next",
                 ["<M-k>"] = "move_selection_previous",
+                ["<M-d>"] = "preview_scrolling_down",
+                ["<M-u>"] = "preview_scrolling_up",
                 ["<c-v>"] = "select_vertical",
                 ["<c-s>"] = "select_horizontal",
                 ["<c-t>"] = "select_tab",
@@ -156,31 +158,35 @@ keymap("n", "<space>f", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<space>s", '<cmd>lua require("telescope").extensions.live_grep_args.live_grep_args()<cr>', opts)
 vim.keymap.set("v", "<space>s", function()
     local selected_text = require("utils").getVisualSelection()
+    selected_text = string.gsub(selected_text, "\n", "")
     tb.live_grep({ default_text = selected_text })
 end, opts)
 keymap("n", "<space>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
 vim.keymap.set("v", "<space>/", function()
-    local text = require("utils").getVisualSelection()
-    tb.current_buffer_fuzzy_find({ default_text = text })
+    local selected_text = require("utils").getVisualSelection()
+    selected_text = string.gsub(selected_text, "\n", "")
+    tb.current_buffer_fuzzy_find({ default_text = selected_text })
 end, opts)
 keymap("n", "<space>b", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<space>?", "<cmd>Telescope diagnostics<cr>", opts)
 vim.keymap.set("v", "<space>?", function()
-    local text = require("utils").getVisualSelection()
-    tb.diagnostics({ default_text = text })
+    local selected_text = require("utils").getVisualSelection()
+    selected_text = string.gsub(selected_text, "\n", "")
+    tb.diagnostics({ default_text = selected_text })
 end, opts)
 keymap("n", "<space>r", "<cmd>Telescope oldfiles<cr>", opts)
 keymap("n", "<space>j", "<cmd>Telescope jumplist<cr>", opts)
 keymap("n", "<space>o", "<cmd>Telescope lsp_document_symbols<cr>", opts)
 vim.keymap.set("v", "<space>o", function()
-    local text = require("utils").getVisualSelection()
-    local selected_text = require("utils").getVisualSelection()
-    tb.lsp_document_symbols({ default_text = text })
+    local selected_text = require("utils").getvisualselection()
+    selected_text = string.gsub(selected_text, "\n", "")
+    tb.lsp_document_symbols({ default_text = selected_text })
 end, opts)
 keymap("n", "<space>O", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
 vim.keymap.set("v", "<space>O", function()
-    local text = require("utils").getVisualSelection()
-    tb.lsp_workspace_symbols({ default_text = text })
+    local selected_text = require("utils").getvisualselection()
+    selected_text = string.gsub(selected_text, "\n", "")
+    tb.lsp_workspace_symbols({ default_text = selected_text })
 end, opts)
 -- vim.keymap.set("n", "<space>e", "<cmd>Telescope file_browser<CR>", opts)
 

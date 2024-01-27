@@ -213,7 +213,7 @@ require("lazy").setup(
         },
         {
             "fgheng/ai.vim",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.completion.ai")
             end,
@@ -222,6 +222,18 @@ require("lazy").setup(
                 { mode = "v", "<leader>a" },
                 { mode = "i", "<leader>a" },
             },
+        },
+        {
+            -- "robitx/gp.nvim",
+            "fgheng/gp.nvim",
+            enabled = true,
+            config = function()
+                require("plugins.completion.gp")
+            end,
+            keys = {
+                {mode = "n", "<cr>"},
+                {mode = "v", "<cr>"},
+            }
         },
 
         ----------------------------------------------------------------------
@@ -313,6 +325,7 @@ require("lazy").setup(
                 { mode = "n", "<leader>sl" },
                 { mode = "n", "ca" },
             },
+            event = { "BufNewFile" },
         },
 
         ----------------------------------------------------------------------
@@ -539,7 +552,7 @@ require("lazy").setup(
         {
             "famiu/bufdelete.nvim",
             enabled = false,
-            config = function ()
+            config = function()
                 require("plugins.editor.bufdelete")
             end,
             cmd = { "Bdelete", "Bwipeout" },
@@ -1138,7 +1151,7 @@ require("lazy").setup(
                 { "arkav/lualine-lsp-progress" },
                 -- { "SmiteshP/nvim-navic" },
             },
-            event = { "BufRead" },
+            event = { "BufRead", "BufNewFile" },
             -- event = { "VeryLazy" },
         },
         {
@@ -1146,7 +1159,7 @@ require("lazy").setup(
             config = function()
                 require("plugins.ui.dropbar")
             end,
-            event = { "BufRead" },
+            event = { "BufRead", "BufNewFile" },
         },
         {
             "rebelot/heirline.nvim",
@@ -1169,7 +1182,7 @@ require("lazy").setup(
             },
             -- event = { "WinNew" },
             -- event = { "BufAdd" },
-            event = { "BufRead" },
+            event = { "BufRead", "BufNewFile" },
             -- event = { "VeryLazy" },
         },
         {

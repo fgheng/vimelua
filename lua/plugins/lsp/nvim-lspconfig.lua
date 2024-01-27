@@ -110,15 +110,15 @@ end
 ----------------------------------------------------------------------
 vim.lsp.set_log_level("off")
 
-local lsp = vim.lsp
-lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
-    border = "rounded",
-    silent = true,
-})
-lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
-    border = "rounded",
-    silent = true,
-})
+-- local lsp = vim.lsp
+-- lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
+--     border = "rounded",
+--     silent = true,
+-- })
+-- lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
+--     border = "rounded",
+--     silent = true,
+-- })
 
 local lspconfig = require("lspconfig")
 local mason_lspconfig = require("mason-lspconfig")
@@ -130,6 +130,24 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
+-- local opts = {
+--     on_attach = function(client, bufnr)
+--         func_keymap(client, bufnr)
+--         func_lsp_highlight(client, bufnr)
+--     end,
+--     capabilities = capabilities,
+--     handlers = {
+--         ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+--             border = "rounded",
+--             focusable = false,
+--         }),
+--         ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+--             border = "rounded",
+--             focusable = false,
+--         }),
+--     },
+-- }
+
 mason_lspconfig.setup({
     ensure_installed = server_names,
     handlers = {
@@ -140,6 +158,16 @@ mason_lspconfig.setup({
                     func_lsp_highlight(client, bufnr)
                 end,
                 capabilities = capabilities,
+                handlers = {
+                    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+                        border = "rounded",
+                        focusable = false,
+                    }),
+                    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+                        border = "rounded",
+                        focusable = false,
+                    }),
+                },
             }
 
             local status_ok, server_config = pcall(require, "plugins.lsp.languages." .. server_name)

@@ -1,6 +1,6 @@
 return {
     cmd = {
         "cmake-language-server",
-        "--stdio",
     },
+    single_file_support = true
 }
