@@ -224,8 +224,7 @@ require("lazy").setup(
             },
         },
         {
-            -- "robitx/gp.nvim",
-            "fgheng/gp.nvim",
+            "robitx/gp.nvim",
             enabled = true,
             config = function()
                 require("plugins.completion.gp")
