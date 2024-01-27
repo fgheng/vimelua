@@ -49,6 +49,7 @@ opt.foldlevelstart = 99
 opt.foldmethod = "expr"
 opt.foldcolumn = "1"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldtext = ''
 opt.fillchars = "foldopen:,foldclose:"
 
 -- opt.colorcolumn = 80

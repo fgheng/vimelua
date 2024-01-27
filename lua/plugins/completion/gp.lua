@@ -6,7 +6,7 @@ gp.setup({
     chat_dir = require("config").notes_home .. "/gp/chats",
     chat_user_prefix = "🗨: [user]",
     chat_assistant_prefix = { "🤖:", "[{{agent}}]" },
-    chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<cr>" },
+    chat_shortcut_respond = { modes = { "n", "v", "x" }, shortcut = "<cr>" },
     chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<C-a>d" },
     chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<C-a>s" },
     chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<C-a>c" },
@@ -24,36 +24,41 @@ local get_buffer = function(file_name)
     end
     return nil
 end
+local open_or_switch = function()
+    local last = gp.config.chat_dir .. "/last.md"
+
+    if vim.fn.filereadable(last) ~= 1 then
+        vim.api.nvim_command("GpChatNew")
+    end
+
+    local target = gp.resolve_buf_target(gp.config.toggle_target)
+
+    last = vim.fn.resolve(last)
+    local buf = get_buffer(last)
+    local win_found = false
+    if buf then
+        for _, w in ipairs(vim.api.nvim_list_wins()) do
+            if vim.api.nvim_win_get_buf(w) == buf then
+                vim.api.nvim_set_current_win(w)
+                vim.api.nvim_set_current_buf(buf)
+                win_found = true
+                break
+            end
+        end
+    end
+
+    buf = win_found and buf or gp.open_buf(last, target, gp._toggle_kind.chat, true)
+    return buf
+end
+
 vim.keymap.set("v", "<cr>", function()
     local selected_text = require("utils").getVisualSelection()
     vim.ui.input({ prompt = "prompt: ", default = "" }, function(input_text)
-        if input_text ~= nil then
+        if input_text ~= "" then
             selected_text = input_text .. "\n" .. selected_text
         end
 
-        local last = gp.config.chat_dir .. "/last.md"
-
-        if vim.fn.filereadable(last) ~= 1 then
-            vim.api.nvim_command("GpChatNew")
-        end
-
-        local target = gp.resolve_buf_target(gp.config.toggle_target)
-
-        last = vim.fn.resolve(last)
-        local buf = get_buffer(last)
-        local win_found = false
-        if buf then
-            for _, w in ipairs(vim.api.nvim_list_wins()) do
-                if vim.api.nvim_win_get_buf(w) == buf then
-                    vim.api.nvim_set_current_win(w)
-                    vim.api.nvim_set_current_buf(buf)
-                    win_found = true
-                    break
-                end
-            end
-        end
-
-        buf = win_found and buf or gp.open_buf(last, target, gp._toggle_kind.chat, true)
+        local buf = open_or_switch()
 
         local last_line = vim.api.nvim_buf_line_count(buf)
         while last_line > 0 do
@@ -66,52 +71,39 @@ vim.keymap.set("v", "<cr>", function()
         local lines = vim.split("\n" .. selected_text, "\n")
         vim.api.nvim_buf_set_lines(buf, last_line, -1, false, lines)
 
-        if input_text ~= nil then
+        if input_text ~= "" then
+            print("input text is not nil")
             vim.api.nvim_command("GpChatRespond")
         end
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("G", true, false, true), "n", true)
+        vim.api.nvim_command("setlocal nonumber")
+        vim.api.nvim_command("setlocal signcolumn=no")
     end)
 end, opts)
 
 vim.keymap.set("n", "<cr>", function()
     local cbuf = vim.api.nvim_get_current_buf()
     local buftype = vim.api.nvim_buf_get_option(cbuf, "buftype")
+    local filetype = vim.api.nvim_buf_get_option(cbuf, "filetype")
 
-    if buftype == "" then
+    if buftype == "" or filetype == "markdown" then
         if not gp.can_handle(cbuf) then
             gp.warning("Another plugin is handling this buffer")
         end
 
         local file_name = vim.api.nvim_buf_get_name(cbuf)
         if not gp.is_chat(cbuf, file_name) then
-            -- vim.api.nvim_command("GpChatToggle")
-            local last = gp.config.chat_dir .. "/last.md"
-
-            if vim.fn.filereadable(last) ~= 1 then
-                vim.api.nvim_command("GpChatNew")
-            end
-
-            local target = gp.resolve_buf_target(gp.config.toggle_target)
-
-            last = vim.fn.resolve(last)
-            local buf = get_buffer(last)
-            local win_found = false
-            if buf then
-                for _, w in ipairs(vim.api.nvim_list_wins()) do
-                    if vim.api.nvim_win_get_buf(w) == buf then
-                        vim.api.nvim_set_current_win(w)
-                        vim.api.nvim_set_current_buf(buf)
-                        win_found = true
-                        break
-                    end
-                end
-            end
-
-            buf = win_found and buf or gp.open_buf(last, target, gp._toggle_kind.chat, true)
+            open_or_switch()
+            vim.api.nvim_command("setlocal nonumber")
+            vim.api.nvim_command("setlocal signcolumn=no")
         else
             vim.api.nvim_command("GpChatRespond")
         end
     else
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cr>", true, true, true), "n", true)
     end
+end, opts)
+
+vim.keymap.set("n", "<leader>a", function()
+    vim.api.nvim_command("GpAppend")
 end, opts)

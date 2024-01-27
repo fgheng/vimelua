@@ -230,9 +230,10 @@ require("lazy").setup(
                 require("plugins.completion.gp")
             end,
             keys = {
-                {mode = "n", "<cr>"},
-                {mode = "v", "<cr>"},
-            }
+                { mode = "n", "<cr>" },
+                { mode = "v", "<cr>" },
+                { mode = "n", "<leader>a" },
+            },
         },
 
         ----------------------------------------------------------------------
@@ -941,10 +942,19 @@ require("lazy").setup(
         },
         {
             "jakewvincent/mkdnflow.nvim",
+            enabled = true,
             ft = { "markdown", "md" },
             config = function()
                 require("plugins.wiki.mkdnflow")
             end,
+        },
+        {
+            "tadmccorkle/markdown.nvim",
+            enabled = false,
+            ft = "markdown", -- or 'event = "VeryLazy"'
+            opts = {
+                -- configuration here or empty for defaults
+            },
         },
 
         ----------------------------------------------------------------------
