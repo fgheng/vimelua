@@ -526,6 +526,7 @@ require("lazy").setup(
                 { mode = "t", "<m-=>" },
                 { mode = "n", "<m-=>" },
             },
+            cmd = { "TermExec", "TermSelect" },
         },
         {
             "chomosuke/term-edit.nvim",

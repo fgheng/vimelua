@@ -35,8 +35,8 @@ vim.defer_fn(function()
             -- ["<TAB>"] = "<C-w><C-w>", -- ctrl-i会有问题
             -- ["<S-TAB>"] = "<C-w>p",
 
-            ["<leader>tt"] = "<cmd>terminal<cr>",
-            ["<leader>bo"] = "<cmd>%bd|e#<cr>", -- close all buffers but the current one
+           ["<leader>tt"] = "<cmd>terminal<cr>",
+            -- ["<leader>bo"] = "<cmd>%bd|e#<cr>", -- close all buffers but the current one
         },
 
         visual = {
@@ -50,7 +50,7 @@ vim.defer_fn(function()
             ["<m-a>"] = "<End>",
             ["<m-i>"] = "<esc>^i",
             ["<SPACE>"] = "<SPACE><C-g>u",
-            ["<C-c>"] = "<C-r>=",
+            -- ["<C-c>"] = "<C-r>=",
         },
 
         command = {},

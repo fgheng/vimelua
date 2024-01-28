@@ -53,7 +53,10 @@ end
 
 vim.keymap.set("v", "<cr>", function()
     local selected_text = require("utils").getVisualSelection()
-    vim.ui.input({ prompt = "prompt: ", default = "" }, function(input_text)
+    vim.ui.input({ prompt = "ai prompt: ", default = "" }, function(input_text)
+        if input_text == nil then
+            return
+        end
         if input_text ~= "" then
             selected_text = input_text .. "\n" .. selected_text
         end
