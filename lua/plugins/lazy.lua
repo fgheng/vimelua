@@ -569,7 +569,7 @@ require("lazy").setup(
         },
         {
             "nvim-treesitter/nvim-treesitter",
-            enabled = false,
+            enabled = true,
             config = function()
                 -- vim.defer_fn(function()
                 require("plugins.editor.nvim-treesitter")
@@ -584,6 +584,7 @@ require("lazy").setup(
                 -- -- { "nvim-treesitter/nvim-treesitter-textobjects" },
                 { "mrjones2014/nvim-ts-rainbow" },
                 { "nvim-treesitter/nvim-treesitter-context" },
+                { "nvim-treesitter/nvim-treesitter-textobjects" },
                 -- { "andymass/vim-matchup" },
             },
             -- event = { "BufReadPre" },
@@ -947,14 +948,6 @@ require("lazy").setup(
             config = function()
                 require("plugins.wiki.mkdnflow")
             end,
-        },
-        {
-            "tadmccorkle/markdown.nvim",
-            enabled = false,
-            ft = "markdown", -- or 'event = "VeryLazy"'
-            opts = {
-                -- configuration here or empty for defaults
-            },
         },
 
         ----------------------------------------------------------------------
@@ -1373,6 +1366,18 @@ require("lazy").setup(
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "starry.*") ~= nil
+            end,
+        },
+        {
+            "alexmozaidze/palenight.nvim",
+            bled = true,
+            priority = 1000,
+            lazy = false,
+            config = function()
+                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
+            end,
+            cond = function()
+                return string.match(require("config").colorscheme.theme_group, "palenight.*") ~= nil
             end,
         },
 

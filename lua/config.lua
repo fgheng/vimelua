@@ -19,8 +19,8 @@ _M.notes_home = os.getenv("ZK_NOTEBOOK_DIR")
 _M.colorscheme = {
     background = "dark",
     background_color = "#ffffff",
-    theme_group = "vscode",
-    theme = "vscode",
+    theme_group = "palenight",
+    theme = "palenight",
 }
 
 ----------------------------------------------------------------------
