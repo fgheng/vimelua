@@ -26,7 +26,7 @@ treesitter_config.setup({
 
     pairs = {
         enable = true,
-        highlight_self = false,
+        highlight_self = true,
     },
 
     autotag = {

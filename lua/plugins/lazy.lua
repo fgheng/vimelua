@@ -579,27 +579,25 @@ require("lazy").setup(
                 -- end)
             end,
             dependencies = {
-                -- -- { "theHamsta/nvim-treesitter-pairs" },
+                -- { "theHamsta/nvim-treesitter-pairs" },
                 -- { "windwp/nvim-ts-autotag" }, -- <div> </div>
-                -- -- { "nvim-treesitter/nvim-treesitter-textobjects" },
                 { "mrjones2014/nvim-ts-rainbow" },
                 { "nvim-treesitter/nvim-treesitter-context" },
                 { "nvim-treesitter/nvim-treesitter-textobjects" },
-                -- { "andymass/vim-matchup" },
+                { "andymass/vim-matchup" },
             },
             -- event = { "BufReadPre" },
             event = { "CursorMoved", "InsertEnter" },
         },
         {
             "andymass/vim-matchup",
-            enabled = false,
-            lazy = true,
+            enabled = true,
             config = function()
                 vim.schedule(function()
                     require("plugins.editor.vim-matchup")
                 end)
             end,
-            -- event = { "CursorMoved" },
+            event = { "BufReadPost" },
         },
         {
             "kawre/neotab.nvim",
