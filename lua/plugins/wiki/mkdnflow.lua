@@ -32,7 +32,7 @@ require("mkdnflow").setup({
         jump_patterns = nil,
     },
     links = {
-        style = "wiki-link",
+        style = "wiki",
         name_is_source = true,
         conceal = true,
         context = 0,
@@ -45,6 +45,25 @@ require("mkdnflow").setup({
             -- text = os.date("%Y-%m-%d_") .. text
             -- return text
         end,
+        new_file_template = {
+    template = [[
+# {{ title }}
+Date: {{ date }}
+Filename: {{ filename }}
+]],
+    placeholders = {
+        before = {
+            date = function()
+                return os.date("%A, %B %d, %Y") -- Wednesday, March 1, 2023
+            end
+        },
+        after = {
+            filename = function()
+                return vim.api.nvim_buf_get_name(0)
+            end
+        }
+    }
+}
     },
     new_file_template = {
         use_template = false,

@@ -948,6 +948,22 @@ require("lazy").setup(
                 require("plugins.wiki.mkdnflow")
             end,
         },
+        {
+            "vimwiki/vimwiki",
+            enabled = false,
+            ft = { "markdown", "md" },
+            config = function()
+                require("plugins.wiki.vimwiki")
+            end,
+        },
+        {
+            "dfendr/clipboard-image.nvim",
+            enabled = false,
+            ft = { "markdown" },
+            config = function()
+                require("plugins.wiki.clipboard-image")
+            end,
+        },
 
         ----------------------------------------------------------------------
         --                              utils                               --
