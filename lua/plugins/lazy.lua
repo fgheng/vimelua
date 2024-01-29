@@ -1068,18 +1068,6 @@ require("lazy").setup(
             cmd = { "Translate" },
             keys = { { mode = "n", ";t" } },
         },
-        {
-            -- translate
-            "potamides/pantran.nvim",
-            enabled = true,
-            config = function()
-                require("plugins.utils.pantran")
-            end,
-            keys = {
-                { mode = "n", "<leader>rr" },
-                { mode = "x", "<leader>rr" },
-            },
-        },
 
         ----------------------------------------------------------------------
         --                              ui                               --
