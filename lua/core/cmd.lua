@@ -1,6 +1,3 @@
--- vim.defer_fn(function()
-local api = vim.api
-
 vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function()
         local mark = vim.api.nvim_buf_get_mark(0, '"')
@@ -11,7 +8,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end,
 })
 
--- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
         vim.highlight.on_yank()
@@ -52,4 +48,3 @@ vim.api.nvim_create_user_command("DiffOrig", function()
         end, { buffer = buf })
     end
 end, {})
--- end, 10)

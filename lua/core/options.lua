@@ -53,7 +53,7 @@ opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.winblend = 30 -- 浮动窗口透明度设置
 opt.updatetime = 100
-opt.laststatus = 3 -- 开启全局状态栏
+opt.laststatus = 0
 -- opt.timeoutlen = 100 -- Time in milliseconds to wait for a mapped sequence to complete.
 -- opt.conceallevel = 2
 

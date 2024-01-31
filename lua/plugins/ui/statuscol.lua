@@ -21,12 +21,12 @@ local cfg = {
     bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
     -- Default segments (fold -> sign -> line number + separator), explained below
     segments = {
-        { text = { "%s" } },
+        { text = { "%s" }, click = "v:lua.ScSa" },
         { text = { "%=", builtin.lnumfunc, "" } },
-        { text = { "", "│", "" } },
+        -- { text = { "", "│", "" } },
         {
             text = {
-                "",
+                " ",
                 function(args)
                     local lnum = args.lnum
                     if vim.fn.foldlevel(lnum) <= vim.fn.foldlevel(lnum - 1) then
@@ -44,6 +44,29 @@ local cfg = {
                 end,
                 true,
             },
+            click = "v:lua.ScFa",
+        },
+        clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
+        -- "a" for Alt, "c" for Ctrl and "m" for Meta.
+        clickhandlers = { -- builtin click handlers
+            Lnum = builtin.lnum_click,
+            FoldClose = builtin.foldclose_click,
+            FoldOpen = builtin.foldopen_click,
+            FoldOther = builtin.foldother_click,
+            DapBreakpointRejected = builtin.toggle_breakpoint,
+            DapBreakpoint = builtin.toggle_breakpoint,
+            DapBreakpointCondition = builtin.toggle_breakpoint,
+            DiagnosticSignError = builtin.diagnostic_click,
+            DiagnosticSignHint = builtin.diagnostic_click,
+            DiagnosticSignInfo = builtin.diagnostic_click,
+            DiagnosticSignWarn = builtin.diagnostic_click,
+            GitSignsTopdelete = builtin.gitsigns_click,
+            GitSignsUntracked = builtin.gitsigns_click,
+            GitSignsAdd = builtin.gitsigns_click,
+            GitSignsChange = builtin.gitsigns_click,
+            GitSignsChangedelete = builtin.gitsigns_click,
+            GitSignsDelete = builtin.gitsigns_click,
+            gitsigns_extmark_signs_ = builtin.gitsigns_click,
         },
     },
 }

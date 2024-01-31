@@ -686,6 +686,7 @@ require("lazy").setup(
         },
         {
             "lukas-reineke/indent-blankline.nvim",
+            enabled = false,
             main = "ibl",
             config = function()
                 require("plugins.editor.indent-blankline")

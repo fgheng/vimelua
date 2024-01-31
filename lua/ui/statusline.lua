@@ -1,3 +1,4 @@
+vim.opt.laststatus = 3
 local api = vim.api
 
 local L1 = "%#statusLineL1#[ %Y ] "
