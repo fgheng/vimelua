@@ -49,6 +49,3 @@ if vim.g.neovide then
     vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("t", "<D-v>", '<C-\\><C-o>"+p', { noremap = true, silent = true })
 end
-
--- debug
--- print(vim.inspect(myTable))

@@ -1,10 +1,3 @@
--- local ok, wf = pcall(require, "vim.lsp._watchfiles")
--- if ok then
---     -- disable lsp watcher. Too slow on linux
---     wf._watchfunc = function()
---         return function() end
---     end
--- end
 ----------------------------------------------------------------------
 --                        some functions                            --
 ----------------------------------------------------------------------
@@ -110,16 +103,6 @@ end
 ----------------------------------------------------------------------
 vim.lsp.set_log_level("off")
 
--- local lsp = vim.lsp
--- lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
---     border = "rounded",
---     silent = true,
--- })
--- lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
---     border = "rounded",
---     silent = true,
--- })
-
 local lspconfig = require("lspconfig")
 local mason_lspconfig = require("mason-lspconfig")
 local server_names = require("config").lsp_servers
@@ -161,11 +144,11 @@ mason_lspconfig.setup({
                 handlers = {
                     ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
                         border = "rounded",
-                        focusable = false,
+                        -- focusable = false,
                     }),
                     ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
                         border = "rounded",
-                        focusable = false,
+                        -- focusable = false,
                     }),
                 },
             }

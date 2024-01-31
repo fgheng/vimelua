@@ -21,7 +21,7 @@ require("modes").setup({
 
     -- Disable modes highlights in specified filetypes
     -- Please PR commonly ignored filetypes
-    ignore_filetypes = { 'TelescopePrompt', 'NvimTree' }
+    ignore_filetypes = { 'TelescopePrompt', 'NvimTree', 'neo-tree' }
 })
 
 -- vim.defer_fn(function()

@@ -81,6 +81,7 @@ vim.keymap.set("v", "<cr>", function()
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("G", true, false, true), "n", true)
         vim.api.nvim_command("setlocal nonumber")
         vim.api.nvim_command("setlocal signcolumn=no")
+        vim.api.nvim_command("setlocal statuscolumn=''")
     end)
 end, opts)
 

@@ -50,11 +50,11 @@ gitsigns.setup({
     --     untracked = { text = "┆" },
     -- },
 
-    current_line_blame = false,
+    current_line_blame = true,
     numhl = true,
     linehl = false,
     word_diff = false,
-    signcolumn = true,
+    signcolumn = false,
     attach_to_untracked = true,
 
     current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",

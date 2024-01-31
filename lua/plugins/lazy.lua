@@ -401,9 +401,6 @@ require("lazy").setup(
         {
             "lewis6991/gitsigns.nvim",
             config = function()
-                -- vim.defer_fn(function()
-                --     require("plugins.git.gitsigns")
-                -- end, 100)
                 vim.schedule(function()
                     require("plugins.git.gitsigns")
                 end)
@@ -583,7 +580,7 @@ require("lazy").setup(
                 -- { "theHamsta/nvim-treesitter-pairs" },
                 -- { "windwp/nvim-ts-autotag" }, -- <div> </div>
                 { "mrjones2014/nvim-ts-rainbow" },
-                { "nvim-treesitter/nvim-treesitter-context" },
+                -- { "nvim-treesitter/nvim-treesitter-context" },
                 { "nvim-treesitter/nvim-treesitter-textobjects" },
                 { "andymass/vim-matchup" },
             },
@@ -971,7 +968,6 @@ require("lazy").setup(
         -- lazy.nvim:
         {
             "smoka7/multicursors.nvim",
-            event = "VeryLazy",
             dependencies = {
                 "smoka7/hydra.nvim",
             },
@@ -989,6 +985,25 @@ require("lazy").setup(
         {
             "nvim-lua/plenary.nvim",
             lazy = true,
+            config = function()
+                require("plugins.utils.plenary")
+            end,
+            keys = {
+                {
+                    "<leader>pp",
+                    function()
+                        require("plenary.profile").start("profile.log", { flame = true })
+                    end,
+                    desc = "Begin profiling",
+                },
+                {
+                    "<leader>ps",
+                    function()
+                        require("plenary.profile").stop()
+                    end,
+                    desc = "End profiling",
+                },
+            },
         },
         {
             "rktjmp/lush.nvim",
@@ -1145,7 +1160,7 @@ require("lazy").setup(
         },
         {
             "nvim-lualine/lualine.nvim",
-            enabled = true,
+            enabled = false,
             config = function()
                 vim.schedule(function()
                     require("plugins.ui.lualine")

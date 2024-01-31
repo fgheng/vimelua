@@ -1,5 +1,6 @@
 vim.defer_fn(function()
     -- require("ui.colorscheme")
     require("ui.diagnostic")
-    -- require("ui.column")
+    require("ui.statusline")
+    -- require("ui.statuscolumn")
 end, 10)
