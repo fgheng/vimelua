@@ -4,7 +4,7 @@ gp.setup({
     openai_api_endpoint = os.getenv("OPENAI_API_ENDPOINT"),
     state_dir = require("config").notes_home .. "/gp/persisted",
     chat_dir = require("config").notes_home .. "/gp/chats",
-    chat_user_prefix = "🗨: [user]",
+    chat_user_prefix = "🗨:[user]",
     chat_assistant_prefix = { "🤖:", "[{{agent}}]" },
     chat_shortcut_respond = { modes = { "n", "v", "x" }, shortcut = "<cr>" },
     chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<C-a>d" },
@@ -82,13 +82,16 @@ vim.keymap.set("v", "<cr>", function()
         vim.api.nvim_command("setlocal nonumber")
         vim.api.nvim_command("setlocal signcolumn=no")
         vim.api.nvim_command("setlocal statuscolumn=''")
+        -- vim.api.nvim_buf_set_option_value("buftype", "gp", { buf = 0 })
     end)
 end, opts)
 
 vim.keymap.set("n", "<cr>", function()
     local cbuf = vim.api.nvim_get_current_buf()
     local buftype = vim.api.nvim_buf_get_option(cbuf, "buftype")
+    -- local buftype = vim.api.nvim_buf_get_option_value("buftype", { buf = cbuf })
     local filetype = vim.api.nvim_buf_get_option(cbuf, "filetype")
+    -- local filetype = vim.api.nvim_buf_get_option_value("filetype", { buf = cbuf })
 
     if buftype == "" or filetype == "markdown" then
         if not gp.can_handle(cbuf) then

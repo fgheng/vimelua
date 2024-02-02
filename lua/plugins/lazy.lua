@@ -7,6 +7,11 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- for markdown preview
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
+
 require("lazy").setup(
     {
         ----------------------------------------------------------------------
@@ -720,7 +725,7 @@ require("lazy").setup(
         },
         {
             "kevinhwang91/nvim-hlslens",
-            enabled = true, -- using noice
+            enabled = false, -- using noice
             config = function()
                 require("plugins.editor.nvim-hlslens")
             end,
@@ -962,11 +967,26 @@ require("lazy").setup(
                 require("plugins.wiki.clipboard-image")
             end,
         },
+        {
+            "3rd/image.nvim",
+            enabled = true,
+            ft = { "markdown" },
+            config = function()
+                require("plugins.wiki.image")
+            end,
+        },
 
         ----------------------------------------------------------------------
         --                              utils                               --
         ----------------------------------------------------------------------
         -- lazy.nvim:
+        {
+            "keaising/im-select.nvim",
+            config = function()
+                require("plugins.utils.im-select")
+            end,
+            event = { "InsertEnter" },
+        },
         {
             "smoka7/multicursors.nvim",
             dependencies = {
@@ -1134,7 +1154,7 @@ require("lazy").setup(
             config = function()
                 require("plugins.ui.noice")
             end,
-            requires = {
+            dependencies = {
                 "MunifTanjim/nui.nvim",
                 -- "rcarriga/nvim-notify",
             },
@@ -1177,6 +1197,7 @@ require("lazy").setup(
         },
         {
             "Bekaboo/dropbar.nvim",
+            enabled = true,
             config = function()
                 require("plugins.ui.dropbar")
             end,
@@ -1192,7 +1213,7 @@ require("lazy").setup(
         },
         {
             "akinsho/bufferline.nvim",
-            enabled = true,
+            enabled = false,
             config = function()
                 vim.schedule(function()
                     require("plugins.ui.bufferline")

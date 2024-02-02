@@ -15,13 +15,13 @@ require("window-picker").setup({
 
     -- when you go to window selection mode, status bar will show one of
     -- following letters on them so you can use that letter to select the window
-    selection_chars = "FJDKSLA;CMRUEIWOQP",
+    selection_chars = "JKLAS;CMRUEIWOQP",
 
     -- whether you want to use winbar instead of the statusline
     -- "always" means to always use winbar,
     -- "never" means to never use winbar
     -- "smart" means to use winbar if cmdheight=0 and statusline if cmdheight > 0
-    use_winbar = "always", -- "always" | "never" | "smart"
+    use_winbar = "never", -- "always" | "never" | "smart"
 
     -- if you want to manually filter out the windows, pass in a function that
     -- takes two parameters. you should return window ids that should be

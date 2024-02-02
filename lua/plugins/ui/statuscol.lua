@@ -3,7 +3,7 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldcolumn = "1"
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldtext = ""
+-- vim.opt.foldtext = ""
 vim.opt.fillchars = "foldopen:,foldclose:"
 
 local builtin = require("statuscol.builtin")
