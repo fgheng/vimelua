@@ -40,4 +40,4 @@ vim.keymap.set("n", "<space>zn", function()
         end
     end)
 end, opts)
-vim.keymap.set("v", "<space>zs", ":'<,'>ZkMatch<CR>", opts)
+-- vim.keymap.set("v", "<space>zs", ":'<,'>ZkMatch<CR>", opts)

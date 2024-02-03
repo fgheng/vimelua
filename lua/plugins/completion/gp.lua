@@ -11,6 +11,7 @@ gp.setup({
     chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<C-a>s" },
     chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<C-a>c" },
 })
+local last = gp.config.chat_dir .. "/last.md"
 
 local opts = { noremap = true, silent = true }
 local get_buffer = function(file_name)
@@ -24,9 +25,8 @@ local get_buffer = function(file_name)
     end
     return nil
 end
-local open_or_switch = function()
-    local last = gp.config.chat_dir .. "/last.md"
 
+local open_or_switch = function()
     if vim.fn.filereadable(last) ~= 1 then
         vim.api.nvim_command("GpChatNew")
     end
@@ -75,13 +75,12 @@ vim.keymap.set("v", "<cr>", function()
         vim.api.nvim_buf_set_lines(buf, last_line, -1, false, lines)
 
         if input_text ~= "" then
-            print("input text is not nil")
             vim.api.nvim_command("GpChatRespond")
         end
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("G", true, false, true), "n", true)
         vim.api.nvim_command("setlocal nonumber")
         vim.api.nvim_command("setlocal signcolumn=no")
-        vim.api.nvim_command("setlocal statuscolumn=''")
+        -- vim.api.nvim_command("setlocal statuscolumn=''")
         -- vim.api.nvim_buf_set_option_value("buftype", "gp", { buf = 0 })
     end)
 end, opts)
@@ -93,7 +92,7 @@ vim.keymap.set("n", "<cr>", function()
     local filetype = vim.api.nvim_buf_get_option(cbuf, "filetype")
     -- local filetype = vim.api.nvim_buf_get_option_value("filetype", { buf = cbuf })
 
-    if buftype == "" or filetype == "markdown" then
+    if filetype ~= "qf" and filetype ~= "neo-tree" and filetype ~= "aerial" then
         if not gp.can_handle(cbuf) then
             gp.warning("Another plugin is handling this buffer")
         end

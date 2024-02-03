@@ -11,7 +11,6 @@ vim.opt.rtp:prepend(lazypath)
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
-
 require("lazy").setup(
     {
         ----------------------------------------------------------------------
@@ -327,6 +326,8 @@ require("lazy").setup(
                 { mode = "v", "<space>/" },
                 { mode = "n", "<space>?" },
                 { mode = "v", "<space>?" },
+                { mode = "n", "<space>zs" },
+                { mode = "v", "<space>zs" },
                 { mode = "n", "<leader>sl" },
                 { mode = "n", "ca" },
             },
@@ -651,6 +652,7 @@ require("lazy").setup(
         },
         {
             "phaazon/hop.nvim",
+            enabled = true,
             branch = "v2",
             config = function()
                 require("plugins.editor.hop")
@@ -940,7 +942,6 @@ require("lazy").setup(
                 { mode = "n", "<space>zl" },
                 { mode = "n", "<space>zt" },
                 { mode = "n", "<space>zn" },
-                { mode = "v", "<space>zs" },
             },
         },
         {

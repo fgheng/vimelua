@@ -114,6 +114,8 @@ telescope.setup({
             mappings = { -- extend mappings
                 i = {
                     ["<C-p>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+                    ["<C-l>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
+                    ["<C-t>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " -t " }),
                 },
             },
         },
@@ -155,17 +157,29 @@ vim.keymap.set("n", "<space><space>", function()
     end
 end, opts)
 keymap("n", "<space>f", "<cmd>Telescope find_files<cr>", opts)
-keymap("n", "<space>s", '<cmd>lua require("telescope").extensions.live_grep_args.live_grep_args()<cr>', opts)
+vim.keymap.set("n", "<space>s", function()
+    require("telescope").extensions.live_grep_args.live_grep_args({})
+end, opts)
 vim.keymap.set("v", "<space>s", function()
     local selected_text = require("utils").getVisualSelection()
     selected_text = string.gsub(selected_text, "\n", "")
-    tb.live_grep({ default_text = selected_text })
+    require("telescope").extensions.live_grep_args.live_grep_args({ default_text = selected_text })
 end, opts)
-keymap("n", "<space>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
+vim.keymap.set("n", "<space>/", function()
+    local current_buffer = vim.api.nvim_get_current_buf()
+    local abs_path = vim.api.nvim_buf_get_name(current_buffer)
+    require("telescope").extensions.live_grep_args.live_grep_args({ search_dirs = { abs_path } })
+end, opts)
 vim.keymap.set("v", "<space>/", function()
     local selected_text = require("utils").getVisualSelection()
     selected_text = string.gsub(selected_text, "\n", "")
-    tb.current_buffer_fuzzy_find({ default_text = selected_text })
+    local current_buffer = vim.api.nvim_get_current_buf()
+    local abs_path = vim.api.nvim_buf_get_name(current_buffer)
+    require("telescope").extensions.live_grep_args.live_grep_args({
+        search_dirs = { abs_path },
+        default_text = selected_text,
+    })
+    -- tb.current_buffer_fuzzy_find({ default_text = selected_text })
 end, opts)
 keymap("n", "<space>b", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<space>?", "<cmd>Telescope diagnostics<cr>", opts)
@@ -188,6 +202,17 @@ vim.keymap.set("v", "<space>O", function()
     selected_text = string.gsub(selected_text, "\n", "")
     tb.lsp_workspace_symbols({ default_text = selected_text })
 end, opts)
+vim.keymap.set("n", "<space>zs", function()
+    require("telescope").extensions.live_grep_args.live_grep_args({ search_dirs = { require("config").notes_home } })
+end, opts)
+vim.keymap.set("v", "<space>zs", function()
+    local selected_text = require("utils").getVisualSelection()
+    selected_text = string.gsub(selected_text, "\n", "")
+    require("telescope").extensions.live_grep_args.live_grep_args({
+        search_dirs = { require("config").notes_home },
+        default_text = selected_text,
+    })
+end, opts)
 -- vim.keymap.set("n", "<space>e", "<cmd>Telescope file_browser<CR>", opts)
 
 ----------------------------------------------------------------------
@@ -208,5 +233,5 @@ end, opts)
 -- foo bar	foo bar	search for „foo bar“
 -- "foo bar" baz	foo bar, baz	search for „foo bar“ in dir „baz“
 -- --no-ignore "foo bar	--no-ignore, foo bar	search for „foo bar“ ignoring ignores
--- "foo" --iglob **/test/**	search for „foo“ in any „test“ path	
+-- "foo" --iglob **/test/**	search for „foo“ in any „test“ path
 -- "foo" ../other-project	foo, ../other-project	search for „foo“ in ../other-project
