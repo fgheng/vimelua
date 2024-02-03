@@ -12,6 +12,7 @@ _M.snippet_path_vscode = vim.fn.stdpath("config") .. "/snippets/vscode/"
 --                               wiki                               --
 ----------------------------------------------------------------------
 _M.notes_home = os.getenv("ZK_NOTEBOOK_DIR")
+-- _M.notes_home = "/Users/fgh/valuts/personal2"
 
 ----------------------------------------------------------------------
 --                           theme config                           --

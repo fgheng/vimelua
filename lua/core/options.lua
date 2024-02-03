@@ -55,7 +55,7 @@ opt.winblend = 30 -- 浮动窗口透明度设置
 opt.updatetime = 100
 opt.laststatus = 0
 -- opt.timeoutlen = 100 -- Time in milliseconds to wait for a mapped sequence to complete.
--- opt.conceallevel = 2
+opt.conceallevel = 1
 
 vim.defer_fn(function()
     -- opt.undofile = true

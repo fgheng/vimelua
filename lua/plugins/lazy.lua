@@ -233,6 +233,7 @@ require("lazy").setup(
             config = function()
                 require("plugins.completion.gp")
             end,
+            cmd = { "GpChatNew" },
             keys = {
                 { mode = "n", "<cr>" },
                 { mode = "v", "<cr>" },
@@ -930,6 +931,7 @@ require("lazy").setup(
         },
         {
             "zk-org/zk-nvim",
+            enabled = true,
             config = function()
                 require("plugins.wiki.zk-nvim")
             end,
@@ -975,6 +977,23 @@ require("lazy").setup(
             config = function()
                 require("plugins.wiki.image")
             end,
+        },
+        {
+            "epwalsh/obsidian.nvim",
+            enabled = false,
+            version = "*", -- recommended, use latest release instead of latest commit
+            lazy = true,
+            ft = "markdown",
+            config = function()
+                require("plugins.wiki.obsidian")
+            end,
+            dependencies = {
+                -- Required.
+                "nvim-lua/plenary.nvim",
+            },
+            cmd = {
+                "ObsidianNew",
+            },
         },
 
         ----------------------------------------------------------------------
