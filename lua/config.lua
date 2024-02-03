@@ -42,6 +42,7 @@ _M.treesitter_languages = {
     "markdown",
     "markdown_inline",
     "regex",
+    -- "tree-sitter-markdown"
 }
 
 _M.treesitter_disable_languages = {

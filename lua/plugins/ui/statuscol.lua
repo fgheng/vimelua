@@ -4,10 +4,9 @@ vim.opt.foldcolumn = "1"
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- vim.opt.foldtext = ""
-vim.opt.fillchars = "foldopen:,foldclose:"
+-- vim.opt.fillchars = "foldopen:,foldclose:"
 
 local builtin = require("statuscol.builtin")
-local fcs = vim.opt.fillchars:get()
 local cfg = {
     setopt = true, -- Whether to set the 'statuscolumn' option, may be set to false for those who
     -- want to use the click handlers in their own 'statuscolumn': _G.Sc[SFL]a().
@@ -18,34 +17,41 @@ local cfg = {
     relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
     -- Builtin 'statuscolumn' options
     ft_ignore = nil, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
-    bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
+    bt_ignore = { "nofile", "terminal" }, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
     -- Default segments (fold -> sign -> line number + separator), explained below
     segments = {
-        { text = { "%s" }, click = "v:lua.ScSa" },
-        { text = { "%=", builtin.lnumfunc, "" } },
-        -- { text = { "", "│", "" } },
+        {
+            sign = {
+                name = { ".*" },
+                text = { ".*" },
+                colwidth = 1,
+                wrap = false,
+            },
+            click = "v:lua.ScSa",
+        },
+        {
+            text = { builtin.lnumfunc },
+            condition = { true, builtin.notempty },
+            click = "v:lua.ScLa",
+        },
+        { text = { " " } },
+        -- {
+        --     sign = { name = { "GitSigns" }, text = { ".*" }, maxwidth = 1, colwidth = 1, wrap = true },
+        --     fillchar = "%#LineNr#%=│",
+        --     click = "v:lua.ScSa",
+        -- },
         {
             text = {
-                " ",
                 function(args)
-                    local lnum = args.lnum
-                    if vim.fn.foldlevel(lnum) <= vim.fn.foldlevel(lnum - 1) then
-                        return " "
-                    end
-                    local fold_sym = vim.fn.foldclosed(lnum) == -1 and fcs.foldopen or fcs.foldclose
-                    return fold_sym
+                    args.fold.close = ""
+                    args.fold.open = ""
+                    args.fold.sep = "│"
+                    return builtin.foldfunc(args)
                 end,
-                " ",
-            },
-            condition = {
-                true,
-                function(args)
-                    return args.fold.width > 0
-                end,
-                true,
             },
             click = "v:lua.ScFa",
         },
+        { text = { " " } },
         clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
         -- "a" for Alt, "c" for Ctrl and "m" for Meta.
         clickhandlers = { -- builtin click handlers
