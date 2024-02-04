@@ -251,3 +251,24 @@ require("obsidian").setup({
     -- case you can temporarily switch to the "yq" parser until the bug is fixed.
     yaml_parser = "native",
 })
+
+local opts = { silent = true, noremap = true }
+vim.keymap.set("v", "<M-cr>", function()
+    vim.api.nvim_command("ObsidianLinkNew")
+end, opts)
+vim.keymap.set("n", "<BS>", function()
+    vim.api.nvim_command("ObsidianBacklinks")
+end, opts)
+vim.keymap.set("n", "<space>zl", function()
+    vim.api.nvim_command("ObsidianQuickSwitch")
+end, opts)
+vim.keymap.set("n", "<space>zt", function()
+    vim.api.nvim_command("ObsidianTags")
+end, opts)
+vim.keymap.set("n", "<space>zn", function()
+    vim.ui.input({ prompt = "title: ", default = "" }, function(input)
+        if input ~= nil and input ~= "" then
+            vim.api.nvim_command("ObsidianNew " .. input)
+        end
+    end)
+end, opts)

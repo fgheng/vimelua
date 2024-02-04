@@ -1,0 +1,39 @@
+{
+  "autocmd": {
+    "prefix": "autocmd",
+    "body": [
+      "vim.api.nvim_create_autocmd(${1}, {",
+      "   callback = function(args)",
+      "       ${2}",
+      "   end,",
+      "})"
+    ],
+    "description": "nvim_create_autocmd"
+  },
+  "ac": {
+    "prefix": "ac",
+    "body": [
+      "vim.api.nvim_create_autocmd(${1}, {",
+      "   callback = function(args)",
+      "       ${2}",
+      "   end,",
+      "})"
+    ],
+    "description": "nvim_create_autocmd"
+  },
+  "pt": {
+    "prefix": "pt",
+    "body": ["print(vim.inspect(${1}))"],
+    "description": "print(vim.inspect())"
+  },
+  "printtable": {
+    "prefix": "printtable",
+    "body": ["print(vim.inspect(${1}))"],
+    "description": "print(vim.inspect())"
+  },
+  "commmand": {
+    "prefix": "commmand",
+    "body": ["vim.api.nvim_command('${1}')"],
+    "description": "vim.api.nvim_command()"
+  }
+}

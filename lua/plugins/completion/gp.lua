@@ -87,23 +87,31 @@ vim.keymap.set("v", "<cr>", function()
 end, opts)
 
 vim.keymap.set("n", "<cr>", function()
-    print("执行了 gp 1111")
     local cbuf = vim.api.nvim_get_current_buf()
     local buftype = vim.api.nvim_buf_get_option(cbuf, "buftype")
     -- local buftype = vim.api.nvim_buf_get_option_value("buftype", { buf = cbuf })
     local filetype = vim.api.nvim_buf_get_option(cbuf, "filetype")
     -- local filetype = vim.api.nvim_buf_get_option_value("filetype", { buf = cbuf })
 
-    print("执行了 gp")
+    local status_ok_mkdn, _ = pcall(require, "mkdnflow")
+    if status_ok_mkdn and filetype == "markdown" then
+        local current_line = vim.api.nvim_get_current_line()
+        local cursor_pos = vim.api.nvim_win_get_cursor(0)
+        local char_under_cursor = current_line:sub(cursor_pos[2], cursor_pos[2]+1)
+
+        if char_under_cursor:match("%S") then
+            vim.api.nvim_command("MkdnEnter")
+            return
+        end
+    end
+
     local status_ok, obs = pcall(require, "obsidian")
     if status_ok then
         if obs.util.cursor_on_markdown_link() then
-          print("-----ok----")
             vim.api.nvim_command("ObsidianFollowLink")
             return
         else
-          print("asdfasdfas")
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cr>", true, true, true), "n", true)
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cr>", true, true, true), "n", true)
         end
     end
 

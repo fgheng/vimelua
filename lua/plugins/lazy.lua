@@ -311,6 +311,7 @@ require("lazy").setup(
             keys = {
                 { mode = "n", "<space><space>" },
                 { mode = "n", "<space>f" },
+                { mode = "n", "<space>c" },
                 -- { mode = "n", "<space>e" },
                 { mode = "n", "<space>s" },
                 { mode = "v", "<space>s" },
@@ -329,6 +330,8 @@ require("lazy").setup(
                 { mode = "v", "<space>?" },
                 { mode = "n", "<space>zs" },
                 { mode = "v", "<space>zs" },
+                { mode = "n", "<space>zt" },
+                { mode = "n", "<space>zl" },
                 { mode = "n", "<leader>sl" },
                 { mode = "n", "ca" },
             },
@@ -606,7 +609,7 @@ require("lazy").setup(
         },
         {
             "kawre/neotab.nvim",
-            enabled = true,
+            enabled = false,
             event = "InsertEnter",
             config = function()
                 vim.schedule(function()
@@ -778,15 +781,15 @@ require("lazy").setup(
             end,
             event = { "ModeChanged", "InsertEnter", "CursorMoved" },
         },
-        {
-            "abecodes/tabout.nvim",
-            enabled = false,
-            config = function()
-                require("plugins.editor.tabout")
-            end,
-            dependencies = { "nvim-treesitter" }, -- or require if not used so far
-            event = { "InsertEnter" },
-        },
+        -- {
+        --     "abecodes/tabout.nvim",
+        --     enabled = false,
+        --     config = function()
+        --         require("plugins.editor.tabout")
+        --     end,
+        --     dependencies = { "nvim-treesitter" }, -- or require if not used so far
+        --     event = { "InsertEnter" },
+        -- },
         {
             "arnamak/stay-centered.nvim",
             enabled = false,
@@ -931,7 +934,7 @@ require("lazy").setup(
         },
         {
             "zk-org/zk-nvim",
-            enabled = true,
+            enabled = false,
             config = function()
                 require("plugins.wiki.zk-nvim")
             end,
@@ -993,6 +996,22 @@ require("lazy").setup(
             },
             cmd = {
                 "ObsidianNew",
+                "ObsidianBacklinks",
+                "ObsidianTags",
+                "ObsidianSearch",
+                "ObsidianQuickSwitch",
+            },
+            -- keys = {
+            --     {mode="n", "<M-cr>"},
+            --     {mode="n", "<BS>"},
+            --     {mode="n", "<leader>zt"},
+            --     {mode="n", "<leader>zl"},
+            --     {mode="n", "<leader>zn"},
+            -- },
+            keys = {
+                { mode = "n", "<space>zl" },
+                { mode = "n", "<space>zt" },
+                { mode = "n", "<space>zn" },
             },
         },
 

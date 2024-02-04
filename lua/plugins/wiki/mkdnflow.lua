@@ -99,7 +99,8 @@ Filename: {{ filename }}
         bib = { override = false },
     },
     mappings = {
-        MkdnEnter = { { "n", "v" }, "<CR>" },
+        -- MkdnEnter = { { "n", "v" }, "<CR>" },
+        MkdnEnter = false,
         MkdnTab = false,
         MkdnSTab = false,
         MkdnNextLink = { "n", "<Tab>" },

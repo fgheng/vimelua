@@ -92,8 +92,8 @@ telescope.setup({
             trim_text = false,
         },
         lsp_definitions = {
-            show_line = false,
-            trim_text = false,
+            show_line = true,
+            trim_text = true,
         },
         diagnostic = {
             bufnr = 0, -- current buffer or nil for all buffers
@@ -157,6 +157,7 @@ vim.keymap.set("n", "<space><space>", function()
     end
 end, opts)
 keymap("n", "<space>f", "<cmd>Telescope find_files<cr>", opts)
+keymap("n", "<space>c", "<cmd>Telescope commands<cr>", opts)
 vim.keymap.set("n", "<space>s", function()
     require("telescope").extensions.live_grep_args.live_grep_args({})
 end, opts)
@@ -212,6 +213,16 @@ vim.keymap.set("v", "<space>zs", function()
         search_dirs = { require("config").notes_home },
         default_text = selected_text,
     })
+end, opts)
+vim.keymap.set("n", "<space>zt", function()
+    require("telescope").extensions.live_grep_args.live_grep_args({
+        search_dirs = { require("config").notes_home },
+        default_text = "(^|\\s)#[A-Za-z\\u4e00-\\u9fff0-9_]+$",
+        path_display = { "hidden" },
+    })
+end, opts)
+vim.keymap.set("n", "<space>zl", function()
+    tb.find_files({ search_dirs = { require("config").notes_home }, path_display = { "tail" } })
 end, opts)
 -- vim.keymap.set("n", "<space>e", "<cmd>Telescope file_browser<CR>", opts)
 

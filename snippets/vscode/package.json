@@ -12,6 +12,12 @@
           "hpp"
         ],
         "path": "./snippets/cpp.json"
+      },
+      {
+          "language": [
+              "lua"
+          ],
+          "path": "./snippets/lua.json"
       }
     ]
   }

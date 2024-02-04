@@ -58,7 +58,7 @@ neo_tree.setup({
     close_if_last_window = false,
     source_selector = {
         winbar = true,
-        statusline = true,
+        statusline = false,
         sources = { -- table
             {
                 source = "filesystem", -- string
@@ -290,6 +290,28 @@ neo_tree.setup({
                 ["gp"] = "git_push",
                 ["gg"] = "git_commit_and_push",
             },
+        },
+    },
+
+    event_handlers = {
+        {
+            event = "neo_tree_buffer_enter",
+            handler = function()
+                -- vim.o.showmode = false
+                -- vim.o.ruler = false
+                -- vim.o.laststatus = 0
+                -- vim.o.showcmd = false
+                vim.wo.statusline = nil
+            end,
+        },
+        {
+            event = "neo_tree_buffer_leave",
+            handler = function()
+                -- vim.o.showmode = true
+                -- vim.o.ruler = true
+                -- vim.o.laststatus = 3
+                -- vim.o.showcmd = true
+            end,
         },
     },
 })
