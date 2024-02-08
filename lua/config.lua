@@ -20,8 +20,8 @@ _M.notes_home = os.getenv("ZK_NOTEBOOK_DIR")
 _M.colorscheme = {
     background = "dark",
     background_color = "#ffffff",
-    theme_group = "catppuccin",
-    theme = "catppuccin",
+    theme_group = "everforest",
+    theme = "everforest",
 }
 
 ----------------------------------------------------------------------
@@ -43,6 +43,7 @@ _M.treesitter_languages = {
     "markdown",
     "markdown_inline",
     "regex",
+    "norg"
     -- "tree-sitter-markdown"
 }
 

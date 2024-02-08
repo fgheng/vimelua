@@ -139,6 +139,7 @@ mason_lspconfig.setup({
                 on_attach = function(client, bufnr)
                     func_keymap(client, bufnr)
                     func_lsp_highlight(client, bufnr)
+                    vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
                 end,
                 capabilities = capabilities,
                 handlers = {
@@ -163,57 +164,3 @@ mason_lspconfig.setup({
         end,
     },
 })
-
--- vim.api.nvim_create_user_command("LspRestart", function(kwargs)
---     local name = kwargs.fargs[1]
---     for _, client in ipairs(vim.get_clients({ name = name })) do
---         local bufs = lsp.get_buffers_by_client_id(client.id)
---         client.stop()
---         vim.wait(30000, function()
---             return lsp.get_client_by_id(client.id) == nil
---         end)
---         local client_id = lsp.start_client(client.config)
---         if client_id then
---             for _, buf in ipairs(bufs) do
---                 lsp.buf_attach_client(buf, client_id)
---             end
---         end
---     end
--- end, {
---     nargs = 1,
---     complete = function()
---         return vim.tbl_map(function(c)
---             return c.name
---         end, vim.get_clients())
---     end,
--- })
-
--- vim.defer_fn(function()
---     require("utils").on_attach(func_keymap)
---     -- require("utils").on_attach(func_format_on_save)
---     -- require("utils").on_attach(func_lsp_highlight)
---
---     -- vim.api.nvim_create_user_command("LspRestart", function(kwargs)
---     --     local name = kwargs.fargs[1]
---     --     for _, client in ipairs(vim.get_clients({ name = name })) do
---     --         local bufs = lsp.get_buffers_by_client_id(client.id)
---     --         client.stop()
---     --         vim.wait(30000, function()
---     --             return lsp.get_client_by_id(client.id) == nil
---     --         end)
---     --         local client_id = lsp.start_client(client.config)
---     --         if client_id then
---     --             for _, buf in ipairs(bufs) do
---     --                 lsp.buf_attach_client(buf, client_id)
---     --             end
---     --         end
---     --     end
---     -- end, {
---     --     nargs = 1,
---     --     complete = function()
---     --         return vim.tbl_map(function(c)
---     --             return c.name
---     --         end, vim.get_clients())
---     --     end,
---     -- })
--- end, 100)

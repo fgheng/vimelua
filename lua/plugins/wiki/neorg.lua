@@ -1,4 +1,3 @@
-local config = require("config")
 require("neorg").setup({
     load = {
         ["core.defaults"] = {}, -- Loads default behaviour

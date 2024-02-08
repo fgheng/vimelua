@@ -14,10 +14,17 @@
         "path": "./snippets/cpp.json"
       },
       {
-          "language": [
-              "lua"
-          ],
-          "path": "./snippets/lua.json"
+        "language": [
+          "lua"
+        ],
+        "path": "./snippets/lua.json"
+      },
+      {
+        "language": [
+          "markdown",
+          "md"
+        ],
+        "path": "./snippets/markdown.json"
       }
     ]
   }

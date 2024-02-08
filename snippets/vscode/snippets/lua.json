@@ -35,5 +35,25 @@
     "prefix": "commmand",
     "body": ["vim.api.nvim_command('${1}')"],
     "description": "vim.api.nvim_command()"
+  },
+  "keymap": {
+    "prefix": "keymap",
+    "body": [
+      "vim.keymap.set(\"${1}\", \"${2}\", function()",
+      "    ${3}",
+      "end, {silent = true, noremap = true})"],
+    "description": "vim.keymap.set()"
+  },
+  "autocmd": {
+      "prefix": "autocmd",
+       "body": [
+            "vim.api.nvim_create_autocmd({\"${1}\"}, {",
+            "   pattern = {\"${2}\"}",
+            "   callback = function(args)",
+            "       ${3}",
+            "   end,",
+            "})"
+        ],
+        "description": "nvim_create_autocmd"
   }
 }

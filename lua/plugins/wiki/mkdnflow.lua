@@ -16,7 +16,7 @@ require("mkdnflow").setup({
     filetypes = { md = true, rmd = true, markdown = true },
     create_dirs = true,
     perspective = {
-        priority = "first",
+        priority = "relative",
         fallback = "current",
         root_tell = false,
         nvim_wd_heel = false,
@@ -45,28 +45,13 @@ require("mkdnflow").setup({
             -- text = os.date("%Y-%m-%d_") .. text
             -- return text
         end,
-        new_file_template = {
-    template = [[
-# {{ title }}
-Date: {{ date }}
-Filename: {{ filename }}
-]],
-    placeholders = {
-        before = {
-            date = function()
-                return os.date("%A, %B %d, %Y") -- Wednesday, March 1, 2023
-            end
-        },
-        after = {
-            filename = function()
-                return vim.api.nvim_buf_get_name(0)
-            end
-        }
-    }
-}
     },
     new_file_template = {
-        use_template = false,
+        use_template = true,
+        template = [[
+# {{ title }}
+Date: {{ date }}
+]],
         placeholders = {
             before = {
                 title = "link_title",
@@ -74,7 +59,7 @@ Filename: {{ filename }}
             },
             after = {},
         },
-        template = "# {{ title }}",
+        -- template = "# {{ title }}",
     },
     to_do = {
         symbols = { " ", "", "✔" },
@@ -99,8 +84,8 @@ Filename: {{ filename }}
         bib = { override = false },
     },
     mappings = {
-        -- MkdnEnter = { { "n", "v" }, "<CR>" },
-        MkdnEnter = false,
+        MkdnEnter = { { "n", "v" }, "gd" },
+        -- MkdnEnter = false,
         MkdnTab = false,
         MkdnSTab = false,
         MkdnNextLink = { "n", "<Tab>" },
@@ -110,7 +95,7 @@ Filename: {{ filename }}
         MkdnGoBack = { "n", "<BS>" },
         MkdnGoForward = { "n", "<Del>" },
         MkdnCreateLink = false, -- see MkdnEnter
-        MkdnCreateLinkFromClipboard = { { "n", "v" }, "<leader>p" }, -- see MkdnEnter
+        MkdnCreateLinkFromClipboard = false, -- see MkdnEnter
         MkdnFollowLink = false, -- see MkdnEnter
         MkdnDestroyLink = { "n", "<M-CR>" },
         MkdnTagSpan = { "v", "<M-CR>" },

@@ -11,16 +11,6 @@ function M.on_attach(on_attach)
     })
 end
 
-function M.on_deattach(on_deattach)
-    vim.api.nvim_create_autocmd("LspDe", {
-        callback = function(args)
-            local buffer = args.buf
-            local client = vim.lsp.get_client_by_id(args.data.client_id)
-            on_attach(client, buffer)
-        end,
-    })
-end
-
 function M.getVisualSelection()
     vim.cmd([[noau normal! "vy"]])
     local text = vim.fn.getreg("v")

@@ -93,17 +93,17 @@ vim.keymap.set("n", "<cr>", function()
     local filetype = vim.api.nvim_buf_get_option(cbuf, "filetype")
     -- local filetype = vim.api.nvim_buf_get_option_value("filetype", { buf = cbuf })
 
-    local status_ok_mkdn, _ = pcall(require, "mkdnflow")
-    if status_ok_mkdn and filetype == "markdown" then
-        local current_line = vim.api.nvim_get_current_line()
-        local cursor_pos = vim.api.nvim_win_get_cursor(0)
-        local char_under_cursor = current_line:sub(cursor_pos[2], cursor_pos[2]+1)
-
-        if char_under_cursor:match("%S") then
-            vim.api.nvim_command("MkdnEnter")
-            return
-        end
-    end
+    -- local status_ok_mkdn, _ = pcall(require, "mkdnflow")
+    -- if status_ok_mkdn and filetype == "markdown" then
+    --     local current_line = vim.api.nvim_get_current_line()
+    --     local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    --     local char_under_cursor = current_line:sub(cursor_pos[2], cursor_pos[2]+1)
+    --
+    --     if char_under_cursor:match("%S") then
+    --         vim.api.nvim_command("MkdnEnter")
+    --         return
+    --     end
+    -- end
 
     local status_ok, obs = pcall(require, "obsidian")
     if status_ok then

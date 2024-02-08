@@ -257,6 +257,15 @@ require("lazy").setup(
             },
         },
         {
+            "LudoPinelli/comment-box.nvim",
+            cmd = {
+                "CBllbox",
+                "CBlrbox",
+                "CBlcbox",
+                "CBcatalog",
+            },
+        },
+        {
             "numToStr/Comment.nvim", -- comment
             config = function()
                 require("plugins.comment.Comment")
@@ -557,6 +566,14 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         --                          editor support                          --
         ----------------------------------------------------------------------
+        {
+            "jbyuki/venn.nvim",
+            lazy = true,
+            config = function()
+                require("plugins.editor.venn")
+            end,
+            keys = { { mode = "n", "<leader>vv" } },
+        },
         {
             "famiu/bufdelete.nvim",
             enabled = false,
@@ -912,7 +929,7 @@ require("lazy").setup(
         ----------------------------------------------------------------------
         {
             "nvim-neorg/neorg",
-            enabled = false,
+            enabled = true,
             build = ":Neorg sync-parsers",
             ft = { "norg", "md", "markdown" },
             -- tag = "*",
@@ -934,7 +951,7 @@ require("lazy").setup(
         },
         {
             "zk-org/zk-nvim",
-            enabled = false,
+            enabled = true,
             config = function()
                 require("plugins.wiki.zk-nvim")
             end,
@@ -1220,7 +1237,7 @@ require("lazy").setup(
         },
         {
             "nvim-lualine/lualine.nvim",
-            enabled = false,
+            enabled = true,
             config = function()
                 vim.schedule(function()
                     require("plugins.ui.lualine")
@@ -1252,7 +1269,7 @@ require("lazy").setup(
         },
         {
             "akinsho/bufferline.nvim",
-            enabled = false,
+            enabled = true,
             config = function()
                 vim.schedule(function()
                     require("plugins.ui.bufferline")
@@ -1330,8 +1347,9 @@ require("lazy").setup(
             priority = 1000,
             lazy = false,
             config = function()
-                vim.o.background = require("config").colorscheme.background
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
+                require("plugins.ui.colorschemes.vscode")
+                -- vim.o.background = require("config").colorscheme.background
+                -- vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "vscode.*") ~= nil
@@ -1342,9 +1360,10 @@ require("lazy").setup(
             priority = 1000,
             lazy = false,
             config = function()
-                vim.schedule(function()
-                    vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
-                end)
+                require("plugins.ui.colorschemes.tokyonight")
+                -- vim.schedule(function()
+                --     vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
+                -- end)
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "tokyonight.*") ~= nil
@@ -1367,7 +1386,7 @@ require("lazy").setup(
             priority = 1000,
             lazy = false,
             config = function()
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
+                require("plugins.ui.colorschemes.catppuccin")
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "catppuccin.*") ~= nil
@@ -1389,7 +1408,7 @@ require("lazy").setup(
             priority = 1000,
             lazy = false,
             config = function()
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
+                require("plugins.ui.colorschemes.onedark")
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "onedark.*") ~= nil
@@ -1407,7 +1426,7 @@ require("lazy").setup(
             end,
         },
         {
-            "sainnhe/everforest",
+            "neanias/everforest-nvim",
             priority = 1000,
             lazy = false,
             config = function()
@@ -1415,8 +1434,9 @@ require("lazy").setup(
                 --     vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme_group))
                 -- end, 1)
                 -- vim.schedule(function()
-                vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
+                -- vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
                 -- end)
+                require("plugins.ui.colorschemes.everforest")
             end,
             cond = function()
                 return string.match(require("config").colorscheme.theme_group, "everforest.*") ~= nil
