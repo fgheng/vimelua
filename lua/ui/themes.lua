@@ -72,6 +72,7 @@ local map_to_themes = {
                         hl.NormalFloat = { bg = "None" }
                         hl.FloatBorder = { fg = "None", bg = "None" }
                         hl.TabLine = { bg = "None" }
+                        hl.WinSeparator = { fg = palette.bg, bg = "None" }
                     end,
                 })
                 require("everforest").load()

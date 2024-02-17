@@ -115,7 +115,8 @@ M.git = function()
     return " %#St_Branch#"
         .. require("utils.icons").symbols.branch
         .. " "
-        .. "%#St_Text#" .. vim.b[stbufnr()].gitsigns_status_dict.head
+        .. "%#St_Text#"
+        .. vim.b[stbufnr()].gitsigns_status_dict.head
 end
 
 M.gitchanges = function()
@@ -126,14 +127,14 @@ M.gitchanges = function()
     local git_status = vim.b[stbufnr()].gitsigns_status_dict
 
     local added = (git_status.added and git_status.added ~= 0)
-            and (" %#St_GitAdd#" .. require("utils.icons").git.add .. "" .. git_status.added)
-        or " %#St_GitAdd#" .. require("utils.icons").git.add .. "0"
+            and (" %#St_GitAdd#" .. require("utils.icons").icons.dot .. "" .. git_status.added)
+        or " %#St_GitAdd#" .. require("utils.icons").icons.dot .. "0"
     local changed = (git_status.changed and git_status.changed ~= 0)
-            and (" %#St_GitMod#" .. require("utils.icons").git.change .. "" .. git_status.changed)
-        or " %#St_GitMod#" .. require("utils.icons").git.change .. "0"
+            and (" %#St_GitMod#" .. require("utils.icons").icons.dot .. "" .. git_status.changed)
+        or " %#St_GitMod#" .. require("utils.icons").icons.dot .. "0"
     local removed = (git_status.removed and git_status.removed ~= 0)
-            and (" %#St_GitDel#" .. require("utils.icons").git.remove .. "" .. git_status.removed)
-        or " %#St_GitDel#" .. require("utils.icons").git.remove .. "0"
+            and (" %#St_GitDel#" .. require("utils.icons").icons.dot .. "" .. git_status.removed)
+        or " %#St_GitDel#" .. require("utils.icons").icons.dot .. "0"
 
     return (added .. changed .. removed) ~= "" and (added .. changed .. removed .. " %#St_Text# ") or ""
 end
@@ -190,7 +191,7 @@ M.LSP_Diagnostics = function()
     local info_str = (info and info > 0) and ("%#St_Info#" .. require("utils.icons").symbols.info .. " " .. info .. " ")
         or "%#St_Info#" .. require("utils.icons").symbols.info .. " 0 "
 
-    return vim.o.columns > 140 and errors_str .. warnings_str .. hints_str .. info_str  or ""
+    return vim.o.columns > 140 and errors_str .. warnings_str .. hints_str .. info_str or ""
 end
 
 M.filetype = function()
