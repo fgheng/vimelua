@@ -8,10 +8,11 @@ local map_to_themes = {
             priority = 1000,
             lazy = false,
             config = function()
+                vim.opt.winblend = 50
                 local c = require("vscode.colors").get_colors()
                 require("vscode").setup({
                     -- Alternatively set style in setup
-                    style = require("config").theme.style,
+                    style = require("config").theme.background,
 
                     -- Enable transparent background
                     transparent = true,
@@ -36,10 +37,11 @@ local map_to_themes = {
                         WinBar = { fg = c.none, bg = c.none },
                         WinBarNC = { fg = c.none, bg = c.none },
                         StatusLine = { bg = c.none },
+                        NormalFloat = { bg = c.none },
+                        FloatBorder = { fg = c.none, bg = c.none },
                     },
                 })
                 require("vscode").load()
-                -- vim.cmd([[hi StatusLine guibg=NONE]])
             end,
         }
     end,
@@ -49,9 +51,10 @@ local map_to_themes = {
             priority = 1000,
             lazy = false,
             config = function()
+                vim.opt.winblend = 50
                 require("everforest").setup({
                     background = "hard",
-                    transparent_background_level = 2,
+                    transparent_background_level = 5,
                     italics = true,
                     sign_column_background = "none",
                     ui_contrast = "high",
@@ -61,10 +64,14 @@ local map_to_themes = {
                         hl.WinBarNC = { fg = "None", bg = "None" }
                         hl.CursorLine = { fg = "None", bg = "None" }
                         hl.StatusLine = { bg = "None" }
+                        hl.StatusLineNC = { bg = "None" }
                         hl.DiagnosticError = { fg = palette.none, bg = palette.none, sp = palette.red }
                         hl.DiagnosticWarn = { fg = palette.none, bg = palette.none, sp = palette.yellow }
                         hl.DiagnosticInfo = { fg = palette.none, bg = palette.none, sp = palette.blue }
                         hl.DiagnosticHint = { fg = palette.none, bg = palette.none, sp = palette.green }
+                        hl.NormalFloat = { bg = "None" }
+                        hl.FloatBorder = { fg = "None", bg = "None" }
+                        hl.TabLine = { bg = "None" }
                     end,
                 })
                 require("everforest").load()
@@ -78,145 +85,65 @@ local map_to_themes = {
             priority = 1000,
             lazy = false,
             config = function()
-                -- vim.api.nvim_command(string.format("colorscheme %s", require("config").theme.theme))
-                local palette = require("nightfox.palette")
+                vim.opt.winblend = 50
                 require("nightfox").setup({
                     options = {
-                        transparent = true,
+                        -- Compiled file's destination location
+                        compile_path = vim.fn.stdpath("cache") .. "/nightfox",
+                        compile_file_suffix = "_compiled", -- Compiled file suffix
+                        transparent = true, -- Disable setting background
+                        terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+                        dim_inactive = false, -- Non focused panes set to alternative background
+                        module_default = true, -- Default enable value for modules
+                        colorblind = {
+                            enable = false, -- Enable colorblind support
+                            simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
+                            severity = {
+                                protan = 0, -- Severity [0,1] for protan (red)
+                                deutan = 0, -- Severity [0,1] for deutan (green)
+                                tritan = 0, -- Severity [0,1] for tritan (blue)
+                            },
+                        },
+                        styles = { -- Style to be applied to different syntax groups
+                            comments = "NONE", -- Value is any valid attr-list value `:help attr-list`
+                            conditionals = "NONE",
+                            constants = "NONE",
+                            functions = "NONE",
+                            keywords = "NONE",
+                            numbers = "NONE",
+                            operators = "NONE",
+                            strings = "NONE",
+                            types = "NONE",
+                            variables = "NONE",
+                        },
+                        inverse = { -- Inverse highlight for different types
+                            match_paren = false,
+                            visual = false,
+                            search = false,
+                        },
+                        modules = { -- List of various plugins and additional options
+                            -- ...
+                        },
                     },
+                    palettes = {},
+                    specs = {},
                     groups = {
                         all = {
-                            IncSearch = { bg = "palette.cyan" },
-                            Cursor = { bg = "None" },
-                            CursorLine = { bg = "None" },
+                            WinBar = { bg = "None" },
+                            WinBarNC = { fg = "None", bg = "None" },
+                            CursorLine = { fg = "None", bg = "None" },
+                            StatusLine = { bg = "None" },
+                            NormalFloat = { bg = "None" },
                         },
                     },
                 })
+
                 require("nightfox").load()
+                -- -- setup must be called before loading
+                -- vim.cmd("colorscheme nightfox")
             end,
         }
     end,
 }
 
 return map_to_themes[require("config").theme.theme]() or {}
-
--- local _M = {
---
---     {
---         "JoosepAlviste/palenightfall.nvim",
---         priority = 1000,
---         lazy = false,
---         config = function() end,
---         cond = function()
---             return string.match(require("config").theme.theme, "palenightfall.*") ~= nil
---         end,
---     },
---     {
---         "folke/tokyonight.nvim",
---         priority = 1000,
---         lazy = false,
---         config = function()
---             require("plugins.ui.colorschemes.tokyonight")
---             -- vim.schedule(function()
---             --     vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
---             -- end)
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "tokyonight.*") ~= nil
---         end,
---     },
---     {
---         "kvrohit/mellow.nvim",
---         priority = 1000,
---         lazy = false,
---         config = function()
---             vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "mellow.*") ~= nil
---         end,
---     },
---     {
---         "catppuccin/nvim",
---         name = "catppuccin",
---         priority = 1000,
---         lazy = false,
---         config = function()
---             require("plugins.ui.colorschemes.catppuccin")
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "catppuccin.*") ~= nil
---         end,
---     },
---     {
---         "LunarVim/horizon.nvim",
---         priority = 1000,
---         lazy = false,
---         config = function()
---             vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "horizon.*") ~= nil
---         end,
---     },
---     {
---         "navarasu/onedark.nvim",
---         priority = 1000,
---         lazy = false,
---         config = function()
---             require("plugins.ui.colorschemes.onedark")
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "onedark.*") ~= nil
---         end,
---     },
---     {
---         "olimorris/onedarkpro.nvim",
---         priority = 1000, -- Ensure it loads first
---         lazy = false,
---         config = function()
---             vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "onedarkpro.*") ~= nil
---         end,
---     },
---     {
---         "sainnhe/sonokai",
---         priority = 1000,
---         lazy = false,
---         config = function()
---             -- vim.cmd([[colorscheme sonokai]])
---             -- vim.cmd([[let g:sonokai_style = 'maia']])
---             vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "sonokai.*") ~= nil
---         end,
---     },
---     {
---         "ray-x/starry.nvim",
---         enabled = true,
---         priority = 1000,
---         lazy = false,
---         config = function()
---             vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "starry.*") ~= nil
---         end,
---     },
---     {
---         "alexmozaidze/palenight.nvim",
---         bled = true,
---         priority = 1000,
---         lazy = false,
---         config = function()
---             vim.api.nvim_command(string.format("colorscheme %s", require("config").colorscheme.theme))
---         end,
---         cond = function()
---             return string.match(require("config").theme.theme, "palenight.*") ~= nil
---         end,
---     },
--- }
--- return _M

@@ -1,6 +1,7 @@
-local colors =  {
+local _M =  {
     bg = '#2e3440',
     fg = '#ECEFF4',
+    black = "#2e3440",
     red = '#c94f6d',
     orange = '#d08770',
     yellow = '#ebcb8b',
@@ -30,4 +31,4 @@ local colors =  {
     grey19 = '#020203',
 }
 
-return colors
+return _M

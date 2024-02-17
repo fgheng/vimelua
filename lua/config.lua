@@ -8,7 +8,7 @@ _M.snippet_path_vscode = vim.fn.stdpath("config") .. "/snippets/vscode/"
 _M.notes_home = os.getenv("ZK_NOTEBOOK_DIR")
 
 _M.theme = {
-    style = "dark",
+    background = "dark",
     theme = "everforest",
 }
 

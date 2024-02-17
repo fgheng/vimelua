@@ -1,7 +1,8 @@
 local _M = {
     "Bekaboo/dropbar.nvim",
     enabled = true,
-    event = { "BufRead", "BufNewFile" },
+    -- event = { "BufRead", "BufNewFile" },
+    event = { "UiEnter" },
     config = function()
         local dropbar = require("dropbar")
         local utils = require("dropbar.utils")

@@ -1,7 +1,8 @@
 local _M = {
     "luukvbaal/statuscol.nvim",
     enabled = true,
-    event = { "BufReadPost" },
+    -- event = { "BufReadPost" },
+    event = { "UiEnter" },
     init = function()
         vim.opt.signcolumn = "yes:1"
         vim.opt.foldlevel = 99

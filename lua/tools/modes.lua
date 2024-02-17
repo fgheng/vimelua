@@ -29,5 +29,5 @@ local _M = {
         ignore_filetypes = { "TelescopePrompt", "NvimTree", "neo-tree" },
     },
 }
-
+_M = {}
 return _M

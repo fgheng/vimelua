@@ -51,4 +51,3 @@ opt.pumheight = 20 -- 提示框显示提示条目数量
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
-opt.winblend = 30 -- 浮动窗口透明度设置

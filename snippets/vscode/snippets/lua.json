@@ -49,11 +49,22 @@
        "body": [
             "vim.api.nvim_create_autocmd({\"${1}\"}, {",
             "   pattern = {\"${2}\"},",
+            "   group = {\"${3}\"},",
             "   callback = function(args)",
-            "       ${3}",
+            "       ${4}",
             "   end,",
             "})"
         ],
         "description": "nvim_create_autocmd"
+  },
+  "augroup": {
+      "prefix": "augroup",
+       "body": [
+            "vim.api.nvim_create_augroup(\"${1}\", {",
+            "   ${2}",
+            "})"
+        ],
+        "description": "nvim_create_augroup"
   }
+
 }
