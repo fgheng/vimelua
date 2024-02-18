@@ -37,6 +37,7 @@ local map_to_themes = {
                         WinBar = { fg = c.none, bg = c.none },
                         WinBarNC = { fg = c.none, bg = c.none },
                         StatusLine = { bg = c.none },
+                        StatusLineNC = { bg = c.none },
                         NormalFloat = { bg = c.none },
                         FloatBorder = { fg = c.none, bg = c.none },
                     },
