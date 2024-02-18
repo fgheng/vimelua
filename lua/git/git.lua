@@ -1,6 +1,9 @@
 local _M = {
     {
         "lewis6991/gitsigns.nvim",
+        enable = true,
+        cmd = { "Gitsigns" },
+        event = { "UiEnter" },
         config = function()
             local gitsigns = require("gitsigns")
             local icons = require("utils.icons")
@@ -110,8 +113,6 @@ local _M = {
                 end,
             })
         end,
-        cmd = { "Gitsigns" },
-        event = { "BufRead" },
     },
     {
         "sindrets/diffview.nvim",
