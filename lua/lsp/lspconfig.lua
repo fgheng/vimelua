@@ -86,7 +86,7 @@ local _M = {
             end
         end
 
-        vim.lsp.set_log_level("off")
+        vim.lsp.set_log_level("ERROR")
 
         local lspconfig = require("lspconfig")
         local servers = require("config").servers.lsp_servers
