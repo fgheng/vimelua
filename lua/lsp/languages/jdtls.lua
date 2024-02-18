@@ -1,4 +1,4 @@
-local lspconfig = require("lspconfig")
+-- local lspconfig = require("lspconfig")
 
 local data_path = vim.fn.stdpath("data")
 local configuration = data_path .. "/mason/packages/jdtls"
@@ -40,14 +40,14 @@ local _M = {
         -- vim.fn.getcwd() .. "/../java-workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"),
         workspace_dir,
     },
-    root_dir = lspconfig.util.root_pattern(
-        ".git",
-        "pom.xml",
-        "build.xml",
-        "settings.gradle",
-        "settings.gradle.kts",
-        vim.fn.getcwd()
-    ),
+    -- root_dir = lspconfig.util.root_pattern(
+    --     ".git",
+    --     "pom.xml",
+    --     "build.xml",
+    --     "settings.gradle",
+    --     "settings.gradle.kts",
+    --     vim.fn.getcwd()
+    -- ),
     single_file_support = true,
 }
 

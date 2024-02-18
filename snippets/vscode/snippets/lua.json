@@ -65,6 +65,14 @@
             "})"
         ],
         "description": "nvim_create_augroup"
+  },
+  "setv": {
+      "prefix": "setv",
+      "body": [
+        "vim.api.nvim_set_option_value(\"${1}\", \"${2}\", { scope = \"${3}\", buf=\"${4}\" })"
+      ],
+      "description": "nvim_set_option_value"
   }
+
 
 }

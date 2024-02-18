@@ -6,7 +6,11 @@ local _M = {
             local opts = { silent = true, noremap = true, buffer = bufnr }
             local keymap = vim.keymap.set
 
-            keymap("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', opts)
+            if vim.bo.filetype == "java" then
+                keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+            else
+                keymap("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', opts)
+            end
             keymap("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<cr>', opts)
             -- keymap("n", "gi", '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>', opts)
             keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_incoming_calls()<cr>", opts)
@@ -106,7 +110,7 @@ local _M = {
             },
         }
 
-        for _, lsp  in pairs(servers) do
+        for _, lsp in pairs(servers) do
             local opts = {
                 on_attach = function(client, bufnr)
                     vim.schedule(function()
