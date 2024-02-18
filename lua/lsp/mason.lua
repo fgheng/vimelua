@@ -41,7 +41,8 @@ local _M = {
 
         vim.api.nvim_create_user_command("MasonInstallAll", function()
             if #ensure_installed > 0 then
-                vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
+                -- vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
+                vim.api.nvim_command('MasonInstall ' .. table.concat(ensure_installed, ' '))
             end
         end, {})
 

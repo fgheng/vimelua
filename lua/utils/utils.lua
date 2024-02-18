@@ -12,7 +12,8 @@ function _M.on_attach(on_attach)
 end
 
 function _M.get_visual_selection()
-    vim.cmd([[noau normal! "vy"]])
+    -- vim.cmd([[noau normal! "vy"]])
+    vim.api.nvim_command('noau normal! "vy"')
     local text = vim.fn.getreg("v")
     vim.fn.setreg("v", {})
 

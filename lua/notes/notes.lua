@@ -252,7 +252,11 @@ local _M = {
         "3rd/image.nvim",
         enabled = true,
         ft = { "markdown" },
+        cond = vim.g.neovide,
         config = function()
+            if vim.g.neovide then
+                return
+            end
             -- for markdown preview
             package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
             package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
@@ -314,7 +318,8 @@ local _M = {
                     local venn_enabled = vim.inspect(vim.b.venn_enabled)
                     if venn_enabled == "nil" then
                         vim.b.venn_enabled = true
-                        vim.cmd([[setlocal ve=all]])
+                        -- vim.cmd([[setlocal ve=all]])
+                        vim.api.nvim_set_option_value("ve", "all", { scope = "local" })
                         -- draw a line on HJKL keystokes
                         vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
                         vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", { noremap = true })
@@ -323,8 +328,10 @@ local _M = {
                         -- draw a box by pressing "f" with visual selection
                         vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", { noremap = true })
                     else
-                        vim.cmd([[setlocal ve=]])
-                        vim.cmd([[mapclear <buffer>]])
+                        -- vim.cmd([[setlocal ve=]])
+                        -- vim.cmd([[mapclear <buffer>]])
+                        vim.api.nvim_set_option_value("ve", "", { scope = "local" })
+                        vim.api.nvim_command("mapclear <buffer>")
                         vim.b.venn_enabled = nil
                     end
                 end,

@@ -141,8 +141,6 @@ local map_to_themes = {
                 })
 
                 require("nightfox").load()
-                -- -- setup must be called before loading
-                -- vim.cmd("colorscheme nightfox")
             end,
         }
     end,
