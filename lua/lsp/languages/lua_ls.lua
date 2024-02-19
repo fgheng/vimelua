@@ -17,6 +17,7 @@ return {
                 checkThirdParty = false,
                 library = {
                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
                     [vim.fn.stdpath("config") .. "/lua"] = true,
                 },
             },
@@ -30,6 +31,10 @@ return {
                 -- setType = false,
             },
             telemetry = {
+                enable = false,
+            },
+            -- Do not override treesitter lua highlighting with lua_ls's highlighting
+            semantic = {
                 enable = false,
             },
         },

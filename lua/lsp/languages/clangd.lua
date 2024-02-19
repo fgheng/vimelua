@@ -1,9 +1,33 @@
+local function switch_source_header_splitcmd(bufnr, splitcmd)
+    bufnr = require("lspconfig").util.validate_bufnr(bufnr)
+    local clangd_client = require("lspconfig").util.get_active_client_by_name(bufnr, "clangd")
+    local params = { uri = vim.uri_from_bufnr(bufnr) }
+    if clangd_client then
+        clangd_client.request("textDocument/switchSourceHeader", params, function(err, result)
+            if err then
+                error(tostring(err))
+            end
+            if not result then
+                vim.notify("Corresponding file can’t be determined", vim.log.levels.ERROR, { title = "LSP Error!" })
+                return
+            end
+            vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
+        end)
+    else
+        vim.notify(
+            "Method textDocument/switchSourceHeader is not supported by any active server on this buffer",
+            vim.log.levels.ERROR,
+            { title = "LSP Error!" }
+        )
+    end
+end
+
 return {
     cmd = {
         "clangd",
         "--offset-encoding=utf-16",
         -- "--malloc-trim=true",
-        "--background-index=true", -- 后台建立索引，并持久化到disk
+        "--background-index",
         -- "--completion-style=detailed",
         -- '--cross-file-rename=true',
         "--header-insertion=iwyu",
@@ -17,7 +41,15 @@ return {
         "--pch-storage=memory",
         "-j=12",
         -- "--pretty",
+        -- "--all-scopes-completion",
+    --     "--clang-tidy",
+    --     -- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
+    --     "--query-driver=" .. get_binary_path_list({ "clang++", "clang", "gcc", "g++" }),
+    --     "--enable-config",
+    --     "--limit-references=3000",
+    --     "--limit-results=350",
     },
+    single_file_support = true,
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "cc", "cppm" },
     inlay_hints = {
         -- Only show inlay hints for the current line
@@ -46,5 +78,25 @@ return {
         highlight = "Comment",
         -- The highlight group priority for extmark
         priority = 100,
+    },
+    commands = {
+        ClangdSwitchSourceHeader = {
+            function()
+                switch_source_header_splitcmd(0, "edit")
+            end,
+            description = "Open source/header in current buffer",
+        },
+        ClangdSwitchSourceHeaderVSplit = {
+            function()
+                switch_source_header_splitcmd(0, "vsplit")
+            end,
+            description = "Open source/header in a new vsplit",
+        },
+        ClangdSwitchSourceHeaderSplit = {
+            function()
+                switch_source_header_splitcmd(0, "split")
+            end,
+            description = "Open source/header in a new split",
+        },
     },
 }
