@@ -34,6 +34,12 @@ local _M = {
                         wrap = false,
                     },
                     click = "v:lua.ScSa",
+                    condition = {
+                        function()
+                            local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+                            return filetype ~= "markdown"
+                        end,
+                    },
                 },
                 {
                     text = { builtin.lnumfunc },
@@ -54,6 +60,13 @@ local _M = {
                             args.fold.sep = "│"
                             return builtin.foldfunc(args)
                         end,
+                    },
+                    condition = {
+                        function()
+                            local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+                            return filetype ~= "markdown"
+                        end,
+                        -- builtin.notempty, -- only shown when the rest of the statuscolumn is not empty
                     },
                     click = "v:lua.ScFa",
                 },

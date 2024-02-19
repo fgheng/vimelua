@@ -1,7 +1,7 @@
 local _M = {
     {
         "nvim-treesitter/nvim-treesitter",
-        enabled = true,
+        enabled = false,
         dependencies = {
             { "mrjones2014/nvim-ts-rainbow" },
             { "nvim-treesitter/nvim-treesitter-textobjects" },

@@ -59,10 +59,8 @@ local _M = {
                 function()
                     local gp = require("gp")
                     local cbuf = vim.api.nvim_get_current_buf()
-                    local buftype = vim.api.nvim_buf_get_option(cbuf, "buftype")
-                    -- local buftype = vim.api.nvim_buf_get_option_value("buftype", { buf = cbuf })
-                    local filetype = vim.api.nvim_buf_get_option(cbuf, "filetype")
-                    -- local filetype = vim.api.nvim_buf_get_option_value("filetype", { buf = cbuf })
+                    local buftype = vim.api.nvim_get_option_value("buftype", { buf = cbuf })
+                    local filetype = vim.api.nvim_get_option_value("filetype", { buf = cbuf })
 
                     local status_ok, obs = pcall(require, "obsidian")
                     if status_ok then

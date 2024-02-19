@@ -122,32 +122,17 @@ end
 
 -- LSP STUFF
 M.LSP_progress = function()
-    if not rawget(vim, "lsp") or vim.lsp.status or not is_activewin() then
+    local lsp = vim.lsp.status()
+    if lsp ~= "" then
+        local spinners = require("utils.icons").spinners.dots
+        local ms = vim.uv.hrtime() / 1000000
+        local frame = math.floor(ms / 120) % #spinners
+        local content = string.format(" %%<%s %s ", spinners[frame + 1], string.match(lsp, "%S+"))
+
+        return content
+    else
         return ""
     end
-
-    -- local Lsp = vim.lsp.util.get_progress_messages()[1]
-    local Lsp = vim.lsp.status()[1]
-
-    if vim.o.columns < 120 or not Lsp then
-        return ""
-    end
-
-    if Lsp.done then
-        vim.defer_fn(function()
-            vim.cmd.redrawstatus()
-        end, 1000)
-    end
-
-    local msg = Lsp.message or ""
-    local percentage = Lsp.percentage or 0
-    local title = Lsp.title or ""
-    local spinners = require("utils.icons").spinners.dots
-    local ms = vim.uv.hrtime() / 1000000
-    local frame = math.floor(ms / 120) % #spinners
-    local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
-
-    return content or ""
 end
 
 M.LSP_Diagnostics = function()
@@ -220,7 +205,6 @@ M.run = function()
         M.git(),
         M.gitchanges(),
 
-        "%=",
         M.LSP_progress(),
         "%=",
 
