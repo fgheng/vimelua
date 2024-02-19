@@ -217,7 +217,7 @@ local _M = {
             mode = "v",
             "<space>o",
             function()
-                local selected_text = require("utils.utils").getvisualselection()
+                local selected_text = require("utils.utils").get_visual_selection()
                 selected_text = string.gsub(selected_text, "\n", "")
                 require("telescope.builtin").lsp_document_symbols({ default_text = selected_text })
             end,
@@ -227,7 +227,7 @@ local _M = {
             mode = "v",
             "<space>O",
             function()
-                local selected_text = require("utils.utils").getvisualselection()
+                local selected_text = require("utils.utils").get_visual_selection()
                 selected_text = string.gsub(selected_text, "\n", "")
                 require("telescope.builtin").lsp_workspace_symbols({ default_text = selected_text })
             end,

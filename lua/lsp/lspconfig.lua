@@ -6,11 +6,7 @@ local _M = {
             local opts = { silent = true, noremap = true, buffer = bufnr }
             local keymap = vim.keymap.set
 
-            if vim.bo.filetype == "java" then
-                keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-            else
-                keymap("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', opts)
-            end
+            keymap("n", "gd", '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', opts)
             keymap("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<cr>', opts)
             -- keymap("n", "gi", '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>', opts)
             keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_incoming_calls()<cr>", opts)

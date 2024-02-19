@@ -26,8 +26,6 @@ require("lazy").setup({
     root = vim.fn.stdpath("data") .. "/lazy",
     defaults = {
         lazy = true, -- should plugins be lazy-loaded?
-        version = "*",
-        -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },
     lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json",
     git = {
