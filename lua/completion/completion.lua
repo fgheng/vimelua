@@ -10,7 +10,7 @@ local _M = {
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lsp-signature-help",
     },
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     config = function()
         ----------------------------------------------------------------------
         --                         snippets config                          --
