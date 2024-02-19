@@ -2,7 +2,8 @@ local _M = {
     "rcarriga/nvim-notify",
     enabled = true,
     lazy = true,
-    event = { "BufRead" },
+    -- event = { "BufRead" },
+    event = { "VeryLazy" },
     config = function()
         local notify = require("notify")
         notify.setup({

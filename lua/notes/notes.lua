@@ -1,50 +1,49 @@
--- -- vim.opt_local.conceallevel = 2
--- local group_notes = vim.api.nvim_create_augroup("vime_notes", { clear = true })
--- vim.api.nvim_create_autocmd({ "FileType" }, {
---     pattern = { "markdown" },
---     group = group_notes,
---     command = "setlocal conceallevel=3",
---     -- callback = function(args)
---     --     local bufnr = args.buf
---     --     vim.api.nvim_set_option_value("conceallevel", 2, { buffer = bufnr })
---     -- end,
--- })
-
 local opts = { silent = true, noremap = true }
-local keymap = vim.keymap.set
 
-keymap("n", "<space>zs", function()
-    require("telescope").extensions.live_grep_args.live_grep_args({
-        search_dirs = { require("config").notes_home },
-        path_display = { "tail" },
-    })
+vim.keymap.set("n", "<space>zs", function()
+    local status_ok, telescope = pcall(require, "telescope")
+    if status_ok then
+        telescope.extensions.live_grep_args.live_grep_args({
+            search_dirs = { require("config").notes_home },
+            path_display = { "tail" },
+        })
+    end
 end, opts)
 
-keymap("v", "<space>zs", function()
+vim.keymap.set("v", "<space>zs", function()
     local selected_text = require("utils.utils").get_visual_selection()
     selected_text = string.gsub(selected_text, "\n", "")
-    require("telescope").extensions.live_grep_args.live_grep_args({
-        search_dirs = { require("config").notes_home },
-        default_text = selected_text,
-        path_display = { "tail" },
-    })
+    local status_ok, telescope = pcall(require, "telescope")
+    if status_ok then
+        telescope.extensions.live_grep_args.live_grep_args({
+            search_dirs = { require("config").notes_home },
+            default_text = selected_text,
+            path_display = { "tail" },
+        })
+    end
 end, opts)
 
 -- keymap("n", "<space>zf", function()
---     require("telescope.builtin").find_files({
---         search_dirs = { require("config").notes_home },
---         path_display = { "tail" },
---     })
+--     local status_ok, telescope = pcall(require, "telescope.builtin")
+--     if status_ok then
+--         telescope.find_files({
+--             search_dirs = { require("config").notes_home },
+--             path_display = { "tail" },
+--         })
+--     end
 -- end, opts)
 --
 -- keymap("n", "<space>zt", function()
---     require("telescope").extensions.live_grep_args.live_grep_args({
---         search_dirs = { require("config").notes_home },
---         default_text = "(^|\\s)#[A-Za-z\\u4e00-\\u9fff0-9_]+$",
---         path_display = { "tail" },
---     })
---     -- local bufnr = vim.api.nvim_get_current_buf()
---     -- require("telescope.actions").to_fuzzy_refine(bufnr)
+--     local status_ok, telescope = pcall(require, "telescope")
+--     if status_ok then
+--         telescope.extensions.live_grep_args.live_grep_args({
+--             search_dirs = { require("config").notes_home },
+--             default_text = "(^|\\s)#[A-Za-z\\u4e00-\\u9fff0-9_]+$",
+--             path_display = { "tail" },
+--         })
+--         -- local bufnr = vim.api.nvim_get_current_buf()
+--         -- require("telescope.actions").to_fuzzy_refine(bufnr)
+--     end
 -- end, opts)
 
 local _M = {
@@ -242,7 +241,6 @@ local _M = {
                 },
             })
 
-            local opts = { silent = true, noremap = true }
             vim.keymap.set("n", "<m-v>", function()
                 require("clipboard-image.paste").paste_img()
             end, opts)
