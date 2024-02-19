@@ -1,3 +1,24 @@
+local set_highlights = function()
+    local colors = require("utils.colors")
+    vim.api.nvim_set_hl(0, "St_NormalMode", { fg = colors.black, bg = colors.cyan })
+    vim.api.nvim_set_hl(0, "St_VisualMode", { fg = colors.black, bg = colors.red })
+    vim.api.nvim_set_hl(0, "St_InsertMode", { fg = colors.black, bg = colors.green })
+    vim.api.nvim_set_hl(0, "St_TerminalMode", { fg = colors.black, bg = colors.fg })
+    vim.api.nvim_set_hl(0, "St_ReplaceMode", { fg = colors.black, bg = colors.magenta })
+    vim.api.nvim_set_hl(0, "St_SelectMode", { fg = colors.black, bg = colors.yellow })
+    vim.api.nvim_set_hl(0, "St_CommandMode", { fg = colors.black, bg = colors.blue })
+    -- vim.api.nvim_set_hl(0, "St_Text", { fg = colors.black, bg = "none"})
+    vim.api.nvim_set_hl(0, "St_Branch", { fg = colors.green, bg = "none" })
+    vim.api.nvim_set_hl(0, "St_Error", { link = "DiagnosticError" })
+    vim.api.nvim_set_hl(0, "St_Warning", { link = "DiagnosticWarn" })
+    vim.api.nvim_set_hl(0, "St_Info", { link = "DiagnosticInfo" })
+    vim.api.nvim_set_hl(0, "St_Hint", { link = "diagnosticHint" })
+
+    vim.api.nvim_set_hl(0, "St_GitAdd", { link = "GitSignsAdd" })
+    vim.api.nvim_set_hl(0, "St_GitMod", { link = "GitSignsChange" })
+    vim.api.nvim_set_hl(0, "St_GitDel", { link = "GitSignsDelete" })
+end
+
 local map_to_themes = {
     default = function()
         return {}
@@ -43,6 +64,7 @@ local map_to_themes = {
                     },
                 })
                 require("vscode").load()
+                set_highlights()
             end,
         }
     end,
@@ -77,6 +99,7 @@ local map_to_themes = {
                     end,
                 })
                 require("everforest").load()
+                set_highlights()
             end,
         }
     end,
@@ -141,6 +164,38 @@ local map_to_themes = {
                 })
 
                 require("nightfox").load()
+                set_highlights()
+            end,
+        }
+    end,
+    cyberdream = function()
+        return {
+            "scottmckendry/cyberdream.nvim",
+            lazy = false,
+            priority = 1000,
+            config = function()
+                require("cyberdream").setup({
+                    -- Recommended - see "Configuring" below for more config options
+                    transparent = true,
+                    italic_comments = true,
+                    hide_fillchars = false,
+                    borderless_telescope = false,
+                    theme = {
+                        highlights = {
+                            WinBar = { fg = "None", bg = "None" },
+                            WinBarNC = { fg = "None", bg = "None" },
+                            CursorLine = { fg = "None", bg = "None" },
+                            StatusLine = { bg = "None" },
+                            StatusLineNC = { bg = "None" },
+                            NormalFloat = { bg = "None" },
+                            FloatBorder = { fg = "None", bg = "None" },
+                            TabLine = { bg = "None" },
+                            WinSeparator = { bg = "None" },
+                        },
+                    },
+                })
+                vim.cmd("colorscheme cyberdream") -- set the colorscheme
+                set_highlights()
             end,
         }
     end,

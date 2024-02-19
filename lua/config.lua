@@ -9,7 +9,7 @@ _M.notes_home = os.getenv("ZK_NOTEBOOK_DIR")
 
 _M.theme = {
     background = "dark",
-    theme = "nightfox",
+    theme = "vscode",
 }
 
 _M.treesitter = {

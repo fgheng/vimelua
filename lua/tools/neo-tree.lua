@@ -82,11 +82,11 @@ local _M = {
             separator = { left = "▏", right = "▕" }, -- string | { left: string, right: string, override: string | nil }
             separator_active = nil, -- string | { left: string, right: string, override: string | nil } | nil
             show_separator_on_edge = false, -- boolean
-            highlight_tab = "NeoTreeTabInactive", -- string
-            highlight_tab_active = "NeoTreeTabActive", -- string
+            highlight_tab = "None", -- string
+            highlight_tab_active = "NeoTreeTabInactive", -- string
             highlight_background = "NeoTreeTabInactive", -- string
-            highlight_separator = "NeoTreeTabSeparatorInactive", -- string
-            highlight_separator_active = "NeoTreeTabSeparatorActive", -- string
+            highlight_separator = "None", -- string
+            highlight_separator_active = "None", -- string
         },
         popup_border_style = "rounded",
         enable_git_status = true,

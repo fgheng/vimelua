@@ -18,9 +18,7 @@ local _M = {
             on_open = function(win)
                 vim.api.nvim_win_set_config(win, { zindex = 1000 })
             end,
-            -- background_colour = function ()
-            --     return "#ff0000"
-            -- end
+            background_colour = "#000000"
         })
 
         vim.notify = notify

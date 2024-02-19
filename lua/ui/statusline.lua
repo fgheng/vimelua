@@ -13,25 +13,6 @@ local function is_activewin()
     return vim.api.nvim_get_current_win() == vim.g.statusline_winid
 end
 
-local colors = require("utils.colors")
-vim.api.nvim_set_hl(0, "St_NormalMode", { fg = colors.black, bg = colors.cyan })
-vim.api.nvim_set_hl(0, "St_VisualMode", { fg = colors.black, bg = colors.red })
-vim.api.nvim_set_hl(0, "St_InsertMode", { fg = colors.black, bg = colors.green })
-vim.api.nvim_set_hl(0, "St_TerminalMode", { fg = colors.black, bg = colors.fg })
-vim.api.nvim_set_hl(0, "St_ReplaceMode", { fg = colors.black, bg = colors.magenta })
-vim.api.nvim_set_hl(0, "St_SelectMode", { fg = colors.black, bg = colors.yellow })
-vim.api.nvim_set_hl(0, "St_CommandMode", { fg = colors.black, bg = colors.blue })
--- vim.api.nvim_set_hl(0, "St_Text", { fg = colors.black, bg = "none"})
-vim.api.nvim_set_hl(0, "St_Branch", { fg = colors.green, bg = "none" })
-vim.api.nvim_set_hl(0, "St_Error", { fg = colors.red, bg = "none" })
-vim.api.nvim_set_hl(0, "St_Warning", { fg = colors.yellow, bg = "none" })
-vim.api.nvim_set_hl(0, "St_Info", { fg = colors.green, bg = "none" })
-vim.api.nvim_set_hl(0, "St_Hint", { fg = colors.cyan, bg = "none" })
-
-vim.api.nvim_set_hl(0, "St_GitAdd", { fg = colors.green, bg = "none" })
-vim.api.nvim_set_hl(0, "St_GitMod", { fg = colors.yellow, bg = "none" })
-vim.api.nvim_set_hl(0, "St_GitDel", { fg = colors.red, bg = "none" })
-
 local M = {}
 
 M.modes = {
