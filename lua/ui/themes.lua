@@ -1,5 +1,5 @@
 vim.opt.winblend = 50
-vim.opt.pumblend = 80
+vim.opt.pumblend = 40
 
 local set_highlights = function()
     local colors = require("utils.colors")
