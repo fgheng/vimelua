@@ -65,7 +65,7 @@ local _M = {
                 path_display = {
                     "absolute",
                 },
-                file_ignore_patterns = { "node_modules" },
+                file_ignore_patterns = { "node_modules", ".git" },
                 -- layout_strategy = "vertical",
                 layout_strategy = "bottom_pane",
                 layout_config = {
@@ -179,6 +179,15 @@ local _M = {
     keys = {
         {
             mode = "n",
+            "<space>g",
+            function()
+                vim.ui.input({ prompt = "Workspace symbols: " }, function(query)
+                    require("telescope").lsp_workspace_symbols({ query = query })
+                end)
+            end,
+        },
+        {
+            mode = "n",
             "<space><space>",
             function()
                 if vim.bo.filetype ~= "qf" then
@@ -212,26 +221,26 @@ local _M = {
         { mode = "n", "<space>a" },
         { mode = "n", "<space>r", "<cmd>Telescope oldfiles<cr>" },
         { mode = "n", "<space>j", "<cmd>Telescope jumplist<cr>" },
-        { mode = "n", "<space>o", "<cmd>Telescope lsp_document_symbols<cr>" },
-        {
-            mode = "v",
-            "<space>o",
-            function()
-                local selected_text = require("utils.utils").get_visual_selection()
-                selected_text = string.gsub(selected_text, "\n", "")
-                require("telescope.builtin").lsp_document_symbols({ default_text = selected_text })
-            end,
-        },
-        { mode = "n", "<space>O", "<cmd>Telescope lsp_workspace_symbols<cr>" },
-        {
-            mode = "v",
-            "<space>O",
-            function()
-                local selected_text = require("utils.utils").get_visual_selection()
-                selected_text = string.gsub(selected_text, "\n", "")
-                require("telescope.builtin").lsp_workspace_symbols({ default_text = selected_text })
-            end,
-        },
+        -- { mode = "n", "<space>o", "<cmd>Telescope lsp_document_symbols<cr>" },
+        -- {
+        --     mode = "v",
+        --     "<space>o",
+        --     function()
+        --         local selected_text = require("utils.utils").get_visual_selection()
+        --         selected_text = string.gsub(selected_text, "\n", "")
+        --         require("telescope.builtin").lsp_document_symbols({ default_text = selected_text })
+        --     end,
+        -- },
+        -- { mode = "n", "<space>O", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>" },
+        -- {
+        --     mode = "v",
+        --     "<space>O",
+        --     function()
+        --         local selected_text = require("utils.utils").get_visual_selection()
+        --         selected_text = string.gsub(selected_text, "\n", "")
+        --         require("telescope.builtin").lsp_dynamic_workspace_symbols({ default_text = selected_text })
+        --     end,
+        -- },
         {
             mode = "n",
             "<space>/",
