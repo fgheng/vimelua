@@ -56,7 +56,7 @@ local map_to_themes = {
                         -- this supports the same val table as vim.api.nvim_set_hl
                         -- use colors from this colorscheme by requiring vscode.colors!
                         Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
-                        -- CursorLine = { bg = c.none },
+                        CursorLine = { bg = "#4a4b4a" },
                         WinBar = { fg = c.none, bg = c.none },
                         WinBarNC = { fg = c.none, bg = c.none },
                         StatusLine = { bg = c.none },

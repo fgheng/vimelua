@@ -172,7 +172,6 @@ local _M = {
                     --border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
                     border = { "╭", " ", "╮", "│", "╯", " ", "╰", "│" },
                     --border = { "┌", " ", "┐", "│", "┘", " ", "└", "│" },
-                    -- winhighlight = "FloatBorder:FloatBorder,CursorLine:CursorLine",
                     winhighlight = "FloatBorder:FloatBorder,CursorLine:CursorLine",
                 },
                 documentation = {
