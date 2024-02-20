@@ -1,3 +1,6 @@
+vim.opt.winblend = 50
+vim.opt.pumblend = 80
+
 local set_highlights = function()
     local colors = require("utils.colors")
     vim.api.nvim_set_hl(0, "St_NormalMode", { fg = colors.black, bg = colors.cyan })
@@ -29,7 +32,6 @@ local map_to_themes = {
             priority = 1000,
             lazy = false,
             config = function()
-                vim.opt.winblend = 50
                 local c = require("vscode.colors").get_colors()
                 require("vscode").setup({
                     -- Alternatively set style in setup
@@ -54,7 +56,7 @@ local map_to_themes = {
                         -- this supports the same val table as vim.api.nvim_set_hl
                         -- use colors from this colorscheme by requiring vscode.colors!
                         Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
-                        CursorLine = { bg = c.none },
+                        -- CursorLine = { bg = c.none },
                         WinBar = { fg = c.none, bg = c.none },
                         WinBarNC = { fg = c.none, bg = c.none },
                         StatusLine = { bg = c.none },
@@ -74,7 +76,6 @@ local map_to_themes = {
             priority = 1000,
             lazy = false,
             config = function()
-                vim.opt.winblend = 50
                 require("everforest").setup({
                     background = "hard",
                     transparent_background_level = 5,
@@ -85,7 +86,7 @@ local map_to_themes = {
                     on_highlights = function(hl, palette)
                         hl.WinBar = { fg = palette.bg, bg = "None" }
                         hl.WinBarNC = { fg = "None", bg = "None" }
-                        hl.CursorLine = { fg = "None", bg = "None" }
+                        -- hl.CursorLine = { bg = "None" }
                         hl.StatusLine = { bg = "None" }
                         hl.StatusLineNC = { bg = "None" }
                         hl.DiagnosticError = { fg = palette.none, bg = palette.none, sp = palette.red }
@@ -110,7 +111,6 @@ local map_to_themes = {
             priority = 1000,
             lazy = false,
             config = function()
-                vim.opt.winblend = 50
                 require("nightfox").setup({
                     options = {
                         -- Compiled file's destination location

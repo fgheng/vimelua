@@ -163,9 +163,24 @@ local _M = {
                 ghost_text = false,
             },
 
+            -- window = {
+            --     completion = cmp.config.window.bordered(),
+            --     documentation = cmp.config.window.bordered(),
+            -- },
             window = {
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
+                completion = {
+                    --border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+                    border = { "╭", " ", "╮", "│", "╯", " ", "╰", "│" },
+                    --border = { "┌", " ", "┐", "│", "┘", " ", "└", "│" },
+                    -- winhighlight = "FloatBorder:FloatBorder,CursorLine:CursorLine",
+                    winhighlight = "FloatBorder:FloatBorder,CursorLine:CursorLine",
+                },
+                documentation = {
+                    max_width = 50,
+                    --border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+                    border = { "┌", " ", "┐", "│", "┘", " ", "└", "│" },
+                    winhighlight = "Normal:CmpPmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+                },
             },
 
             confirm_opts = {
