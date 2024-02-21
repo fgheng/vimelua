@@ -109,13 +109,14 @@ local _M = {
 
                     -- Text object
                     -- map({ "o", "x" }, "gv", "<cmd>Gitsigns select_hunk<CR>")
-                    map({ "n", "v" }, "gss", "<cmd>Gitsigns select_hunk<CR>")
+                    -- map({ "n", "v" }, "gss", "<cmd>Gitsigns select_hunk<CR>")
                 end,
             })
         end,
     },
     {
         "sindrets/diffview.nvim",
+        enabled = false,
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-tree/nvim-web-devicons" },
@@ -149,8 +150,22 @@ local _M = {
         "tpope/vim-fugitive",
         enable = true,
         config = function() end,
-        cmd = {"G"},
+        cmd = { "G", "Git" },
+
         keys = {},
+    },
+    {
+        "NeogitOrg/neogit",
+        enabled = false,
+        dependencies = {
+            "nvim-lua/plenary.nvim", -- required
+            "sindrets/diffview.nvim", -- optional - Diff integration
+
+            -- Only one of these is needed, not both.
+            "nvim-telescope/telescope.nvim", -- optional
+            "ibhagwan/fzf-lua", -- optional
+        },
+        config = true,
     },
 }
 
