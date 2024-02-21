@@ -199,6 +199,36 @@ local map_to_themes = {
             end,
         }
     end,
+    github = function()
+        return {
+            "projekt0n/github-nvim-theme",
+            lazy = false, -- make sure we load this during startup if it is your main colorscheme
+            priority = 1000, -- make sure to load this before all the other start plugins
+            config = function()
+                require("github-theme").setup({
+                    groups = {
+                        -- ...
+                        -- As with specs and palettes, the values defined under `all` will be applied to every style.
+                        all = {
+                            -- If `link` is defined it will be applied over any other values defined
+                            Whitespace = { link = "Comment" },
+
+                            -- Specs are used for the template. Specs have their palette's as a field that can be accessed
+                            IncSearch = { bg = "palette.cyan" },
+                            StatusLine = { bg = "None" },
+                        },
+                        github_dark = {
+                            -- As with specs and palettes, a specific style's value will be used over the `all`'s value.
+                            PmenuSel = { bg = "#73daca", fg = "bg0" },
+                        },
+                    },
+                })
+
+                vim.cmd("colorscheme github_dark")
+                set_highlights()
+            end,
+        }
+    end,
 }
 
 return map_to_themes[require("config").theme.theme]() or {}
