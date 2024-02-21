@@ -1,15 +1,15 @@
 vim.opt.signcolumn = "yes:1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 local _M = {
     "luukvbaal/statuscol.nvim",
     enabled = false,
     -- event = { "BufReadPost" },
     event = { "UiEnter" },
     init = function()
-        vim.opt.foldlevel = 99
-        vim.opt.foldlevelstart = 99
         vim.opt.foldcolumn = "1"
-        vim.opt.foldmethod = "expr"
-        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     end,
     config = function()
         local builtin = require("statuscol.builtin")
@@ -65,25 +65,25 @@ local _M = {
                 --     fillchar = "%#LineNr#%=│",
                 --     click = "v:lua.ScSa",
                 -- },
-                -- {
-                --     text = {
-                --         function(args)
-                --             args.fold.close = require("utils.icons").symbols.fold_close
-                --             args.fold.open = require("utils.icons").symbols.fold_open
-                --             args.fold.sep = "│"
-                --             return builtin.foldfunc(args)
-                --         end,
-                --     },
-                --     condition = {
-                --         function()
-                --             local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-                --             return filetype ~= "markdown"
-                --         end,
-                --         -- builtin.notempty, -- only shown when the rest of the statuscolumn is not empty
-                --     },
-                --     click = "v:lua.ScFa",
-                -- },
-                -- { text = { " " } },
+                {
+                    text = {
+                        function(args)
+                            args.fold.close = require("utils.icons").symbols.fold_close
+                            args.fold.open = require("utils.icons").symbols.fold_open
+                            args.fold.sep = "│"
+                            return builtin.foldfunc(args)
+                        end,
+                    },
+                    condition = {
+                        function()
+                            local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+                            return filetype ~= "markdown"
+                        end,
+                        -- builtin.notempty, -- only shown when the rest of the statuscolumn is not empty
+                    },
+                    click = "v:lua.ScFa",
+                },
+                { text = { " " } },
                 clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
                 -- "a" for Alt, "c" for Ctrl and "m" for Meta.
                 clickhandlers = { -- builtin click handlers

@@ -145,6 +145,13 @@ local _M = {
             { mode = "n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Open file history" },
         },
     },
+    {
+        "tpope/vim-fugitive",
+        enable = true,
+        config = function() end,
+        cmd = {"G"},
+        keys = {},
+    },
 }
 
 return _M
