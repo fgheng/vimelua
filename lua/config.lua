@@ -3,14 +3,14 @@ local _M = {}
 _M.node_path = ""
 _M.python_path = ""
 
-_M.snippet_path_vscode = vim.fn.stdpath("config") .. "/snippets/vscode/"
-
 _M.notes_home = os.getenv("ZK_NOTEBOOK_DIR")
 
 _M.theme = {
     background = "dark",
     theme = "vscode",
 }
+
+_M.snippet_path_vscode = vim.fn.stdpath("config") .. "/snippets/vscode/"
 
 _M.treesitter = {
     languages = {
@@ -62,7 +62,7 @@ _M.servers = {
         "google_java_format",
         "beautysh",
         "rustfmt",
-        "clang_format"
+        "clang_format",
     },
     dap = {},
 }
