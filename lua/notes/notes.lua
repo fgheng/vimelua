@@ -248,7 +248,7 @@ local _M = {
     },
     {
         "3rd/image.nvim",
-        enabled = true,
+        enabled = false,
         ft = { "markdown" },
         config = function()
             if vim.g.neovide then
