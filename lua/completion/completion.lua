@@ -140,7 +140,7 @@ local _M = {
 
                     -- Below is the default comparitor list and order for nvim-cmp
                     cmp.config.compare.offset,
-                    cmp.config.compare.scopes, --this is commented in nvim-cmp too
+                    -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
                     cmp.config.compare.exact,
                     cmp.config.compare.score,
                     cmp.config.compare.recently_used,

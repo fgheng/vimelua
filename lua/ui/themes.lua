@@ -1,5 +1,5 @@
 vim.opt.winblend = 50
-vim.opt.pumblend = 40
+vim.opt.pumblend = 20
 
 local set_highlights = function()
     local colors = require("utils.colors")
@@ -206,6 +206,9 @@ local map_to_themes = {
             priority = 1000, -- make sure to load this before all the other start plugins
             config = function()
                 require("github-theme").setup({
+                    options = {
+                        transparent = false,
+                    },
                     groups = {
                         -- ...
                         -- As with specs and palettes, the values defined under `all` will be applied to every style.
@@ -224,7 +227,8 @@ local map_to_themes = {
                     },
                 })
 
-                vim.cmd("colorscheme github_dark")
+                -- vim.cmd("colorscheme github_light_colorblind")
+                vim.cmd("colorscheme github_dark_colorblind")
                 set_highlights()
             end,
         }

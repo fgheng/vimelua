@@ -29,7 +29,8 @@ vim.defer_fn(function()
             ["j"] = "gj",
             ["k"] = "gk",
 
-           ["<leader>tt"] = "<cmd>terminal<cr>",
+            ["<leader>tt"] = "<cmd>terminal<cr>",
+            -- ["<c-w>o"] = "<c-w>_<c-w>|"
         },
 
         visual = {
