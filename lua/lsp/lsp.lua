@@ -147,31 +147,31 @@ local _M = {
             }
 
             for _, lsp in pairs(servers) do
-                local opts = {
-                    on_attach = function(client, bufnr)
-                        vim.schedule(function()
-                            keymaps(client, bufnr)
-                            func_lsp_highlight(client, bufnr)
-                            vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
-                        end)
-                    end,
-                    capabilities = capabilities,
-                    handlers = {
-                        ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-                            border = "rounded",
-                            silent = true,
-                            -- focusable = false,
-                        }),
-                        ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-                            border = "rounded",
-                            silent = true,
-                            -- focusable = false,
-                        }),
-                    },
-                }
-
                 local status_ok, server_config = pcall(require, "lsp.languages." .. lsp)
                 if status_ok then
+                    local opts = {
+                        on_attach = function(client, bufnr)
+                            vim.schedule(function()
+                                keymaps(client, bufnr)
+                                func_lsp_highlight(client, bufnr)
+                                vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
+                            end)
+                        end,
+                        capabilities = capabilities,
+                        handlers = {
+                            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+                                border = "rounded",
+                                silent = true,
+                                -- focusable = false,
+                            }),
+                            ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+                                border = "rounded",
+                                silent = true,
+                                -- focusable = false,
+                            }),
+                        },
+                    }
+
                     opts = vim.tbl_deep_extend("force", opts, server_config)
                     lspconfig[lsp].setup(opts)
                 end
