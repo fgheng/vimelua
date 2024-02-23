@@ -249,7 +249,10 @@ local _M = {
             function()
                 local current_buffer = vim.api.nvim_get_current_buf()
                 local abs_path = vim.api.nvim_buf_get_name(current_buffer)
-                require("telescope").extensions.live_grep_args.live_grep_args({ search_dirs = { abs_path } })
+                require("telescope").extensions.live_grep_args.live_grep_args({
+                    search_dirs = { abs_path },
+                    path_display = { "hidden" },
+                })
             end,
         },
         {
@@ -263,6 +266,7 @@ local _M = {
                 require("telescope").extensions.live_grep_args.live_grep_args({
                     search_dirs = { abs_path },
                     default_text = selected_text,
+                    path_display = { "hidden" },
                 })
                 -- tb.current_buffer_fuzzy_find({ default_text = selected_text })
             end,
