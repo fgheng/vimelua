@@ -3,13 +3,13 @@ local _M = {
     enabled = true,
     event = { "CursorMoved" },
     opts = {
-        cursor = require("utils.icons").icons.double_arrow_right, -- cursor shape (need nerd font)
+        cursor = require("utils.icons").symbols.select_arrow, -- cursor shape (need nerd font)
         texthl = "SmoothCursor", -- highlight group, default is { bg = nil, fg = "#FFD400" }
         linehl = "cursorLine", -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
         type = "exp", -- define cursor movement calculate function, "default" or "exp" (exponential).
         fancy = {
             enable = true, -- enable fancy mode
-            head = { cursor = require("utils.icons").icons.double_arrow_right, texthl = "SmoothCursor", linehl = nil },
+            head = { cursor = require("utils.icons").symbols.select_arrow, texthl = "SmoothCursor", linehl = nil },
             body = {
                 { cursor = "󰝥", texthl = "SmoothCursorRed" },
                 { cursor = "󰝥", texthl = "SmoothCursorOrange" },

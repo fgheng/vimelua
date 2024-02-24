@@ -111,6 +111,7 @@ _M.symbols = {
     folder_empty = "◇", -- 
     modify = "☻",
     branch = "",
+    select_arrow = "•"
 }
 
 return _M

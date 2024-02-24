@@ -28,8 +28,8 @@ local _M = {
                         ["<M-k>"] = "move_selection_previous",
                         ["<M-J>"] = "preview_scrolling_down",
                         ["<M-K>"] = "preview_scrolling_up",
-                        ["<M-L>"] = "preview_scrolling_left",
-                        ["<M-H>"] = "preview_scrolling_right",
+                        ["<M-L>"] = "preview_scrolling_right",
+                        ["<M-H>"] = "preview_scrolling_left",
                         ["<c-v>"] = "select_vertical",
                         ["<c-s>"] = "select_horizontal",
                         ["<c-t>"] = "select_tab",
@@ -63,7 +63,7 @@ local _M = {
                 },
 
                 prompt_prefix = icons.icons.telescope .. "  ",
-                selection_caret = icons.icons.double_arrow_right .. "  ",
+                selection_caret = icons.symbols.select_arrow .. "  ",
                 path_display = {
                     "absolute",
                 },
@@ -200,12 +200,28 @@ local _M = {
             end,
             desc = "Open Telescope",
         },
-        { mode = "n", "<space>f", "<cmd>Telescope find_files<cr>", desc = "Telescope finde files" },
-        { mode = "n", "<space>c", "<cmd>Telescope commands<cr>", desc = "Telescope show all commands" },
+        {
+            mode = "n",
+            "<space>f",
+            function()
+                require("telescope.builtin").find_files()
+            end,
+            desc = "Telescope finde files",
+        },
+        {
+            mode = "n",
+            "<space>c",
+            function()
+                require("telescope.builtin").commands()
+            end,
+            desc = "Telescope show all commands",
+        },
         {
             mode = "n",
             "<space>s",
-            "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({})<cr>",
+            function()
+                require("telescope").extensions.live_grep_args.live_grep_args({})
+            end,
             desc = "Telescope search",
         },
         {
@@ -218,31 +234,9 @@ local _M = {
             end,
             desc = "Telescope search",
         },
-        { mode = "n", "<space>g" },
         { mode = "n", "<space>b", "<cmd>Telescope buffers<cr>" },
-        { mode = "n", "<space>a" },
         { mode = "n", "<space>r", "<cmd>Telescope oldfiles<cr>" },
         { mode = "n", "<space>j", "<cmd>Telescope jumplist<cr>" },
-        -- { mode = "n", "<space>o", "<cmd>Telescope lsp_document_symbols<cr>" },
-        -- {
-        --     mode = "v",
-        --     "<space>o",
-        --     function()
-        --         local selected_text = require("utils.utils").get_visual_selection()
-        --         selected_text = string.gsub(selected_text, "\n", "")
-        --         require("telescope.builtin").lsp_document_symbols({ default_text = selected_text })
-        --     end,
-        -- },
-        -- { mode = "n", "<space>O", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>" },
-        -- {
-        --     mode = "v",
-        --     "<space>O",
-        --     function()
-        --         local selected_text = require("utils.utils").get_visual_selection()
-        --         selected_text = string.gsub(selected_text, "\n", "")
-        --         require("telescope.builtin").lsp_dynamic_workspace_symbols({ default_text = selected_text })
-        --     end,
-        -- },
         {
             mode = "n",
             "<space>/",
@@ -268,7 +262,6 @@ local _M = {
                     default_text = selected_text,
                     path_display = { "hidden" },
                 })
-                -- tb.current_buffer_fuzzy_find({ default_text = selected_text })
             end,
         },
         { mode = "n", "<space>?", "<cmd>Telescope diagnostics<cr>" },
