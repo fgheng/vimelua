@@ -1,17 +1,3 @@
--- local auto_save = function(client, bufnr)
---     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
---     if client.supports_method("textDocument/formatting") then
---         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
---         vim.api.nvim_create_autocmd("BufWritePre", {
---             group = augroup,
---             buffer = bufnr,
---             callback = function()
---                 vim.lsp.buf.format({ bufnr = bufnr })
---             end,
---         })
---     end
--- end
---
 local _M = {
     "nvimtools/none-ls.nvim",
     enabled = true,
@@ -28,22 +14,22 @@ local _M = {
             null_ls.builtins.formatting["stylua"].with({
                 extra_args = { "--indent-type", "Spaces", "--indent-width", "4" },
             }),
-            null_ls.builtins.formatting.autopep8,
+            null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.cmake_format,
             null_ls.builtins.formatting.google_java_format.with({ filetypes = { "java" } }),
-            null_ls.builtins.formatting.beautysh,
-            null_ls.builtins.formatting.rustfmt,
+            null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "zsh" } }),
             null_ls.builtins.formatting.clang_format.with({
-                extra_args = { "--style", "{BasedOnStyle: Google, IndentWidth: 4}" },
+                -- extra_args = { "--style", "{BasedOnStyle: Google, IndentWidth: 4}" },
+                extra_args = { "--style", "file" },
             }),
 
             -- diagnostics
             null_ls.builtins.diagnostics.write_good,
             null_ls.builtins.diagnostics.cppcheck,
-            null_ls.builtins.diagnostics.shellcheck,
+            -- null_ls.builtins.diagnostics.shellcheck,
 
             -- codeaction
-            null_ls.builtins.code_actions.shellcheck,
+            -- null_ls.builtins.code_actions.shellcheck,
 
             -- for bash
             null_ls.builtins.hover.dictionary,

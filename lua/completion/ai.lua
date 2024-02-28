@@ -3,7 +3,12 @@ local open_or_switch = function()
 
     local last = gp.config.chat_dir .. "/last.md"
     if vim.fn.filereadable(last) ~= 1 then
+        print("debug 1")
         vim.api.nvim_command("GpChatNew vsplit")
+        -- vim.api.nvim_command("setlocal nonumber")
+        -- vim.api.nvim_command("setlocal signcolumn=no")
+        vim.api.nvim_set_option_value("number", false, { scope = "local" })
+        vim.api.nvim_set_option_value("signcolumn", { "no" }, { scope = "local" })
         return vim.api.nvim_get_current_buf()
     end
 
@@ -24,6 +29,8 @@ local open_or_switch = function()
     end
 
     buf = win_found and buf or gp.open_buf(last, target, gp._toggle_kind.chat, true)
+    vim.api.nvim_set_option_value("number", false, { scope = "local" })
+    vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
     return buf
 end
 
@@ -43,7 +50,7 @@ local _M = {
             chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<C-a>s" },
             chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<C-a>c" },
         },
-        cmd = { "GpChatNew" },
+        cmd = { "GpChatNew", "GpChatToggle" },
         keys = {
             {
                 mode = "n",
@@ -59,32 +66,15 @@ local _M = {
                 function()
                     local gp = require("gp")
                     local cbuf = vim.api.nvim_get_current_buf()
-                    local buftype = vim.api.nvim_get_option_value("buftype", { buf = cbuf })
                     local filetype = vim.api.nvim_get_option_value("filetype", { buf = cbuf })
-
-                    local status_ok, obs = pcall(require, "obsidian")
-                    if status_ok then
-                        if obs.util.cursor_on_markdown_link() then
-                            vim.api.nvim_command("ObsidianFollowLink")
-                            return
-                        else
-                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cr>", true, true, true), "n", true)
-                        end
-                    end
 
                     if filetype ~= "qf" and filetype ~= "neo-tree" and filetype ~= "aerial" then
                         if not gp.can_handle(cbuf) then
-                            gp.warning("Another plugin is handling this buffer")
+                            vim.notify("Another plugin is handling this buffer")
+                            return
                         end
-
-                        local file_name = vim.api.nvim_buf_get_name(cbuf)
-                        if not gp.is_chat(cbuf, file_name) then
-                            open_or_switch()
-                            vim.api.nvim_command("setlocal nonumber")
-                            vim.api.nvim_command("setlocal signcolumn=no")
-                        else
-                            vim.api.nvim_command("GpChatRespond")
-                        end
+                        open_or_switch()
+                        -- vim.api.nvim_command("GpChatToggle")
                     else
                         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cr>", true, true, true), "n", true)
                     end
@@ -121,10 +111,6 @@ local _M = {
                             vim.api.nvim_command("GpChatRespond")
                         end
                         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("G", true, false, true), "n", true)
-                        vim.api.nvim_command("setlocal nonumber")
-                        vim.api.nvim_command("setlocal signcolumn=no")
-                        -- vim.api.nvim_command("setlocal statuscolumn=''")
-                        -- vim.api.nvim_buf_set_option_value("buftype", "gp", { buf = 0 })
                     end)
                 end,
                 desc = "Chat with AI",

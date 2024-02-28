@@ -52,15 +52,15 @@ _M.servers = {
     linter = {
         "write_good",
         "cppcheck",
-        "shellcheck",
+        -- "shellcheck",
     },
     formatter = {
         "prettierd",
         "stylua",
-        "autopep8",
+        "black",
         "cmake_format",
         "google_java_format",
-        "beautysh",
+        "shfmt",
         "rustfmt",
         "clang_format",
     },

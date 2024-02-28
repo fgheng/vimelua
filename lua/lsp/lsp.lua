@@ -4,7 +4,7 @@ local _M = {
         enabled = true,
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            local keymaps = function(_, bufnr)
+            local keymaps = function(client, bufnr)
                 local opts = { silent = true, noremap = true, buffer = bufnr }
                 local keymap = vim.keymap.set
 
@@ -51,33 +51,44 @@ local _M = {
                     vim.diagnostic.goto_prev({ float = true })
                 end, opts)
                 keymap("n", "<leader>f", function()
-                    local ft = vim.bo[bufnr].filetype
+                    local cbuf = vim.api.nvim_get_current_buf()
+                    local ft = vim.api.nvim_get_option_value("filetype", {
+                        buf = cbuf,
+                    })
                     local have_nls = package.loaded["null-ls"]
                         and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
 
+                    -- vim.lsp.buf.format({ async = false })
                     vim.lsp.buf.format({
-                        filter = function(client)
+                        filter = function(_client)
                             if have_nls then
                                 -- apply whatever logic you want (in this example, we'll only use null-ls)
-                                return client.name == "null-ls"
+                                return _client.name == "null-ls"
                             end
-                            return client.name ~= "null-ls"
+                            return _client.name ~= "null-ls"
                         end,
+                        bufnr = bufnr,
                     })
                 end, opts)
                 keymap("v", "<leader>f", function()
-                    local ft = vim.bo[bufnr].filetype
+                    local cbuf = vim.api.nvim_get_current_buf()
+                    local ft = vim.api.nvim_get_option_value("filetype", {
+                        buf = cbuf,
+                    })
                     local have_nls = package.loaded["null-ls"]
                         and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
 
+                    -- vim.lsp.buf.format({ async = false })
+
                     vim.lsp.buf.format({
-                        filter = function(client)
+                        filter = function(_client)
                             if have_nls then
                                 -- apply whatever logic you want (in this example, we'll only use null-ls)
-                                return client.name == "null-ls"
+                                return _client.name == "null-ls"
                             end
-                            return client.name ~= "null-ls"
+                            return _client.name ~= "null-ls"
                         end,
+                        bufnr = bufnr,
                     })
                 end, opts)
                 keymap("n", "<space>o", function()

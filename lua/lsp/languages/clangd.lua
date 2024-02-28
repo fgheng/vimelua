@@ -42,12 +42,12 @@ return {
         "-j=12",
         -- "--pretty",
         -- "--all-scopes-completion",
-    --     "--clang-tidy",
-    --     -- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
-    --     "--query-driver=" .. get_binary_path_list({ "clang++", "clang", "gcc", "g++" }),
-    --     "--enable-config",
-    --     "--limit-references=3000",
-    --     "--limit-results=350",
+        --     "--clang-tidy",
+        --     -- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
+        --     "--query-driver=" .. get_binary_path_list({ "clang++", "clang", "gcc", "g++" }),
+        --     "--enable-config",
+        --     "--limit-references=3000",
+        --     "--limit-results=350",
     },
     single_file_support = true,
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "cc", "cppm" },
