@@ -8,7 +8,7 @@ local _M = {
         linehl = "cursorLine", -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
         type = "exp", -- define cursor movement calculate function, "default" or "exp" (exponential).
         fancy = {
-            enable = true, -- enable fancy mode
+            enable = false, -- enable fancy mode
             head = { cursor = require("utils.icons").symbols.select_arrow, texthl = "SmoothCursor", linehl = nil },
             body = {
                 { cursor = "󰝥", texthl = "SmoothCursorRed" },

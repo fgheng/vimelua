@@ -1,13 +1,13 @@
 vim.opt.signcolumn = "yes:1"
--- vim.opt.foldcolumn = "auto"
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- -- vim.opt.foldcolumn = "auto"
+-- vim.opt.foldlevel = 99
+-- vim.opt.foldlevelstart = 99
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 local _M = {
     "luukvbaal/statuscol.nvim",
-    enabled = true,
+    enabled = false,
     -- event = { "BufReadPost" },
     event = { "UiEnter" },
     init = function()

@@ -12,7 +12,7 @@ local _M = {
 
         -- when you go to window selection mode, status bar will show one of
         -- following letters on them so you can use that letter to select the window
-        selection_chars = "JKLAS;CMRUEIWOQP",
+        selection_chars = "LKJAS;CMRUEIWOQP",
 
         -- whether you want to use winbar instead of the statusline
         -- "always" means to always use winbar,
