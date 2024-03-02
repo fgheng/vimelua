@@ -30,6 +30,7 @@ _M.treesitter = {
         "markdown_inline",
         "regex",
         "norg",
+        "latex"
     },
     disanble_languages = {
         "txt",

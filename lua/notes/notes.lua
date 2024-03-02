@@ -336,6 +336,42 @@ local _M = {
             },
         },
     },
+    {
+        "jbyuki/nabla.nvim",
+        ft = { "markdown" },
+        config = function()
+            vim.api.nvim_create_augroup("vimelua_markdown_autocommands", {})
+            vim.api.nvim_create_autocmd("BufEnter", {
+                group = "vimelua_markdown_autocommands",
+                pattern = "*.md",
+                callback = function()
+                    require("nabla").enable_virt({
+                        autogen = true, -- auto-regenerate ASCII art when exiting insert mode
+                        silent = true, -- silents error messages
+                    })
+                end,
+            })
+            vim.api.nvim_create_autocmd("BufLeave", {
+                group = "vimelua_markdown_autocommands",
+                pattern = "*.md",
+                callback = function()
+                    require("nabla").disable_virt()
+                end,
+            })
+        end,
+        keys = {
+            {
+                mode = "n",
+                "<leader>nt",
+                function()
+                    require("nabla").toggle_virt({
+                        autogen = true, -- auto-regenerate ASCII art when exiting insert mode
+                        silent = true, -- silents error messages
+                    })
+                end,
+            },
+        },
+    },
 }
 
 return _M
