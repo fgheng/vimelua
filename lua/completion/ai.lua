@@ -7,9 +7,6 @@ local open_or_switch = function()
         vim.api.nvim_command("GpChatNew vsplit")
         -- vim.api.nvim_command("setlocal nonumber")
         -- vim.api.nvim_command("setlocal signcolumn=no")
-        vim.api.nvim_set_option_value("number", false, { scope = "local" })
-        vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
-        vim.api.nvim_set_option_value("scrolloff", 5, { scope = "local" })
         return vim.api.nvim_get_current_buf()
     end
 
@@ -158,6 +155,9 @@ local _M = {
                             return
                         end
                         open_or_switch()
+                        vim.api.nvim_set_option_value("number", false, { scope = "local" })
+                        vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
+                        -- vim.api.nvim_set_option_value("scrolloff", 5, { scope = "local" })
                         -- vim.api.nvim_command("GpChatToggle")
                     else
                         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cr>", true, true, true), "n", true)
@@ -179,6 +179,9 @@ local _M = {
                         end
 
                         local buf = open_or_switch()
+                        vim.api.nvim_set_option_value("number", false, { scope = "local" })
+                        vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
+                        -- vim.api.nvim_set_option_value("scrolloff", 5, { scope = "local" })
 
                         local last_line = vim.api.nvim_buf_line_count(buf)
                         while last_line > 0 do

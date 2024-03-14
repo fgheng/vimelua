@@ -1,3 +1,9 @@
+-- vim.api.nvim_create_autocmd({ "FileType" }, {
+--     pattern = { "markdown" },
+--     callback = function(args)
+--         vim.cmd([[syntax match codeblock "```" conceal cchar=═]])
+--     end,
+-- })
 local opts = { silent = true, noremap = true }
 
 vim.keymap.set("n", "<space>zs", function()
@@ -170,6 +176,7 @@ local _M = {
                         mimic_alignment = true,
                     },
                 },
+                -- syntax match todoCheckbox "\[\ \]" conceal cchar=
                 yaml = {
                     bib = { override = false },
                 },
@@ -255,7 +262,7 @@ local _M = {
                 return
             end
 
-            -- for markdown preview
+            -- -- for markdown preview
             package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
             package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
@@ -264,7 +271,7 @@ local _M = {
             -- install luarocks manully
             -- brew install imagemagick
             -- luarocks --local install luarocks-fetch-gitrec
-            -- luarocks --local install magick
+            -- luarocks --local --lua-version 5.1 install magick
             -- default config
             require("image").setup({
                 backend = "kitty",
@@ -318,6 +325,7 @@ local _M = {
                         vim.b.venn_enabled = true
                         -- vim.cmd([[setlocal ve=all]])
                         vim.api.nvim_set_option_value("ve", "all", { scope = "local" })
+                        vim.api.nvim_set_option_value("wrap", false, { scope = "local" })
                         -- draw a line on HJKL keystokes
                         vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
                         vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", { noremap = true })
@@ -329,6 +337,7 @@ local _M = {
                         -- vim.cmd([[setlocal ve=]])
                         -- vim.cmd([[mapclear <buffer>]])
                         vim.api.nvim_set_option_value("ve", "", { scope = "local" })
+                        vim.api.nvim_set_option_value("wrap", true, { scope = "local" })
                         vim.api.nvim_command("mapclear <buffer>")
                         vim.b.venn_enabled = nil
                     end
@@ -338,6 +347,7 @@ local _M = {
     },
     {
         "jbyuki/nabla.nvim",
+        enabled = false,
         ft = { "markdown" },
         config = function()
             vim.api.nvim_create_augroup("vimelua_markdown_autocommands", {})

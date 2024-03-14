@@ -235,6 +235,7 @@ local _M = {
             desc = "Telescope search",
         },
         { mode = "n", "<space>b", "<cmd>Telescope buffers<cr>" },
+        -- { mode = "n", "<tab><tab>", "<cmd>Telescope buffers<cr>" },
         { mode = "n", "<space>r", "<cmd>Telescope oldfiles<cr>" },
         { mode = "n", "<space>j", "<cmd>Telescope jumplist<cr>" },
         {

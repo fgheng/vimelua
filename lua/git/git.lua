@@ -3,7 +3,7 @@ local _M = {
         "lewis6991/gitsigns.nvim",
         enable = true,
         cmd = { "Gitsigns" },
-        event = { "UiEnter" },
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function()
             local gitsigns = require("gitsigns")
             local icons = require("utils.icons")

@@ -1,3 +1,4 @@
+vim.opt.pumheight = 20 -- 提示框显示提示条目数量
 local _M = {
     {
         "hrsh7th/nvim-cmp",

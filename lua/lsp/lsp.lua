@@ -2,7 +2,8 @@ local _M = {
     {
         "neovim/nvim-lspconfig",
         enabled = true,
-        event = { "BufReadPre", "BufNewFile" },
+        -- event = { "BufReadPre", "BufNewFile" },
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function()
             local keymaps = function(client, bufnr)
                 local opts = { silent = true, noremap = true, buffer = bufnr }
@@ -164,8 +165,8 @@ local _M = {
                         on_attach = function(client, bufnr)
                             vim.schedule(function()
                                 keymaps(client, bufnr)
-                                func_lsp_highlight(client, bufnr)
-                                vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
+                                -- func_lsp_highlight(client, bufnr)
+                                -- vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
                             end)
                         end,
                         capabilities = capabilities,

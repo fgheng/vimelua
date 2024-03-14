@@ -24,7 +24,7 @@ local _M = {
             }),
 
             -- diagnostics
-            null_ls.builtins.diagnostics.write_good,
+            -- null_ls.builtins.diagnostics.write_good,
             null_ls.builtins.diagnostics.cppcheck,
             -- null_ls.builtins.diagnostics.shellcheck,
 

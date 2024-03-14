@@ -7,7 +7,7 @@ _M.notes_home = os.getenv("ZK_NOTEBOOK_DIR")
 
 _M.theme = {
     background = "dark",
-    theme = "vscode",
+    theme = "rosepine",
 }
 
 _M.snippet_path_vscode = vim.fn.stdpath("config") .. "/snippets/vscode/"
@@ -51,7 +51,7 @@ _M.servers = {
         "zk",
     },
     linter = {
-        "write_good",
+        -- "write_good",
         "cppcheck",
         -- "shellcheck",
     },

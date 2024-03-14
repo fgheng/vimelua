@@ -41,6 +41,22 @@ local _M = {
             end,
             desc = "Load sessions",
         },
+        {
+            "<leader>sd",
+            function()
+                pcall(require, "telescope")
+                vim.api.nvim_command("SessionManager delete_session")
+            end,
+            desc = "Load sessions",
+        },
+        {
+            "<leader>ss",
+            function()
+                pcall(require, "telescope")
+                vim.api.nvim_command("SessionManager available_commands")
+            end,
+            desc = "Load sessions",
+        },
     },
 }
 

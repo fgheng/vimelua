@@ -13,6 +13,7 @@ vim.defer_fn(function()
             ["<c-w>h"] = "<cmd>abo vsplit<cr>",
             ["<c-w>j"] = "<cmd>rightbelow split<cr>",
             ["<c-w>l"] = "<cmd>rightbelow vsplit<cr>",
+            ["<c-=>"] = "<c-w>=",
 
             ["Q"] = "q",
             ["q"] = "<cmd>close<cr>",
