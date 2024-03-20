@@ -220,7 +220,7 @@ local _M = {
             mode = "n",
             "<space>s",
             function()
-                require("telescope").extensions.live_grep_args.live_grep_args({})
+                require("telescope").extensions.live_grep_args.live_grep_args({ additional_args = { "-j1" } })
             end,
             desc = "Telescope search",
         },
@@ -230,7 +230,10 @@ local _M = {
             function()
                 local selected_text = require("utils.utils").get_visual_selection()
                 selected_text = string.gsub(selected_text, "\n", "")
-                require("telescope").extensions.live_grep_args.live_grep_args({ default_text = selected_text })
+                require("telescope").extensions.live_grep_args.live_grep_args({
+                    default_text = selected_text,
+                    additional_args = { "-j1" },
+                })
             end,
             desc = "Telescope search",
         },

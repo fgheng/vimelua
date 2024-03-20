@@ -4,7 +4,7 @@ local _M = {
         enabled = true,
         lazy = false,
         dependencies = {
-            { "mrjones2014/nvim-ts-rainbow" },
+            -- { "mrjones2014/nvim-ts-rainbow" },
             { "nvim-treesitter/nvim-treesitter-textobjects" },
             -- { "andymass/vim-matchup" },
         },

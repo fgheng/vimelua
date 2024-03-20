@@ -331,6 +331,7 @@ local map_to_themes = {
                 -- vim.cmd("colorscheme rose-pine-main")
                 -- vim.cmd("colorscheme rose-pine-dawn")
                 vim.cmd("colorscheme rose-pine-moon")
+                set_highlights()
             end,
         }
     end,

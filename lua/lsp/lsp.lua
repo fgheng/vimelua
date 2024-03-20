@@ -5,7 +5,7 @@ local _M = {
         -- event = { "BufReadPre", "BufNewFile" },
         event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function()
-            local keymaps = function(client, bufnr)
+            local function keymaps(client, bufnr)
                 local opts = { silent = true, noremap = true, buffer = bufnr }
                 local keymap = vim.keymap.set
 
@@ -112,7 +112,7 @@ local _M = {
                 end, opts)
             end
 
-            local func_lsp_highlight = function(client, bufnr)
+            local  function func_lsp_highlight(client, bufnr)
                 if client.supports_method("textDocument/documentHighlight") then
                     vim.api.nvim_create_augroup("lsp_document_highlight", {
                         clear = false,
@@ -165,8 +165,8 @@ local _M = {
                         on_attach = function(client, bufnr)
                             vim.schedule(function()
                                 keymaps(client, bufnr)
-                                -- func_lsp_highlight(client, bufnr)
-                                -- vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
+                                func_lsp_highlight(client, bufnr)
+                                vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
                             end)
                         end,
                         capabilities = capabilities,

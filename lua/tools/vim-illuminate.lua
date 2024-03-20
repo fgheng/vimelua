@@ -1,6 +1,6 @@
 local _M = {
     "RRethy/vim-illuminate",
-    enabled = true,
+    enabled = false,
     -- event = { "CursorHold", "CursorMoved" },
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     config = function()
