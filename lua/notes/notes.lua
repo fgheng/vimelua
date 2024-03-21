@@ -4,6 +4,7 @@
 --         vim.cmd([[syntax match codeblock "```" conceal cchar=═]])
 --     end,
 -- })
+os.execute("export ZK_NOTEBOOK_DIR=" .. require("config").notes_home)
 local opts = { silent = true, noremap = true }
 
 vim.keymap.set("n", "<space>zs", function()

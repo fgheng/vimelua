@@ -16,6 +16,7 @@ require("lazy").setup({
         { import = "lsp" },
         { import = "completion" },
         { import = "project" },
+        { import = "debug" },
         { import = "editor" },
         { import = "git" },
         { import = "ui" },

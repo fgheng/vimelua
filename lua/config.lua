@@ -3,7 +3,7 @@ local _M = {}
 _M.node_path = ""
 _M.python_path = ""
 
-_M.notes_home = os.getenv("ZK_NOTEBOOK_DIR")
+_M.notes_home = vim.fn.expand("~/Documents/notes")
 
 _M.theme = {
     background = "dark",
@@ -30,7 +30,7 @@ _M.treesitter = {
         "markdown_inline",
         "regex",
         "norg",
-        "latex"
+        "latex",
     },
     disanble_languages = {
         "txt",

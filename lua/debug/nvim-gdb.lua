@@ -1,6 +1,6 @@
 local _M = {
     "sakhnik/nvim-gdb",
-    enable = false,
+    enabled = false,
     cmd = { "GdbStart" },
     config = function()
 
