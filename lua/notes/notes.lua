@@ -159,11 +159,11 @@ local _M = {
                     -- template = "# {{ title }}",
                 },
                 to_do = {
-                    -- symbols = { " ", "", "✔" },
-                    -- update_parents = true,
-                    -- not_started = " ",
-                    -- in_progress = "",
-                    -- complete = "✔",
+                    symbols = { " ", "", "✔" },
+                    update_parents = true,
+                    not_started = " ",
+                    in_progress = "",
+                    complete = "✔",
                 },
                 tables = {
                     trim_whitespace = true,
