@@ -112,7 +112,7 @@ local _M = {
                 end, opts)
             end
 
-            local  function func_lsp_highlight(client, bufnr)
+            local function func_lsp_highlight(client, bufnr)
                 if client.supports_method("textDocument/documentHighlight") then
                     vim.api.nvim_create_augroup("lsp_document_highlight", {
                         clear = false,
@@ -274,6 +274,16 @@ local _M = {
             -- Resume latest coc list
             keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
         end,
+    },
+
+    {
+        "zeioth/garbage-day.nvim",
+        dependencies = "neovim/nvim-lspconfig",
+        event = "VeryLazy",
+        opts = {
+            -- your options here
+            excluded_lsp_clients = { "null-ls", "jdtls" },
+        },
     },
 }
 
