@@ -6,7 +6,7 @@ local _M = {
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         },
-        { "nvim-telescope/telescope-live-grep-args.nvim" },
+        { "nvim-telescope/telescope-live-grep-args.nvim" }, -- usage: https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md
         { "nvim-telescope/telescope-symbols.nvim" },
         { "tsakirist/telescope-lazy.nvim" },
         { "nvim-telescope/telescope-ui-select.nvim" },

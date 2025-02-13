@@ -1,8 +1,9 @@
 local _M = {
     {
         "L3MON4D3/LuaSnip",
-        lazy = true,
-        -- event = "InsertEnter",
+        -- lazy = true,
+        event = "InsertEnter",
+        build = vim.fn.has("win32") ~= 0 and "make install_jsregexp" or nil,
         dependencies = {
             "rafamadriz/friendly-snippets",
         },
@@ -13,15 +14,28 @@ local _M = {
                 history = true,
             })
 
-            -- require("luasnip.loaders.from_vscode").lazy_load()
+            -- load default snippets
+            require("luasnip.loaders.from_vscode").lazy_load()
+            -- load custom snippets
             require("luasnip.loaders.from_vscode").lazy_load({
-                paths = { -- load custom snippets
+                paths = {
                     require("config").snippet_path,
                 },
             })
 
-            luasnip.filetype_extend("ruby", { "rails" })
-            luasnip.filetype_extend("typescript", { "javascript" })
+            luasnip.filetype_extend("typescript", { "tsdoc" })
+            luasnip.filetype_extend("javascript", { "jsdoc" })
+            luasnip.filetype_extend("lua", { "luadoc" })
+            luasnip.filetype_extend("python", { "pydoc" })
+            luasnip.filetype_extend("rust", { "rustdoc" })
+            luasnip.filetype_extend("cs", { "csharpdoc" })
+            luasnip.filetype_extend("java", { "javadoc" })
+            luasnip.filetype_extend("c", { "cdoc" })
+            luasnip.filetype_extend("cpp", { "cppdoc" })
+            luasnip.filetype_extend("php", { "phpdoc" })
+            luasnip.filetype_extend("kotlin", { "kdoc" })
+            luasnip.filetype_extend("ruby", { "rdoc" })
+            luasnip.filetype_extend("sh", { "shelldoc" })
         end,
         -- keys = {
         --     {

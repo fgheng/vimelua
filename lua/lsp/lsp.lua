@@ -24,7 +24,6 @@ local _M = {
                             on_init = on_init,
                             on_attach = on_attach,
                             capabilities = capabilities,
-                            -- capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
                             handlers = handlers,
                         }
 

@@ -5,8 +5,8 @@ local function keymaps(_, bufnr)
     local keymap = vim.keymap.set
 
     keymap("n", "gd", function()
-        -- require("telescope.builtin").lsp_definitions()
-        vim.lsp.buf.definition()
+        require("telescope.builtin").lsp_definitions()
+        -- vim.lsp.buf.definition()
     end, opts)
     keymap("n", "gr", function()
         require("telescope.builtin").lsp_references()
@@ -138,7 +138,7 @@ M.capabilities = function()
         dynamicRegistration = true,
         lineFoldingOnly = true,
     }
-    capabilities_.workspace.inlayHint.refreshSupport = false
+    capabilities_.workspace.inlayHint.refreshSupport = true
     capabilities_.textDocument.completion.completionItem = {
         documentationFormat = { "markdown", "plaintext" },
         snippetSupport = true,

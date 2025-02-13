@@ -36,38 +36,7 @@ local _M = {
             },
         },
     },
-    -- config = function()
-    --     require("smart-splits").setup({
-    --     })
-    --
-    --     local opts = { silent = true, noremap = true }
-    --     local keymap = vim.api.nvim_set_keymap
-    --
-    --     keymap("n", "<C-w>r", '<cmd>lua require("smart-splits").start_resize_mode()<cr>', opts)
-    --
-    --     -- recommended mappings
-    --     -- resizing splits
-    --     -- these keymaps will also accept a range,
-    --     -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-    --     vim.keymap.set("n", "<c-left>", require("smart-splits").resize_left)
-    --     vim.keymap.set("n", "<c-down>", require("smart-splits").resize_down)
-    --     vim.keymap.set("n", "<c-up>", require("smart-splits").resize_up)
-    --     vim.keymap.set("n", "<c-right>", require("smart-splits").resize_right)
-    --
-    --     -- moving between splits
-    --     vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
-    --     vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
-    --     vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
-    --     vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
-    --
-    --     -- swapping buffers between windows
-    --     vim.keymap.set("n", "<C-w>H", '<cmd>lua require("smart-splits").swap_buf_left({ move_cursor = true })<cr>')
-    --     vim.keymap.set("n", "<C-w>J", '<cmd>lua require("smart-splits").swap_buf_down({ move_cursor = true })<cr>')
-    --     vim.keymap.set("n", "<C-w>K", '<cmd>lua require("smart-splits").swap_buf_up({ move_cursor = true })<cr>')
-    --     vim.keymap.set("n", "<C-w>L", '<cmd>lua require("smart-splits").swap_buf_right({ move_cursor = true })<cr>')
-    -- end,
     keys = {
-        -- { "n", "<C-w>r", '<cmd>lua require("smart-splits").start_resize_mode()<cr>' },
         {
             mode = "n",
             "<C-w>r",
@@ -75,10 +44,10 @@ local _M = {
                 require("smart-splits").start_resize_mode()
             end,
         },
-        { mode = "n", "<c-left>", '<cmd>lua require("smart-splits").resize_left()<cr>' },
-        { mode = "n", "<c-down>", '<cmd>lua require("smart-splits").resize_down()<cr>' },
-        { mode = "n", "<c-up>", '<cmd>lua require("smart-splits").resize_up()<cr>' },
-        { mode = "n", "<c-right>", '<cmd>lua require("smart-splits").resize_right()<cr>' },
+        -- { mode = "n", "<c-left>", '<cmd>lua require("smart-splits").resize_left()<cr>' },
+        -- { mode = "n", "<c-down>", '<cmd>lua require("smart-splits").resize_down()<cr>' },
+        -- { mode = "n", "<c-up>", '<cmd>lua require("smart-splits").resize_up()<cr>' },
+        -- { mode = "n", "<c-right>", '<cmd>lua require("smart-splits").resize_right()<cr>' },
         { mode = "n", "<C-h>", '<cmd>lua require("smart-splits").move_cursor_left()<cr>' },
         { mode = "n", "<C-j>", '<cmd>lua require("smart-splits").move_cursor_down()<cr>' },
         { mode = "n", "<C-k>", '<cmd>lua require("smart-splits").move_cursor_up()<cr>' },
