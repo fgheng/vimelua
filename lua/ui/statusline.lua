@@ -134,6 +134,28 @@ function M.LSP_progress()
     else
         return ""
     end
+
+    -- local timer = vim.uv.new_timer()
+    -- local spinners = require("utils.icons").spinners.dots
+    -- local len_spinners = #spinners
+    -- local i = 0
+    -- timer:start(
+    --     100,
+    --     0,
+    --     vim.schedule_wrap(function()
+    --         local lsp = vim.lsp.status()
+    --         if lsp ~= "" then
+    --             local frame = i % len_spinners
+    --             local content = string.format(" %%<%s %s ", spinners[frame + 1], string.match(lsp, "%S+"))
+    --             i = i+1
+    --
+    --             return content
+    --         else
+    --             timer:close()
+    --             return ""
+    --         end
+    --     end)
+    -- )
 end
 
 function M.LSP_Diagnostics()
@@ -219,6 +241,22 @@ function M.run()
     return table.concat(modules)
     -- #StatuslineAccent#%#St_Mode#  NORMAL %#Normal# %#St_Mode# 󰉖 nvim %#St_Text#  init.lua   new_struct  ■ 0 ◉ 0 %=%= ~ 1 | %#St_Text# Ln %l, Col %c  %#St_encode#UTF-8  {} lua  󰄭  lua_ls
     -- %#DiffText#  NORMAL %#St_Mode# 󰉖 nvim %#St_Text#  statusline.lua   new_struct  %=%= + 327 ~ 185 - 701 | ■ 0 ◉ 1 | %#St_Text# Ln %l, Col %c  %#St_encode#UTF-8  {} lua  󰄭  lua_ls
+end
+
+function M.run2()
+    local timer = vim.loop.new_timer()
+    timer:start(100, 0, function()
+        local lsp = vim.lsp.status()
+        local content = M.run()
+        if lsp ~= "" then
+            vim.api.nvim_set_option_value("statusline", content, {})
+        else
+            vim.api.nvim_set_option_value("statusline", content, {})
+            timer:close()
+        end
+    end)
+
+
 end
 
 StatusLine = M

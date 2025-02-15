@@ -401,6 +401,11 @@ local _M = {
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = function()
             require("render-markdown").setup({
+                render_modes = { 'n', 'c', 't', "i" },
+                preset = "obsidian", -- "none" or "obsidian" or "lazy"
+                heading = {
+                    enabled = false,
+                },
                 bullet = {
                     enabled = true,
                     icons = { "●", "○", "◆", "◇" },

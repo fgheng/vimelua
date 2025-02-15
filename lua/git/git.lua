@@ -48,6 +48,7 @@ local _M = {
                 word_diff = false,
                 signcolumn = false,
                 attach_to_untracked = true,
+                sign_priority = 10,
 
                 current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
                 -- current_line_blame_formatter_opts = {
@@ -60,8 +61,15 @@ local _M = {
                     ignore_whitespace = false,
                 },
 
-
                 max_file_length = 10000,
+                preview_config = {
+                    -- Options passed to nvim_open_win
+                    border = require("config").ui.float_ui_win.border,
+                    style = "minimal",
+                    relative = "cursor",
+                    row = 0,
+                    col = 1,
+                },
 
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
@@ -145,6 +153,8 @@ local _M = {
             { mode = "n", "<leader>gc", "<cmd>DiffviewClose<cr>", desc = "Close diff view" },
             { mode = "n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Open file history" },
         },
+
+        config = function() end,
     },
     {
         "tpope/vim-fugitive",
@@ -166,6 +176,24 @@ local _M = {
             "ibhagwan/fzf-lua", -- optional
         },
         config = true,
+    },
+    {
+        "kdheepak/lazygit.nvim",
+        lazy = false,
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+        -- optional for floating window border decoration
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("telescope").load_extension("lazygit")
+        end,
     },
 }
 

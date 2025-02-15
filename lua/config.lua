@@ -9,7 +9,7 @@ _M.ui = {
     float_ui_win = {
         -- Can be one of the pre-defined styles: `"double"`, `"none"`, `"rounded"`, `"shadow"`, `"single"` or `"solid"`.
         -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        border = "rounded",
+        border = "double",
         width = 0.8,
         height = 0.8,
     },

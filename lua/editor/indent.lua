@@ -13,7 +13,7 @@ local _M = {
         require("ibl").setup({
             indent = {
                 char = "▏",
-                -- tab_char = { "∙" },
+                tab_char = { "▏" },
                 highlight = { "DiagnosticHint" },
                 smart_indent_cap = true,
                 priority = 2,

@@ -16,7 +16,7 @@ end
 local config = {
     -- virtual_text = true,
     virtual_text = {
-        source = "always", -- Or "if_many"
+        source = "if_many", -- "always" Or "if_many"
         prefix = icons.icons.square .. " ",
         -- suffix = function(diag)
         --     if diag.severity == vim.diagnostic.severity.ERROR then
@@ -39,7 +39,7 @@ local config = {
         end,
     },
     virtual_lines = {
-        only_current_line = true,
+        only_current_line = false,
     },
     signs = false,
     -- signs = {

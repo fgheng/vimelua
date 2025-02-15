@@ -34,7 +34,7 @@ local function keymaps(_, bufnr)
         if vim.bo.filetype == "help" then
             vim.api.nvim_feedkeys("<c-]>", "n", true)
         else
-            vim.lsp.buf.hover({border = require("config").ui.float_ui_win.border})
+            vim.lsp.buf.hover({ border = require("config").ui.float_ui_win.border })
         end
     end, opts)
     keymap("n", "<leader>rn", function()
@@ -44,10 +44,10 @@ local function keymaps(_, bufnr)
         vim.diagnostic.open_float()
     end, opts)
     keymap("n", "<m-j>", function()
-        vim.diagnostic.jump({ count = 1, float = true })
+        vim.diagnostic.jump({ count = 1, float = false })
     end, opts)
     keymap("n", "<m-k>", function()
-        vim.diagnostic.jump({ count = -1, float = true })
+        vim.diagnostic.jump({ count = -1, float = false })
     end, opts)
     keymap("n", "<leader>f", function()
         local cbuf = vim.api.nvim_get_current_buf()
@@ -152,6 +152,13 @@ M.capabilities = function()
             properties = { "documentation", "detail", "additionalTextEdits" },
         },
     }
+    capabilities_.textDocument.publishDiagnostics = {
+        dataSupport = true,
+        relevanceSupport = true,
+    }
+    capabilities_.textDocument.references = {
+        dynamicRegistration = true,
+    }
     return capabilities_
 end
 
@@ -166,7 +173,7 @@ M.on_attach = function(client, bufnr)
     lsp_highlight(client, bufnr)
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 
-    client.capabilities.document_formatting = true -- ?
+    client.capabilities.document_formatting = false -- ?
 end
 
 M.handlers = function()

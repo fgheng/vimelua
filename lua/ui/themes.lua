@@ -124,12 +124,12 @@ local map_to_themes = {
                         -- Compiled file's destination location
                         compile_path = vim.fn.stdpath("cache") .. "/nightfox",
                         compile_file_suffix = "_compiled", -- Compiled file suffix
-                        transparent = true, -- Disable setting background
+                        transparent = require("config").ui.theme.transparent, -- Enable/disable transparency
                         terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
                         dim_inactive = false, -- Non focused panes set to alternative background
                         module_default = true, -- Default enable value for modules
                         colorblind = {
-                            enable = false, -- Enable colorblind support
+                            enable = true, -- Enable colorblind support
                             simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
                             severity = {
                                 protan = 0, -- Severity [0,1] for protan (red)
@@ -215,7 +215,7 @@ local map_to_themes = {
             config = function()
                 require("github-theme").setup({
                     options = {
-                        transparent = false,
+                        transparent = require("config").ui.theme.transparent,
                     },
                     groups = {
                         -- ...
@@ -236,7 +236,13 @@ local map_to_themes = {
                 })
 
                 -- vim.cmd("colorscheme github_light_colorblind")
-                vim.cmd.colorscheme("github_dark_colorblind")
+                -- vim.cmd.colorscheme("github_dark_colorblind")
+                local background = require("config").ui.theme.background
+                if background == "dark" then
+                    vim.cmd.colorscheme("github_dark")
+                elseif background == "light" then
+                    vim.cmd.colorscheme("github_light")
+                end
                 set_highlights()
             end,
         }
