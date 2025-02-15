@@ -22,6 +22,8 @@ local function set_highlights()
     vim.api.nvim_set_hl(0, "St_GitDel", { link = "GitSignsDelete" })
 end
 
+local theme_config = require("config").ui.theme
+
 local map_to_themes = {
     default = function()
         return {}
@@ -77,12 +79,18 @@ local map_to_themes = {
             lazy = false,
             config = function()
                 require("everforest").setup({
-                    background = "hard",
-                    transparent_background_level = 5,
+                    background = theme_config.background,
+                    transparent_background_level = theme_config.transparent,
                     italics = true,
                     sign_column_background = "none",
                     ui_contrast = "high",
-                    dim_inactive_windows = true,
+                    dim_inactive_windows = false,
+                    diagnostic_text_highlight = true,
+                    diagnostic_virtual_text = "grey", -- "coloured" or "grey"
+                    diagnostic_line_highlight = true,
+                    spell_foreground = true,
+                    show_eob = true,
+                    inlay_hints_background = "dimmed", -- "none" or "dimmed"
                     on_highlights = function(hl, palette)
                         hl.WinBar = { fg = palette.bg, bg = "None" }
                         hl.WinBarNC = { fg = "None", bg = "None" }

@@ -1,14 +1,14 @@
-local g = vim.g
+-- local g = vim.g
 local opt = vim.o
 
-local config = require("config")
-if config.node_path ~= "" then
-    g.node_host_prog = config.node_path
-end
-
-if config.python_path ~= "" then
-    g.python3_host_prog = config.python_path
-end
+-- local config = require("config")
+-- if config.node_path ~= "" then
+--     g.node_host_prog = config.node_path
+-- end
+--
+-- if config.python_path ~= "" then
+--     g.python3_host_prog = config.python_path
+-- end
 
 opt.ignorecase = true
 opt.smartcase = true

@@ -1,21 +1,29 @@
-local highlight = {
-    -- "CursorColumn",
-    -- "Whitespace",
-}
-
 local _M = {
     "lukas-reineke/indent-blankline.nvim",
-    enabled = false,
+    enabled = true,
     main = "ibl",
     cmd = {
-        "IndentBlanklineToggle",
-        "IndentBlanklineEnable",
-        "IndentBlanklineRefresh",
+        "IBLEnable",
+        "IBLToggle",
+        -- "IBLEnableScope",
+        -- "IBLToggleScope",
     },
-    opts = {
-        indent = { highlight = highlight, char = "" },
-        whitespace = { highlight = highlight, remove_blankline_trail = false },
-        scope = { highlight = highlight, enabled = true },
-    },
+
+    config = function()
+        require("ibl").setup({
+            indent = {
+                char = "▏",
+                -- tab_char = { "∙" },
+                highlight = { "DiagnosticHint" },
+                smart_indent_cap = true,
+                priority = 2,
+                repeat_linebreak = false,
+            },
+            exclude = {
+                filetypes = { "markdown" },
+                buftypes = { "terminal", "nofile", "quickfix", "help", "prompt" },
+            },
+        })
+    end,
 }
 return _M

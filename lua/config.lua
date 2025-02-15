@@ -2,8 +2,9 @@ local _M = {}
 
 _M.ui = {
     theme = {
-        theme = "vscode",
+        theme = "everforest",
         background = "dark",
+        transparent = 0.8,
     },
     float_ui_win = {
         -- Can be one of the pre-defined styles: `"double"`, `"none"`, `"rounded"`, `"shadow"`, `"single"` or `"solid"`.
@@ -16,11 +17,10 @@ _M.ui = {
     sidebar_width = 40
 }
 
-_M.node_path = ""
-_M.python_path = ""
+-- _M.node_path = ""
+-- _M.python_path = ""
 
 _M.notes_home = vim.fn.expand("~/notes")
-
 _M.snippet_path = vim.fn.stdpath("config") .. "/snippets/"
 
 _M.treesitter = {
