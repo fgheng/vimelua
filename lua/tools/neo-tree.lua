@@ -54,23 +54,6 @@ local _M = {
     },
     cmd = { "Neotree", "NeoTreeShow", "NeoTreeClose" },
     config = function()
-        vim.fn.sign_define(
-            "DiagnosticSignError",
-            { text = require("utils.icons").symbols.error .. " ", texthl = "DiagnosticSignError" }
-        )
-        vim.fn.sign_define(
-            "DiagnosticSignWarn",
-            { text = require("utils.icons").symbols.warning .. " ", texthl = "DiagnosticSignWarn" }
-        )
-        vim.fn.sign_define(
-            "DiagnosticSignInfo",
-            { text = require("utils.icons").symbols.info .. " ", texthl = "DiagnosticSignInfo" }
-        )
-        vim.fn.sign_define(
-            "DiagnosticSignHint",
-            { text = require("utils.icons").symbols.hint .. " ", texthl = "DiagnosticSignHint" }
-        )
-
         require("neo-tree").setup({
             auto_clean_after_session_restore = true,
             close_if_last_window = false,
