@@ -1,12 +1,16 @@
 {
-  "sc": {
-    "prefix": "sc",
-    "body": ["std::cout << ${1};"],
-    "description": "std::cout << | ;"
-  },
-  "scl": {
-    "prefix": "scl",
-    "body": ["std::cout << ${1} << std::endl;"],
-    "description": "std::cout << | << std::endl;"
-  }
+    "sc": {
+        "prefix": "sc",
+        "body": [
+            "std::cout << ${1};"
+        ],
+        "description": "std::cout << | ;"
+    },
+    "scl": {
+        "prefix": "scl",
+        "body": [
+            "std::cout << ${1} << std::endl;"
+        ],
+        "description": "std::cout << | << std::endl;"
+    }
 }

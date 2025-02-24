@@ -1,6 +1,6 @@
 local _M = {
     "nvimtools/none-ls.nvim",
-    enabled = true,
+    enabled = false,
     -- dependencies = { "williamboman/mason.nvim", "jayp0521/mason-null-ls.nvim" },
     event = { "LspAttach" },
     config = function()

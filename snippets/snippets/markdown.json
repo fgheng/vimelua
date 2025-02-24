@@ -1,88 +1,118 @@
 {
-  "cb": {
-    "prefix": "cb",
-    "body": ["```${1}",
-      "```"
-    ],
-    "description": "code block"
-  },
-  "frac": {
-    "prefix": "frac",
-    "body": ["\\frac{$1}{$2}"],
-    "description": "fraction"
-  },
-  "dot": {
-    "prefix": "dot",
-    "body": ["\\dot{$1}"],
-    "description": "dot"
-  },
-  "cdot": {
-    "prefix": "cdot",
-    "body": ["\\cdot{$1}"],
-    "description": "cdot"
-  },
-  "alpha": {
-    "prefix": "alpha",
-    "body": ["\\alpha"],
-    "description": "alpha"
-  },
-  "beta": {
-    "prefix": "beta",
-    "body": ["\\beta"],
-    "description": "beta"
-  },
-  "matrix": {
-    "prefix": "matrix",
-    "body": ["\\begin{bmatrix}",
-      "  $1 & $2 \\\\",
-      "  $3 & $4",
-      "\\end{bmatrix}"
-    ],
-    "description": "matrix"
-  },
-  "sqrt": {
-    "prefix": "sqrt",
-    "body": ["\\sqrt{$1}"],
-    "description": "square root"
-  },
-  "sum": {
-    "prefix": "sum",
-    "body": ["\\sum_{i=1}^{n}"],
-    "description": "sum"
-  },
-  "inf": {
-    "prefix": "inf",
-    "body": ["\\infty"],
-    "description": "infinity"
-  },
-  "int": {
-    "prefix": "int",
-    "body": ["\\int_{a}^{b}"],
-    "description": "integral"
-  },
-  "partial": {
-    "prefix": "partial",
-    "body": ["\\partial"],
-    "description": "partial"
-  },
-  "delta": {
-    "prefix": "delta",
-    "body": ["\\delta"],
-    "description": "delta"
-  },
-  "Delta": {
-    "prefix": "Delta",
-    "body": ["\\Delta"],
-    "description": "Delta"
-  },
-  "belongs": {
-    "prefix": "belongs",
-    "body": ["\\in"],
-    "description": "belongs"
-  },
-  "notbelongs": {
-    "prefix": "notbelongs",
-    "body": ["\\notin"],
-    "description": "not belongs"
-  }
+    "cb": {
+        "prefix": "cb",
+        "body": [
+            "```${1}",
+            "```"
+        ],
+        "description": "code block"
+    },
+    "frac": {
+        "prefix": "frac",
+        "body": [
+            "\\frac{$1}{$2}"
+        ],
+        "description": "fraction"
+    },
+    "dot": {
+        "prefix": "dot",
+        "body": [
+            "\\dot{$1}"
+        ],
+        "description": "dot"
+    },
+    "cdot": {
+        "prefix": "cdot",
+        "body": [
+            "\\cdot{$1}"
+        ],
+        "description": "cdot"
+    },
+    "alpha": {
+        "prefix": "alpha",
+        "body": [
+            "\\alpha"
+        ],
+        "description": "alpha"
+    },
+    "beta": {
+        "prefix": "beta",
+        "body": [
+            "\\beta"
+        ],
+        "description": "beta"
+    },
+    "matrix": {
+        "prefix": "matrix",
+        "body": [
+            "\\begin{bmatrix}",
+            "  $1 & $2 \\\\",
+            "  $3 & $4",
+            "\\end{bmatrix}"
+        ],
+        "description": "matrix"
+    },
+    "sqrt": {
+        "prefix": "sqrt",
+        "body": [
+            "\\sqrt{$1}"
+        ],
+        "description": "square root"
+    },
+    "sum": {
+        "prefix": "sum",
+        "body": [
+            "\\sum_{i=1}^{n}"
+        ],
+        "description": "sum"
+    },
+    "inf": {
+        "prefix": "inf",
+        "body": [
+            "\\infty"
+        ],
+        "description": "infinity"
+    },
+    "int": {
+        "prefix": "int",
+        "body": [
+            "\\int_{a}^{b}"
+        ],
+        "description": "integral"
+    },
+    "partial": {
+        "prefix": "partial",
+        "body": [
+            "\\partial"
+        ],
+        "description": "partial"
+    },
+    "delta": {
+        "prefix": "delta",
+        "body": [
+            "\\delta"
+        ],
+        "description": "delta"
+    },
+    "Delta": {
+        "prefix": "Delta",
+        "body": [
+            "\\Delta"
+        ],
+        "description": "Delta"
+    },
+    "belongs": {
+        "prefix": "belongs",
+        "body": [
+            "\\in"
+        ],
+        "description": "belongs"
+    },
+    "notbelongs": {
+        "prefix": "notbelongs",
+        "body": [
+            "\\notin"
+        ],
+        "description": "not belongs"
+    }
 }

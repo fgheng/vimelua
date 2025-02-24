@@ -1,75 +1,83 @@
 {
-  "keymaps": {
-    "prefix": "keymaps",
-    "body": [
-      "{",
-      "    mode = {$1},",
-      "    \"$2\",",
-      "    function()",
-      "        $3",
-      "    end,",
-      "    desc = \"$4\",",
-      "},"
-    ]
-  },
-  "ac": {
-    "body": [
-      "vim.api.nvim_create_autocmd(${1}, {",
-      "   callback = function(args)",
-      "       ${2}",
-      "   end,",
-      "})"
-    ],
-    "description": "nvim_create_autocmd",
-    "prefix": "ac"
-  },
-  "autocmd": {
-    "body": [
-      "vim.api.nvim_create_autocmd({\"${1}\"}, {",
-      "   pattern = {\"${2}\"},",
-      "   group = {\"${3}\"},",
-      "   callback = function(args)",
-      "       ${4}",
-      "   end,",
-      "})"
-    ],
-    "description": "nvim_create_autocmd",
-    "prefix": "autocmd"
-  },
-  "keymap": {
-    "body": [
-      "vim.keymap.set(\"${1}\", \"${2}\", function()",
-      "    ${3}",
-      "end, {silent = true, noremap = true})"
-    ],
-    "description": "vim.keymap.set()",
-    "prefix": "keymap"
-  },
-  "augroup": {
-    "body": ["vim.api.nvim_create_augroup(\"${1}\", {", "   ${2}", "})"],
-    "description": "nvim_create_augroup",
-    "prefix": "augroup"
-  },
-  "pt": {
-    "body": ["print(vim.inspect(${1}))"],
-    "description": "print(vim.inspect())",
-    "prefix": "pt"
-  },
-  "setv": {
-    "body": [
-      "vim.api.nvim_set_option_value(\"${1}\", \"${2}\", { scope = \"${3}\", buf=\"${4}\" })"
-    ],
-    "description": "nvim_set_option_value",
-    "prefix": "setv"
-  },
-  "commmand": {
-    "body": ["vim.api.nvim_command('${1}')"],
-    "description": "vim.api.nvim_command()",
-    "prefix": "commmand"
-  },
-  "printtable": {
-    "description": "print(vim.inspect())",
-    "prefix": "ptable",
-    "body": "print(vim.inspect(${1}))"
-  }
+    "keymaps": {
+        "prefix": "keymaps",
+        "body": [
+            "{",
+            "    mode = {$1},",
+            "    \"$2\",",
+            "    function()",
+            "        $3",
+            "    end,",
+            "    desc = \"$4\",",
+            "},"
+        ]
+    },
+    "ac": {
+        "body": [
+            "vim.api.nvim_create_autocmd(${1}, {",
+            "   callback = function(args)",
+            "       ${2}",
+            "   end,",
+            "})"
+        ],
+        "description": "nvim_create_autocmd",
+        "prefix": "ac"
+    },
+    "autocmd": {
+        "body": [
+            "vim.api.nvim_create_autocmd({\"${1}\"}, {",
+            "   pattern = {\"${2}\"},",
+            "   group = {\"${3}\"},",
+            "   callback = function(args)",
+            "       ${4}",
+            "   end,",
+            "})"
+        ],
+        "description": "nvim_create_autocmd",
+        "prefix": "autocmd"
+    },
+    "keymap": {
+        "body": [
+            "vim.keymap.set(\"${1}\", \"${2}\", function()",
+            "    ${3}",
+            "end, {silent = true, noremap = true})"
+        ],
+        "description": "vim.keymap.set()",
+        "prefix": "keymap"
+    },
+    "augroup": {
+        "body": [
+            "vim.api.nvim_create_augroup(\"${1}\", {",
+            "   ${2}",
+            "})"
+        ],
+        "description": "nvim_create_augroup",
+        "prefix": "augroup"
+    },
+    "pt": {
+        "body": [
+            "print(vim.inspect(${1}))"
+        ],
+        "description": "print(vim.inspect())",
+        "prefix": "pt"
+    },
+    "setv": {
+        "body": [
+            "vim.api.nvim_set_option_value(\"${1}\", \"${2}\", { scope = \"${3}\", buf=\"${4}\" })"
+        ],
+        "description": "nvim_set_option_value",
+        "prefix": "setv"
+    },
+    "commmand": {
+        "body": [
+            "vim.api.nvim_command('${1}')"
+        ],
+        "description": "vim.api.nvim_command()",
+        "prefix": "commmand"
+    },
+    "printtable": {
+        "description": "print(vim.inspect())",
+        "prefix": "ptable",
+        "body": "print(vim.inspect(${1}))"
+    }
 }
