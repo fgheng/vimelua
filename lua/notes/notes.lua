@@ -13,7 +13,7 @@ vim.keymap.set("n", "<space>zs", function()
     local picker_name = require("config").picker
     local notes_home = require("config").notes_home
     if picker_name == "fzf-lua" then
-        require("fzf-lua").grep_project({ cmd = "rg " .. notes_home })
+        require("fzf-lua").grep_project({ cmd = "cd " .. notes_home })
     elseif picker_name == "telescope" then
         local status_ok, telescope = pcall(require, "telescope")
         if status_ok then
@@ -31,7 +31,7 @@ vim.keymap.set("v", "<space>zs", function()
     local picker_name = require("config").picker
     local notes_home = require("config").notes_home
     if picker_name == "fzf-lua" then
-        require("fzf-lua").live_grep({ cmd = "rg " .. selected_text .. " " .. notes_home })
+        require("fzf-lua").live_grep({ cmd = "cd " .. notes_home })
     elseif picker_name == "telescope" then
         local status_ok, telescope = pcall(require, "telescope")
         if status_ok then

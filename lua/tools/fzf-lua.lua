@@ -7,25 +7,29 @@ return {
             local actions = require("fzf-lua").actions
             require("fzf-lua").setup({
                 winopts = {
-                    split      = "belowright new",
+                    split      = "aboveleft new",
                     border     = border,
-                    height     = 0.3,
-                    backdrop   = 20,
-                    fullscreen = false, -- start fullscreen?
+                    height     = 0.2,
+                    width      = 0.8,
+                    row        = 0.2,
+                    col        = 0.1,
+                    backdrop   = 0,
                     preview    = {
-                        border = border
+                        -- border = border
+                        vertical   = "down:50%", -- up|down:size
+                        horizontal = "right:50%", -- right|left:size
                     }
                 },
-                on_create = function()
-                    -- called once upon creation of the fzf main window
-                    -- can be used to add custom fzf-lua mappings, e.g:
-                    -- vim.keymap.set("t", "<M-j>", "<Down>", { silent = true, buffer = true })
-                end,
+                -- on_create = function()
+                --     -- called once upon creation of the fzf main window
+                --     -- can be used to add custom fzf-lua mappings, e.g:
+                --     -- vim.keymap.set("t", "<M-j>", "<Down>", { silent = true, buffer = true })
+                -- end,
                 keymap = {
                     builtin = {
                         true,
                         ["<M-s-j>"] = "preview-down",
-                        ["<M-s-k>"]   = "preview-up",
+                        ["<M-s-k>"] = "preview-up",
                     },
                     fzf = {
                         true,
@@ -34,8 +38,6 @@ return {
                         ["alt-G"] = "last",
                         ["alt-j"] = "down",
                         ["alt-k"] = "up",
-                        ["alt-J"] = "preview-down",
-                        ["alt-K"] = "preview-up",
                     }
                 },
                 previewers = {
@@ -44,7 +46,6 @@ return {
                         ["ctrl-s"] = actions.keymap_split,
                         ["ctrl-v"] = actions.keymap_vsplit,
                         ["ctrl-t"] = actions.keymap_tabedit,
-                        -- ["alt-J"] = actions.
                     },
                 }
 

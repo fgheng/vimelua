@@ -1,5 +1,6 @@
 local _M = {
     "folke/todo-comments.nvim",
+    -- lazy = false,
     opts = {
         signs = false, -- show icons in the signs column
         sign_priority = 8, -- sign priority
@@ -55,7 +56,8 @@ local _M = {
             -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
         },
     },
-    keys = { { mode = "n", "<space>t", "<cmd>TodoTelescope<cr>", desc = "Open todo" } },
+    -- keys = { { mode = "n", "<space>t", "<cmd>TodoTelescope<cr>", desc = "Open todo" } },
+    keys = { { mode = "n", "<space>t", "<cmd>TodoFzfLua<cr>", desc = "Open todo" } },
 }
 
 return _M
