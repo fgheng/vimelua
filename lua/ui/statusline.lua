@@ -76,10 +76,12 @@ function M.fileInfo()
     local name = (path == "" and "Empty ") or path:match("([^/\\]+)[/\\]*$")
 
     if name ~= "Empty " then
-        local devicons_present, devicons = pcall(require, "nvim-web-devicons")
+        -- local devicons_present, devicons = pcall(require, "nvim-web-devicons")
+        local devicons_present, devicons = pcall(require, "mini.icons")
 
         if devicons_present then
-            local ft_icon = devicons.get_icon(name)
+            -- local ft_icon = devicons.get_icon(name)
+            local ft_icon = devicons.get("file", "file." .. name)
             icon = (ft_icon ~= nil and ft_icon) or icon
         end
 

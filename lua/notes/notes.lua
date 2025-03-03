@@ -10,25 +10,37 @@ os.execute("export ZK_NOTEBOOK_DIR=" .. require("config").notes_home)
 local opts = { silent = true, noremap = true }
 
 vim.keymap.set("n", "<space>zs", function()
-    local status_ok, telescope = pcall(require, "telescope")
-    if status_ok then
-        telescope.extensions.live_grep_args.live_grep_args({
-            search_dirs = { require("config").notes_home },
-            path_display = { "tail" },
-        })
+    local picker_name = require("config").picker
+    local notes_home = require("config").notes_home
+    if picker_name == "fzf-lua" then
+        require("fzf-lua").grep_project({ cmd = "rg " .. notes_home })
+    elseif picker_name == "telescope" then
+        local status_ok, telescope = pcall(require, "telescope")
+        if status_ok then
+            telescope.extensions.live_grep_args.live_grep_args({
+                search_dirs = { require("config").notes_home },
+                path_display = { "tail" },
+            })
+        end
     end
 end, opts)
 
 vim.keymap.set("v", "<space>zs", function()
     local selected_text = require("utils.utils").get_visual_selection()
     selected_text = string.gsub(selected_text, "\n", "")
-    local status_ok, telescope = pcall(require, "telescope")
-    if status_ok then
-        telescope.extensions.live_grep_args.live_grep_args({
-            search_dirs = { require("config").notes_home },
-            default_text = selected_text,
-            path_display = { "tail" },
-        })
+    local picker_name = require("config").picker
+    local notes_home = require("config").notes_home
+    if picker_name == "fzf-lua" then
+        require("fzf-lua").live_grep({ cmd = "rg " .. selected_text .. " " .. notes_home })
+    elseif picker_name == "telescope" then
+        local status_ok, telescope = pcall(require, "telescope")
+        if status_ok then
+            telescope.extensions.live_grep_args.live_grep_args({
+                search_dirs = { require("config").notes_home },
+                default_text = selected_text,
+                path_display = { "tail" },
+            })
+        end
     end
 end, opts)
 
@@ -59,13 +71,14 @@ local _M = {
     {
         "zk-org/zk-nvim",
         enabled = true,
-        cmd = {"ZkNew", "ZkTags", "ZkIndex", "ZkNotes"},
+        cmd = { "ZkNew", "ZkTags", "ZkIndex", "ZkNotes" },
         ft = { "markdown", "md" },
         config = function()
             require("zk").setup({
                 -- can be "telescope", "fzf", "fzf_lua" or "select" (`vim.ui.select`)
                 -- it's recommended to use "telescope", "fzf" or "fzf_lua"
-                picker = "telescope",
+                -- picker = "telescope",
+                picker = "fzf_lua",
 
                 lsp = {
                     -- `config` is passed to `vim.lsp.start_client(config)`
@@ -195,9 +208,9 @@ local _M = {
                     MkdnPrevHeading = { "n", "[[" },
                     MkdnGoBack = { "n", "<BS>" },
                     MkdnGoForward = { "n", "<Del>" },
-                    MkdnCreateLink = false, -- see MkdnEnter
+                    MkdnCreateLink = false,              -- see MkdnEnter
                     MkdnCreateLinkFromClipboard = false, -- see MkdnEnter
-                    MkdnFollowLink = false, -- see MkdnEnter
+                    MkdnFollowLink = false,              -- see MkdnEnter
                     MkdnDestroyLink = { "n", "<M-CR>" },
                     MkdnTagSpan = { "v", "<M-CR>" },
                     MkdnMoveSource = { "n", "<F2>" },
@@ -236,7 +249,7 @@ local _M = {
                     img_dir = "images",
                     img_name = function()
                         return os.date("%Y-%m-%d-%H-%M-%S")
-                    end, -- Example result: "2021-04-13-10-04-18"
+                    end,                  -- Example result: "2021-04-13-10-04-18"
                     affix = "<\n  %s\n>", -- Multi lines affix
                 },
                 -- You can create configuration for ceartain filetype by creating another field (markdown, in this case)
@@ -245,7 +258,7 @@ local _M = {
                 markdown = {
                     img_dir = { "src", "assets", "img" }, -- Use table for nested dir (New feature form PR #20)
                     img_dir_txt = "/assets/img",
-                    img_handler = function(img) -- New feature from PR #22
+                    img_handler = function(img)           -- New feature from PR #22
                         local script = string.format('./image_compressor.sh "%s"', img.path)
                         os.execute(script)
                     end,
@@ -314,10 +327,10 @@ local _M = {
                 max_height = nil,
                 max_width_window_percentage = nil,
                 max_height_window_percentage = 50,
-                window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+                window_overlap_clear_enabled = true,                                      -- toggles images when windows are overlapped
                 window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-                editor_only_render_when_focused = true, -- auto show/hide images when the editor gains/looses focus
-                tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+                editor_only_render_when_focused = true,                                   -- auto show/hide images when the editor gains/looses focus
+                tmux_show_only_in_active_window = true,                                   -- auto show/hide images in the correct Tmux window (needs visual-activity off)
                 hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }, -- render image files as images when opened
             })
         end,
@@ -368,7 +381,7 @@ local _M = {
                 callback = function()
                     require("nabla").enable_virt({
                         autogen = true, -- auto-regenerate ASCII art when exiting insert mode
-                        silent = true, -- silents error messages
+                        silent = true,  -- silents error messages
                     })
                 end,
             })
@@ -387,7 +400,7 @@ local _M = {
                 function()
                     require("nabla").toggle_virt({
                         autogen = true, -- auto-regenerate ASCII art when exiting insert mode
-                        silent = true, -- silents error messages
+                        silent = true,  -- silents error messages
                     })
                 end,
             },

@@ -4,7 +4,7 @@ local _M = {
     -- event = { "BufRead", "BufNewFile" },
     event = { "UiEnter" },
     dependencies = {
-        "nvim-tree/nvim-web-devicons",
+        "echasnovski/mini.icons",
     },
     opts = {
         options = {
@@ -36,8 +36,8 @@ local _M = {
             offsets = {
                 { filetype = "NvimTree", text = "File Explorer", highlight = "Directory", text_align = "center" },
                 { filetype = "neo-tree", text = "File Explorer", highlight = "Directory", text_align = "center" },
-                { filetype = "aerial", text = "Outline", text_align = "center" },
-                { filetype = "Outline", text = "Outline", text_align = "center" },
+                { filetype = "aerial",   text = "Outline",       text_align = "center" },
+                { filetype = "Outline",  text = "Outline",       text_align = "center" },
             },
 
             color_icons = true,
@@ -47,7 +47,7 @@ local _M = {
             show_tab_indicators = true,
             separator_style = "{'any', 'any'}", -- | "thick" | "thin" | { 'any', 'any' }, 'slant'
 
-            show_duplicate_prefix = false, -- whether to show duplicate buffer prefix
+            show_duplicate_prefix = false,      -- whether to show duplicate buffer prefix
             -- always_show_bufferline = true
             hover = {
                 enabled = true,
@@ -70,7 +70,7 @@ local _M = {
         { "<m-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "prev buffer" },
         { "<m-l>", "<cmd>BufferLineCycleNext<cr>", desc = "next buffer" },
         { "<m-x>", "<cmd>BufferLinePickClose<cr>", desc = "close buffer" },
-        { "<m-b>", "<cmd>BufferLinePick<cr>", desc = "pick buffer" },
+        { "<m-b>", "<cmd>BufferLinePick<cr>",      desc = "pick buffer" },
     },
 }
 

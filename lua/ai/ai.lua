@@ -283,7 +283,7 @@ local _M = {
         branch = "canary",
         dependencies = {
             { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-            { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+            { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
         },
         opts = {
             debug = false, -- Enable debugging
@@ -425,8 +425,8 @@ local _M = {
                 -- endpoint = os.getenv("OPENAI_API_ENDPOINT"),
                 endpoint = "https://api.ezchat.top/v1",
                 model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-                timeout = 30000, -- timeout in milliseconds
-                temperature = 0, -- adjust if needed
+                timeout = 30000,  -- timeout in milliseconds
+                temperature = 0,  -- adjust if needed
                 max_tokens = 4096,
             },
         },
@@ -438,12 +438,13 @@ local _M = {
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
             --- The below dependencies are optional,
-            "echasnovski/mini.pick", -- for file_selector provider mini.pick
+            "echasnovski/mini.pick",         -- for file_selector provider mini.pick
             "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-            "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-            "ibhagwan/fzf-lua", -- for file_selector provider fzf
-            "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-            "zbirenbaum/copilot.lua", -- for providers='copilot'
+            "hrsh7th/nvim-cmp",              -- autocompletion for avante commands and mentions
+            "ibhagwan/fzf-lua",              -- for file_selector provider fzf
+            -- "nvim-tree/nvim-web-devicons",   -- or echasnovski/mini.icons
+            "echasnovski/mini.icons",
+            "zbirenbaum/copilot.lua",        -- for providers='copilot'
             {
                 -- support for image pasting
                 "HakonHarnes/img-clip.nvim",
@@ -470,6 +471,38 @@ local _M = {
             --     ft = { "markdown", "Avante" },
             -- },
         },
+    },
+    {
+        "olimorris/codecompanion.nvim",
+        lazy = true,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("codecompanion").setup({
+                strategies = {
+                    chat = {
+                        adapter = "anthropic",
+                    },
+                    inline = {
+                        adapter = "anthropic",
+                    },
+                },
+                display = {
+                    action_palette = {
+                        width = 95,
+                        height = 10,
+                        prompt = "Prompt ", -- Prompt used for interactive LLM calls
+                        provider = "telescope", -- default|telescope|mini_pick
+                        opts = {
+                            show_default_actions = true, -- Show the default actions in the action palette?
+                            show_default_prompt_library = true, -- Show the default prompt library in the action palette?
+                        },
+                    },
+                },
+            })
+        end,
     },
 }
 

@@ -179,6 +179,7 @@ local _M = {
     },
     {
         "kdheepak/lazygit.nvim",
+        enabled = false,
         lazy = false,
         cmd = {
             "LazyGit",

@@ -1,5 +1,6 @@
 local _M = {
     "nvim-telescope/telescope.nvim",
+    enabled = false,
     dependencies = {
         { "nvim-lua/plenary.nvim" },
         {

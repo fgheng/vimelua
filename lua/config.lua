@@ -1,5 +1,7 @@
 local _M = {}
 
+_M.picker = "fzf-lua"
+
 _M.ui = {
     theme = {
         theme = "everforest",

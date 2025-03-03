@@ -3,32 +3,57 @@ local M = {}
 local function keymaps(_, bufnr)
     local opts = { silent = true, noremap = true, buffer = bufnr }
     local keymap = vim.keymap.set
+    local picker_name = require("config").picker
+    local picker_status, picker = pcall(require, picker_name)
 
     keymap("n", "gd", function()
-        require("telescope.builtin").lsp_definitions()
-        -- vim.lsp.buf.definition()
+        if picker_status then
+            picker.lsp_definitions()
+        else
+            vim.lsp.buf.definition()
+        end
     end, opts)
     keymap("n", "gr", function()
-        require("telescope.builtin").lsp_references()
-        -- vim.lsp.buf.references()
+        if picker_status then
+            picker.lsp_references()
+        else
+            vim.lsp.buf.references()
+        end
     end, opts)
     keymap("n", "<leader>D", function()
-        vim.lsp.buf.type_definition()
+        if picker_status then
+            picker.lsp_document_symbols()
+        else
+            vim.lsp.buf.document_symbol()
+        end
     end, opts)
-    -- keymap("n", "gi", '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>', opts)
     keymap("n", "gi", function()
-        require("telescope.builtin").lsp_incoming_calls()
-        -- vim.lsp.buf.incoming_calls()
+        if picker_status then
+            picker.lsp_implementation()
+        else
+            vim.lsp.buf.implementation()
+        end
     end, opts)
     keymap("n", "go", function()
-        require("telescope.builtin").lsp_outgoing_calls()
-        -- vim.lsp.buf.outgoing_calls()
+        if picker_status then
+            picker.lsp_outgoing_calls()
+        else
+            vim.lsp.buf.outgoing_calls()
+        end
     end, opts)
     keymap("n", "gD", function()
-        vim.lsp.buf.declaration()
+        if picker_status then
+            picker.lsp_declaration()
+        else
+            vim.lsp.buf.declaration()
+        end
     end, opts)
     keymap("n", "ca", function()
-        vim.lsp.buf.code_action()
+        if picker_status then
+            picker.lsp_code_actions()
+        else
+            vim.lsp.buf.code_action()
+        end
     end, opts)
     vim.keymap.set("n", "K", function()
         if vim.bo.filetype == "help" then
@@ -91,23 +116,29 @@ local function keymaps(_, bufnr)
         })
     end, opts)
     keymap("n", "<space>o", function()
-        require("telescope.builtin").lsp_document_symbols()
-        -- vim.lsp.buf.document_symbol()
+        if picker_status then
+            picker.lsp_document_symbols()
+        else
+            vim.lsp.buf.document_symbol()
+        end
     end, opts)
     keymap("n", "<space>O", function()
-        require("telescope.builtin").lsp_workspace_symbols()
-        -- vim.lsp.buf.workspace_symbol()
+        if picker_status then
+            picker.lsp_dynamic_workspace_symbols()
+        else
+            vim.lsp.buf.workspace_symbol()
+        end
     end, opts)
-    keymap("v", "<space>o", function()
-        local selected_text = require("utils.utils").get_visual_selection()
-        selected_text = string.gsub(selected_text, "\n", "")
-        require("telescope.builtin").lsp_document_symbols({ default_text = selected_text })
-    end, opts)
-    keymap("v", "<space>O", function()
-        local selected_text = require("utils.utils").get_visual_selection()
-        selected_text = string.gsub(selected_text, "\n", "")
-        require("telescope.builtin").lsp_dynamic_workspace_symbols({ default_text = selected_text })
-    end, opts)
+    -- keymap("v", "<space>o", function()
+    --     local selected_text = require("utils.utils").get_visual_selection()
+    --     selected_text = string.gsub(selected_text, "\n", "")
+    --     require("telescope.builtin").lsp_document_symbols({ default_text = selected_text })
+    -- end, opts)
+    -- keymap("v", "<space>O", function()
+    --     local selected_text = require("utils.utils").get_visual_selection()
+    --     selected_text = string.gsub(selected_text, "\n", "")
+    --     require("telescope.builtin").lsp_dynamic_workspace_symbols({ default_text = selected_text })
+    -- end, opts)
 end
 
 local function lsp_highlight(client, bufnr)
