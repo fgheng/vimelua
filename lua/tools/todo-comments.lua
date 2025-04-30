@@ -57,7 +57,14 @@ local _M = {
         },
     },
     -- keys = { { mode = "n", "<space>t", "<cmd>TodoTelescope<cr>", desc = "Open todo" } },
-    keys = { { mode = "n", "<space>t", "<cmd>TodoFzfLua<cr>", desc = "Open todo" } },
+    keys = { { mode = "n", "<space>t", function ()
+        local picker = require("config").picker
+        if picker == "telescope" then
+            vim.cmd("TodoTelescope")
+        else
+            vim.cmd("TodoFzfLua")
+        end
+    end, desc = "Open todo" } },
 }
 
 return _M

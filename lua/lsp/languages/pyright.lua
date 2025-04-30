@@ -1,5 +1,5 @@
 return {
-    cmd = { "delance-langserver", "--stdio" }, -- using pylance, install pylance by `npm install -g @delance/runtime`
+    -- cmd = { "delance-langserver", "--stdio" }, -- using pylance, install pylance by `npm install -g @delance/runtime`
     settings = {
         verboseOutput = true,
         autoImportCompletion = true,
@@ -19,4 +19,11 @@ return {
             },
         },
     },
+    format = {
+        enable = true,
+    }
+    -- formatter = "black",
+    -- formatting = {
+    --     provider = "black"
+    -- }
 }

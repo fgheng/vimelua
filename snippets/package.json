@@ -1,31 +1,43 @@
 {
-  "name": "my-snippets",
-  "engines": {
-    "vscode": "^1.11.0"
-  },
-  "contributes": {
-    "snippets": [
-      {
-        "language": [
-          "cpp",
-          "cc",
-          "hpp"
-        ],
-        "path": "./snippets/cpp.json"
-      },
-      {
-        "language": [
-          "lua"
-        ],
-        "path": "./snippets/lua.json"
-      },
-      {
-        "language": [
-          "markdown",
-          "md"
-        ],
-        "path": "./snippets/markdown.json"
-      }
-    ]
-  }
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "name": "my-snippets",
+    "contributes": {
+        "snippets": [
+            {
+                "path": "./snippets/cpp.json",
+                "language": [
+                    "cpp",
+                    "cc",
+                    "hpp"
+                ]
+            },
+            {
+                "path": "./snippets/lua.json",
+                "language": [
+                    "lua"
+                ]
+            },
+            {
+                "path": "./snippets/markdown.json",
+                "language": [
+                    "markdown",
+                    "md"
+                ]
+            },
+            {
+                "path": "./snippets/python.json",
+                "language": [
+                    "python"
+                ]
+            },
+            {
+                "path": "./json.json",
+                "language": [
+                    "json"
+                ]
+            }
+        ]
+    }
 }

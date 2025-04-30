@@ -1,6 +1,7 @@
 require("core")
 require("init")
 
+-- @diagnostic disable-next-line: inject-field
 if vim.g.neovide then
     vim.g.neovide_scale_factor = 0.7
     vim.g.neovide_transparency = 0.8

@@ -4,6 +4,9 @@ local function keymaps(_, bufnr)
     local opts = { silent = true, noremap = true, buffer = bufnr }
     local keymap = vim.keymap.set
     local picker_name = require("config").picker
+    if picker_name == "telescope" then
+        picker_name = "telescope.builtin"
+    end
     local picker_status, picker = pcall(require, picker_name)
 
     keymap("n", "gd", function()
@@ -29,9 +32,9 @@ local function keymaps(_, bufnr)
     end, opts)
     keymap("n", "gi", function()
         if picker_status then
-            picker.lsp_implementation()
+            picker.lsp_incoming_calls()
         else
-            vim.lsp.buf.implementation()
+            vim.lsp.buf.incoming_calls()
         end
     end, opts)
     keymap("n", "go", function()
@@ -43,13 +46,13 @@ local function keymaps(_, bufnr)
     end, opts)
     keymap("n", "gD", function()
         if picker_status then
-            picker.lsp_declaration()
+            picker.lsp_declarations()
         else
             vim.lsp.buf.declaration()
         end
     end, opts)
     keymap("n", "ca", function()
-        if picker_status then
+        if picker_status and picker_name ~= "telescope.builtin" then
             picker.lsp_code_actions()
         else
             vim.lsp.buf.code_action()
@@ -124,7 +127,7 @@ local function keymaps(_, bufnr)
     end, opts)
     keymap("n", "<space>O", function()
         if picker_status then
-            picker.lsp_dynamic_workspace_symbols()
+            picker.lsp_workspace_symbols()
         else
             vim.lsp.buf.workspace_symbol()
         end

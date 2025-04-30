@@ -1,0 +1,1 @@
+{"guiyihua":{"body":"${1} = ${1} / np.sqrt(np.sum(${1}**2, axis=1, keepdims=True))","prefix":"guiyihua"}}

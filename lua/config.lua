@@ -1,11 +1,11 @@
 local _M = {}
 
-_M.picker = "fzf-lua"
+_M.picker = "fzf-lua" -- telescope, fzf-lua
 
 _M.ui = {
     theme = {
-        theme = "everforest",
-        background = "dark",
+        theme = "paper",
+        background = "light",
         transparent = 0.8,
     },
     float_ui_win = {

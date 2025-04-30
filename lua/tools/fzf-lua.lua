@@ -1,13 +1,16 @@
 return {
     {
         "ibhagwan/fzf-lua",
+        enabled = function()
+            return require("config").picker == "fzf-lua"
+        end,
         dependencies = { "echasnovski/mini.icons" },
         config = function()
             local border = require("config").ui.float_ui_win.border
             local actions = require("fzf-lua").actions
             require("fzf-lua").setup({
                 winopts = {
-                    split      = "aboveleft new",
+                    split      = "belowright new", -- aboveleft new, belowright new, topleft new, botright new
                     border     = border,
                     height     = 0.2,
                     width      = 0.8,
@@ -47,6 +50,12 @@ return {
                         ["ctrl-v"] = actions.keymap_vsplit,
                         ["ctrl-t"] = actions.keymap_tabedit,
                     },
+                },
+                grep = {
+
+                },
+                files = {
+                    path_shorten = false
                 }
 
             })

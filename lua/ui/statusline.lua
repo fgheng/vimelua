@@ -274,7 +274,6 @@ return {}
 --         -- event = { "VeryLazy" },
 --         event = { "UiEnter" },
 --         dependencies = {
---             { "nvim-tree/nvim-web-devicons" },
 --             { "arkav/lualine-lsp-progress" },
 --         },
 --         -- init = function()
