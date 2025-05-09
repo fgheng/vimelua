@@ -47,3 +47,4 @@ opt.guicursor = "n-v-c-sm:blinkon01,i-ci-ve:ver25-blinkon01,r-cr-o:hor20"
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
+opt.isk="@,48-57,192-255"

@@ -7,7 +7,7 @@ local _M = {
     },
     -- keys = { "f", "F", "W" },
     keys = {
-        { mode = "n", "W", "<cmd>HopWordMW<cr>", "Hop word" },
+        -- { mode = "n", "W", "<cmd>HopWordMW<cr>", "Hop word" },
         {
             mode = "n",
             "f",

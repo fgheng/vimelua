@@ -1,6 +1,6 @@
 local _M = {
     "mrjones2014/smart-splits.nvim",
-    enabled = true,
+    enabled = false,
     opts = {
         -- Ignored filetypes (only while resizing)
         ignored_filetypes = {

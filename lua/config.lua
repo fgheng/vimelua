@@ -4,8 +4,8 @@ _M.picker = "fzf-lua" -- telescope, fzf-lua
 
 _M.ui = {
     theme = {
-        theme = "paper",
-        background = "light",
+        theme = "everforest", --"paper",
+        background = "dark",
         transparent = 0.8,
     },
     float_ui_win = {

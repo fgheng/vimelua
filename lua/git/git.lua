@@ -149,7 +149,7 @@ local _M = {
                 end,
                 desc = "Open diff view",
             },
-            { mode = "n", "<leader>gc", "<cmd>DiffviewClose<cr>", desc = "Close diff view" },
+            { mode = "n", "<leader>gc", "<cmd>DiffviewClose<cr>",       desc = "Close diff view" },
             { mode = "n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Open file history" },
         },
 
@@ -167,12 +167,12 @@ local _M = {
         "NeogitOrg/neogit",
         enabled = false,
         dependencies = {
-            "nvim-lua/plenary.nvim", -- required
+            "nvim-lua/plenary.nvim",  -- required
             "sindrets/diffview.nvim", -- optional - Diff integration
 
             -- Only one of these is needed, not both.
             "nvim-telescope/telescope.nvim", -- optional
-            "ibhagwan/fzf-lua", -- optional
+            "ibhagwan/fzf-lua",              -- optional
         },
         config = true,
     },

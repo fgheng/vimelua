@@ -37,8 +37,8 @@ return {
                     fzf = {
                         true,
                         ["alt-a"] = "toggle-all",
-                        ["alt-g"] = "first",
-                        ["alt-G"] = "last",
+                        ["alt-h"] = "first",
+                        ["alt-l"] = "last",
                         ["alt-j"] = "down",
                         ["alt-k"] = "up",
                     }
