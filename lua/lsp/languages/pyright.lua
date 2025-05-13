@@ -1,12 +1,14 @@
 return {
     cmd = { "delance-langserver", "--stdio" }, -- using pylance, install pylance by `npm install -g @delance/runtime`
+    -- cmd = { "pyright-langserver", "--stdio" },
+    -- single_file_support = true,
     settings = {
         verboseOutput = true,
         autoImportCompletion = true,
         python = {
             analysis = {
                 autoSearchPaths = true,
-                typeCheckingMode = "strict",
+                -- typeCheckingMode = "strict",
                 inlayHints = {
                     callArgumentNames = "partial",
                     functionReturnTypes = true,

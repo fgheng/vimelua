@@ -182,6 +182,8 @@ local _M = {
                 },
                 mappings = {
                     ["<2-LeftMouse>"] = "open",
+                    -- ["H"] = "close_all_subnodes",
+                    ["H"] = false,
                     ["l"] = window_open,
                     ["o"] = window_open_close,
                     ["<esc>"] = "revert_preview",

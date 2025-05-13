@@ -82,20 +82,24 @@ local function keymaps(_, bufnr)
         local ft = vim.api.nvim_get_option_value("filetype", {
             buf = cbuf,
         })
-        local have_nls = package.loaded["null-ls"]
+        local have_nullls = package.loaded["null-ls"]
             and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+        local have_conform = require("lazy.core.config").plugins["conform.nvim"]
 
-        -- vim.lsp.buf.format({ async = false })
-        vim.lsp.buf.format({
-            filter = function(_client)
-                if have_nls then
-                    -- apply whatever logic you want (in this example, we'll only use null-ls)
-                    return _client.name == "null-ls"
-                end
-                return _client.name ~= "null-ls"
-            end,
-            bufnr = bufnr,
-        })
+        if have_conform then
+            require("conform").format()
+        else
+            vim.lsp.buf.format({
+                filter = function(_client)
+                    if have_nullls then
+                        -- apply whatever logic you want (in this example, we'll only use null-ls)
+                        return _client.name == "null-ls"
+                    end
+                    return _client.name ~= "null-ls"
+                end,
+                bufnr = bufnr,
+            })
+        end
     end, opts)
     keymap("v", "<leader>f", function()
         local cbuf = vim.api.nvim_get_current_buf()
@@ -106,17 +110,23 @@ local function keymaps(_, bufnr)
             and #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
 
         -- vim.lsp.buf.format({ async = false })
+        local have_conform = package.loaded["conform.nvim"]
 
-        vim.lsp.buf.format({
-            filter = function(_client)
-                if have_nls then
-                    -- apply whatever logic you want (in this example, we'll only use null-ls)
-                    return _client.name == "null-ls"
-                end
-                return _client.name ~= "null-ls"
-            end,
-            bufnr = bufnr,
-        })
+        if have_conform then
+            print("format visual")
+            require("conform").format()
+        else
+            vim.lsp.buf.format({
+                filter = function(_client)
+                    if have_nls then
+                        -- apply whatever logic you want (in this example, we'll only use null-ls)
+                        return _client.name == "null-ls"
+                    end
+                    return _client.name ~= "null-ls"
+                end,
+                bufnr = bufnr,
+            })
+        end
     end, opts)
     keymap("n", "<space>o", function()
         if picker_status then

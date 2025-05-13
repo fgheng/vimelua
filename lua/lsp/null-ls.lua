@@ -16,12 +16,12 @@ local _M = {
             }),
             null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.cmake_format,
-            null_ls.builtins.formatting.google_java_format.with({ filetypes = { "java" }, indent_size = 4 }),
+            -- null_ls.builtins.formatting.google_java_format.with({ filetypes = { "java" }, indent_size = 4 }),
             null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "zsh" } }),
-            null_ls.builtins.formatting.clang_format.with({
-                -- extra_args = { "--style", "{BasedOnStyle: Google, IndentWidth: 4}" },
-                extra_args = { "--style", "file" },
-            }),
+            -- null_ls.builtins.formatting.clang_format.with({
+            --     -- extra_args = { "--style", "{BasedOnStyle: Google, IndentWidth: 4}" },
+            --     extra_args = { "--style", "file" },
+            -- }),
 
             -- diagnostics
             -- null_ls.builtins.diagnostics.write_good,
