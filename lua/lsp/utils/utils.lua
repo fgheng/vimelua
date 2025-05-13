@@ -1,5 +1,19 @@
 local M = {}
 
+-- local open_float_winid = -1
+--
+-- local function jump_to_float_buffer(float_bufnr)
+--     for _, win in ipairs(vim.api.nvim_list_wins()) do
+--         local buf = vim.api.nvim_win_get_buf(win)
+--         if buf == float_bufnr and vim.api.nvim_win_is_valid(win) then
+--             vim.api.nvim_set_current_win(win)
+--             return true
+--         end
+--     end
+--     print("找不到显示该浮窗 buffer 的窗口")
+--     return false
+-- end
+
 local function keymaps(_, bufnr)
     local opts = { silent = true, noremap = true, buffer = bufnr }
     local keymap = vim.keymap.set
@@ -69,6 +83,16 @@ local function keymaps(_, bufnr)
         vim.lsp.buf.rename()
     end, opts)
     keymap("n", "?", function()
+        -- if vim.api.nvim_win_is_valid(open_float_winid) then
+        --     vim.api.nvim_set_current_win(open_float_winid)
+        -- else
+        --     local winid = vim.diagnostic.open_float()
+        --     if winid ~= nil then
+        --         open_float_winid = winid
+        --     else
+        --         open_float_winid = -1
+        --     end
+        -- end
         vim.diagnostic.open_float()
     end, opts)
     keymap("n", "<m-j>", function()
