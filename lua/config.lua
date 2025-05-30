@@ -82,7 +82,8 @@ _M.servers = {
         "clang_format",
         "codespell",
     },
-    dap = {},
+    dap = {
+    },
 }
 
 return _M

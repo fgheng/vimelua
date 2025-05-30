@@ -15,8 +15,8 @@ vim.defer_fn(function()
             ["<c-w>l"] = "<cmd>rightbelow vsplit<cr>",
             ["<c-=>"] = "<c-w>=",
 
-            ["Q"] = "q",
-            ["q"] = "<cmd>close<cr>",
+            -- ["Q"] = "q",
+            -- ["q"] = "<cmd>close<cr>",
 
             ["<m-L>"] = "<cmd>tabnext<cr>",
             ["<m-H>"] = "<cmd>tabpre<cr>",

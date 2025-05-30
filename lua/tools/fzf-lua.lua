@@ -8,18 +8,19 @@ return {
         config = function()
             local border = require("config").ui.float_ui_win.border
             local actions = require("fzf-lua").actions
-            require("fzf-lua").setup({
+            local fzf_lua = require("fzf-lua")
+            fzf_lua.setup({
                 winopts = {
-                    split      = "belowright new", -- aboveleft new, belowright new, topleft new, botright new
-                    border     = border,
-                    height     = 0.2,
-                    width      = 0.8,
-                    row        = 0.2,
-                    col        = 0.1,
-                    backdrop   = 0,
-                    preview    = {
+                    split    = "belowright new",   -- aboveleft new, belowright new, topleft new, botright new
+                    border   = border,
+                    height   = 0.2,
+                    width    = 0.8,
+                    row      = 0.2,
+                    col      = 0.1,
+                    backdrop = 0,
+                    preview  = {
                         -- border = border
-                        vertical   = "down:50%", -- up|down:size
+                        vertical   = "down:50%",  -- up|down:size
                         horizontal = "right:50%", -- right|left:size
                     }
                 },
@@ -59,6 +60,7 @@ return {
                 }
 
             })
+            fzf_lua.register_ui_select({ silent = true })
         end,
         keys = {
             {

@@ -126,6 +126,9 @@ local _M = {
                 function()
                     local cbuf = vim.api.nvim_get_current_buf()
                     local filetype = vim.api.nvim_get_option_value("filetype", { buf = cbuf })
+                    if filetype == "fzf" then
+                        return
+                    end
 
                     if filetype ~= "qf" and filetype ~= "neo-tree" and filetype ~= "aerial" then
                         gp_open_or_switch()
@@ -144,6 +147,9 @@ local _M = {
                 "<s-enter>",
                 function()
                     local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+                    if filetype == "fzf" then
+                        return
+                    end
                     local prompt = "这是一份"
                         .. filetype
                         .. "文档，如果问题输出不是代码，那么请用注释的方式输出结果\n"
@@ -158,6 +164,11 @@ local _M = {
                 "<cr>",
                 function()
                     local selected_text = require("utils.utils").get_visual_selection()
+                    local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+                    if filetype == "fzf" then
+                        return
+                    end
+
                     vim.ui.input({ prompt = "ai prompt: ", default = "" }, function(input_text)
                         if input_text == nil then
                             return

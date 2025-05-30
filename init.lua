@@ -1,3 +1,4 @@
+---@diagnostic disable: inject-field
 require("core")
 require("init")
 
