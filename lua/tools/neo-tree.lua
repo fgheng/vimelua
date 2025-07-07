@@ -62,23 +62,23 @@ local _M = {
             enable_diagnostics = true,
             open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
             open_files_using_relative_paths = false,
-            sort_case_insensitive = false, -- used when sorting files and directories in the tree
-            sort_function = nil, -- use a custom function for sorting files and directories in the tree
+            sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
+            sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
 
             source_selector = {
                 winbar = true,
                 statusline = false,
-                sources = { -- table
+                sources = {                        -- table
                     {
-                        source = "filesystem", -- string
+                        source = "filesystem",     -- string
                         display_name = "  Files ", -- string | nil
                     },
                     {
-                        source = "buffers", -- string
+                        source = "buffers",         -- string
                         display_name = " Buffers ", -- string | nil
                     },
                     {
-                        source = "git_status", -- string
+                        source = "git_status",  -- string
                         display_name = " Git ", -- string | nil
                     },
                 },
@@ -150,22 +150,22 @@ local _M = {
 
                 file_size = {
                     enabled = false,
-                    width = 12, -- width of the column
+                    width = 12,          -- width of the column
                     required_width = 64, -- min width of window required to show this column
                 },
                 type = {
                     enabled = false,
-                    width = 10, -- width of the column
+                    width = 10,           -- width of the column
                     required_width = 122, -- min width of window required to show this column
                 },
                 last_modified = {
                     enabled = false,
-                    width = 20, -- width of the column
+                    width = 20,          -- width of the column
                     required_width = 88, -- min width of window required to show this column
                 },
                 created = {
                     enabled = false,
-                    width = 20, -- width of the column
+                    width = 20,           -- width of the column
                     required_width = 110, -- min width of window required to show this column
                 },
                 symlink_target = {
@@ -218,7 +218,7 @@ local _M = {
                         config = {
                             show_path = "absolute", -- "none", "relative", "absolute"
                         }
-                    }, -- takes text input for destination, also accepts the optional config.show_path option like "add".
+                    },                              -- takes text input for destination, also accepts the optional config.show_path option like "add".
                     ["q"] = "close_window",
                     ["R"] = "refresh",
                     ["?"] = "show_help",
@@ -232,6 +232,11 @@ local _M = {
 
             nesting_rules = {},
             filesystem = {
+                follow_current_file = {
+                    enabled = true,
+                    leave_dirs_open = true,
+                },
+                bind_to_cwd = false,
                 filtered_items = {
                     visible = false, -- when true, they will just be displayed differently than normal items
                     hide_dotfiles = true,
@@ -256,7 +261,7 @@ local _M = {
                     },
                 },
                 -- time the current file is changed while the tree is open.
-                group_empty_dirs = false, -- when true, empty folders will be grouped together
+                group_empty_dirs = false,               -- when true, empty folders will be grouped together
                 hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
                 -- in whatever position is specified in window.position
                 -- "open_current",  -- netrw disabled, opening a directory opens within the
@@ -293,12 +298,12 @@ local _M = {
                 commands = {}, -- Add a custom command or override a global one using the same function name
             },
             buffers = {
-                follow_current_file = {
-                    enabled = true,
-                    leave_dirs_open = true,
-                }, -- This will find and focus the file in the active buffer every
-                -- follow_current_file = true, -- This will find and focus the file in the active buffer every
-                -- time the current file is changed while the tree is open.
+                -- follow_current_file = {
+                --     enabled = true,
+                --     -- leave_dirs_open = true,
+                -- }, -- This will find and focus the file in the active buffer every
+                -- -- follow_current_file = true, -- This will find and focus the file in the active buffer every
+                -- -- time the current file is changed while the tree is open.
                 group_empty_dirs = true, -- when true, empty folders will be grouped together
                 show_unloaded = true,
                 window = {
@@ -356,10 +361,10 @@ local _M = {
         })
     end,
     keys = {
-        { mode = "n", "<F2>", "<cmd>NeoTreeRevealToggle<cr>", desc = "Toggle NeoTree" },
-        { mode = "n", "<leader>ee", "<cmd>Neotree left<cr>", desc = "NeoTree left" },
-        { mode = "n", "<leader>er", "<cmd>Neotree right<cr>", desc = "NeoTree right" },
-        { mode = "n", "<leader>ef", "<cmd>Neotree float<cr>", desc = "NeoTree float" },
+        { mode = "n", "<F2>",       "<cmd>NeoTreeRevealToggle<cr>", desc = "Toggle NeoTree" },
+        { mode = "n", "<leader>ee", "<cmd>Neotree left<cr>",        desc = "NeoTree left" },
+        { mode = "n", "<leader>er", "<cmd>Neotree right<cr>",       desc = "NeoTree right" },
+        { mode = "n", "<leader>ef", "<cmd>Neotree float<cr>",       desc = "NeoTree float" },
     },
 }
 return _M
