@@ -42,8 +42,8 @@ _M.treesitter = {
         "markdown",
         "markdown_inline",
         "regex",
-        "norg",
-        "latex",
+        -- "norg",
+        -- "latex",
     },
     disanble_languages = {
         "txt",
