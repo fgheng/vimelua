@@ -365,6 +365,7 @@ local _M = {
         { mode = "n", "<leader>ee", "<cmd>Neotree left<cr>",        desc = "NeoTree left" },
         { mode = "n", "<leader>er", "<cmd>Neotree right<cr>",       desc = "NeoTree right" },
         { mode = "n", "<leader>ef", "<cmd>Neotree float<cr>",       desc = "NeoTree float" },
+        { mode = "n", "=",          "<cmd>Neotree focus<cr>",       desc = "NeoTree focus" },
     },
 }
 return _M
