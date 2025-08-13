@@ -5,7 +5,7 @@ local _M = {
         -- event = { "BufReadPre", "BufNewFile" },
         event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function()
-            vim.lsp.set_log_level("ERROR")
+            vim.lsp.log.set_level("ERROR")
 
             local on_init = require("lsp.utils.utils").on_init
             local on_attach = require("lsp.utils.utils").on_attach

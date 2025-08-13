@@ -1,7 +1,7 @@
 local _M = {
     {
         "andymass/vim-matchup",
-        enabled = true,
+        enabled = false,
         -- event = { "InsertEnter" },
         event = { "BufReadPost" },
         init = function()
