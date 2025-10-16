@@ -2,36 +2,24 @@ local _M = {
     {
         "neovim/nvim-lspconfig",
         enabled = true,
-        -- event = { "BufReadPre", "BufNewFile" },
         event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function()
             vim.lsp.log.set_level("ERROR")
 
-            local on_init = require("lsp.utils.utils").on_init
-            local on_attach = require("lsp.utils.utils").on_attach
-            local capabilities = require("lsp.utils.utils").capabilities()
-            local handlers = require("lsp.utils.utils").handlers()
-
-            local lspconfig = require("lspconfig")
+            -- local on_init = require("lsp.utils").on_init
+            -- local on_attach = require("lsp.utils").on_attach
+            -- local capabilities = require("lsp.utils").capabilities
+            -- local handlers = require("lsp.utils").handlers
+            --
+            -- local opts = {
+            --     on_init = on_init,
+            --     on_attach = on_attach,
+            --     capabilities = capabilities,
+            --     handlers = handlers,
+            -- }
+            -- vim.lsp.config("*", opts)
             local servers = require("config").servers.lsp_servers
-
-            for _, lsp in pairs(servers) do
-                if lsp ~= "jdtls" then
-                    local status_ok, server_config = pcall(require, "lsp.languages." .. lsp)
-
-                    if status_ok then
-                        local opts = {
-                            on_init = on_init,
-                            on_attach = on_attach,
-                            capabilities = capabilities,
-                            handlers = handlers,
-                        }
-
-                        opts = vim.tbl_deep_extend("force", opts, server_config)
-                        lspconfig[lsp].setup(opts)
-                    end
-                end
-            end
+            vim.lsp.enable(servers)
         end,
     },
 

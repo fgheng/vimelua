@@ -1,4 +1,3 @@
-local M = {}
 
 -- local open_float_winid = -1
 --
@@ -200,7 +199,7 @@ local function lsp_highlight(client, bufnr)
     end
 end
 
-M.capabilities = function()
+local function capabilities()
     local capabilities_ = vim.lsp.protocol.make_client_capabilities()
     capabilities_.textDocument.foldingRange = {
         dynamicRegistration = true,
@@ -230,21 +229,7 @@ M.capabilities = function()
     return capabilities_
 end
 
-M.on_init = function(client, _)
-    if client:supports_method("textDocument/semanticTokens") then
-        client.server_capabilities.semanticTokensProvider = nil
-    end
-end
-
-M.on_attach = function(client, bufnr)
-    keymaps(client, bufnr)
-    lsp_highlight(client, bufnr)
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-
-    client.capabilities.document_formatting = false -- ?
-end
-
-M.handlers = function()
+local function handlers()
     return {
         -- ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         --     border = require("config").ui.border,
@@ -258,5 +243,24 @@ M.handlers = function()
         -- }),
     }
 end
+
+local function on_attach(client, bufnr)
+    keymaps(client, bufnr)
+    lsp_highlight(client, bufnr)
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+
+    client.capabilities.document_formatting = false -- ?
+end
+
+local function on_init(client, _)
+    if client:supports_method("textDocument/semanticTokens") then
+        client.server_capabilities.semanticTokensProvider = nil
+    end
+end
+
+M.capabilities = capabilities()
+M.handlers = handlers()
+M.on_init = on_init
+M.on_attach = on_attach
 
 return M

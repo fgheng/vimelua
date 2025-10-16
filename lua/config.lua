@@ -4,14 +4,14 @@ _M.picker = "fzf-lua" -- telescope, fzf-lua
 
 _M.ui = {
     theme = {
-        theme = "paper", --"paper",
-        background = "light",
+        theme = "vscode", --"paper",
+        background = "dark",
         transparent = 0.8,
     },
     float_ui_win = {
         -- Can be one of the pre-defined styles: `"double"`, `"none"`, `"rounded"`, `"shadow"`, `"single"` or `"solid"`.
-        -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        border = "double",
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        -- border = "double",
         width = 0.8,
         height = 0.8,
     },

@@ -40,7 +40,7 @@ end
 local _M = {
     {
         "robitx/gp.nvim",
-        enabled = true,
+        enabled = false,
         config = function()
             require("gp").setup({
                 providers = {

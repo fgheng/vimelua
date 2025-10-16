@@ -16,6 +16,10 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/.cache/jdtls3/workspace/" .. project_name
 
 local _M = {
+    on_init = require("utils.lsp_utils").on_init,
+    on_attach = require("utils.lsp_utils").on_attach,
+    capabilities = require("utils.lsp_utils").capabilities,
+    handlers = require("utils.lsp_utils").handlers,
     cmd = {
         "jdtls",
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -86,7 +90,7 @@ local _M = {
         "settings.gradle.kts",
         vim.fn.getcwd(),
     }),
-    single_file_support = true,
+    single_file_support = true
     -- root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew" }),
 }
 

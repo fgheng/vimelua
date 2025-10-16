@@ -24,6 +24,8 @@ end
 
 local theme_config = require("config").ui.theme
 
+vim.o.background = theme_config.background
+
 local map_to_themes = {
     default = function()
         return {}
@@ -59,6 +61,7 @@ local map_to_themes = {
                         -- use colors from this colorscheme by requiring vscode.colors!
                         Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
                         CursorLine = { bg = "#4a4b4a" },
+                        -- CursorLine = { bg = c.none },
                         WinBar = { fg = c.none, bg = c.none },
                         WinBarNC = { fg = c.none, bg = c.none },
                         StatusLine = { bg = c.none },
@@ -68,7 +71,7 @@ local map_to_themes = {
                     },
                 })
                 require("vscode").load()
-                set_highlights()
+                -- set_highlights()
             end,
         }
     end,
@@ -123,21 +126,21 @@ local map_to_themes = {
                     options = {
                         -- Compiled file's destination location
                         compile_path = vim.fn.stdpath("cache") .. "/nightfox",
-                        compile_file_suffix = "_compiled", -- Compiled file suffix
+                        compile_file_suffix = "_compiled",                    -- Compiled file suffix
                         transparent = require("config").ui.theme.transparent, -- Enable/disable transparency
-                        terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
-                        dim_inactive = false, -- Non focused panes set to alternative background
-                        module_default = true, -- Default enable value for modules
+                        terminal_colors = true,                               -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+                        dim_inactive = false,                                 -- Non focused panes set to alternative background
+                        module_default = true,                                -- Default enable value for modules
                         colorblind = {
-                            enable = true, -- Enable colorblind support
-                            simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
+                            enable = true,                                    -- Enable colorblind support
+                            simulate_only = false,                            -- Only show simulated colorblind colors and not diff shifted
                             severity = {
-                                protan = 0, -- Severity [0,1] for protan (red)
-                                deutan = 0, -- Severity [0,1] for deutan (green)
-                                tritan = 0, -- Severity [0,1] for tritan (blue)
+                                protan = 0,                                   -- Severity [0,1] for protan (red)
+                                deutan = 0,                                   -- Severity [0,1] for deutan (green)
+                                tritan = 0,                                   -- Severity [0,1] for tritan (blue)
                             },
                         },
-                        styles = { -- Style to be applied to different syntax groups
+                        styles = {             -- Style to be applied to different syntax groups
                             comments = "NONE", -- Value is any valid attr-list value `:help attr-list`
                             conditionals = "NONE",
                             constants = "NONE",
@@ -210,7 +213,7 @@ local map_to_themes = {
     github = function()
         return {
             "projekt0n/github-nvim-theme",
-            lazy = false, -- make sure we load this during startup if it is your main colorscheme
+            lazy = false,    -- make sure we load this during startup if it is your main colorscheme
             priority = 1000, -- make sure to load this before all the other start plugins
             config = function()
                 require("github-theme").setup({
@@ -267,7 +270,7 @@ local map_to_themes = {
             priority = 1000,
             config = function()
                 require("rose-pine").setup({
-                    variant = "auto", -- auto, main, moon, or dawn
+                    variant = "auto",      -- auto, main, moon, or dawn
                     dark_variant = "main", -- main, moon, or dawn
                     dim_inactive_windows = false,
                     extend_background_behind_borders = true,
@@ -275,7 +278,7 @@ local map_to_themes = {
                     enable = {
                         terminal = true,
                         legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-                        migrations = true, -- Handle deprecated options automatically
+                        migrations = true,        -- Handle deprecated options automatically
                     },
 
                     styles = {
@@ -344,24 +347,51 @@ local map_to_themes = {
 
                 -- vim.cmd("colorscheme rose-pine-main")
                 -- vim.cmd("colorscheme rose-pine-dawn")
-                vim.cmd("colorscheme rose-pine-moon")
+                vim.cmd.colorschem("rose-pine-moon")
                 set_highlights()
             end,
         }
     end,
     paper = function()
         return {
-            "yorik1984/newpaper.nvim",
-            priority = 1000,
+            "thesimonho/kanagawa-paper.nvim",
             lazy = false,
+            priority = 1000,
+            -- init = function()
+            -- end,
             config = function()
-                local style = require("config").ui.theme.style
-                require("newpaper").setup({
-                    style = style,
+                require("kanagawa-paper").setup({
+                    cache = true
                 })
-            end,
+                vim.cmd.colorscheme("kanagawa-paper")
+            end
         }
+        -- return {
+        --     "yorik1984/newpaper.nvim",
+        --     priority = 1000,
+        --     lazy = false,
+        --     config = function()
+        --         local style = require("config").ui.theme.style
+        --         require("newpaper").setup({
+        --             style = style,
+        --         })
+        --     end,
+        -- }
     end,
+    kanagawa = function()
+        return {
+            "rebelot/kanagawa.nvim",
+            lazy = false,
+            priority = 1000,
+            config = function ()
+                require("kanagawa").setup({
+
+                })
+                vim.cmd.colorscheme("kanagawa-wave")
+            end
+        }
+
+    end
 }
 
 return map_to_themes[require("config").ui.theme.theme]() or {}

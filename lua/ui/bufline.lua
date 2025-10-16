@@ -18,8 +18,8 @@ local _M = {
             left_mouse_command = "buffer %d",
             middle_mouse_command = nil,
             indicator = {
-                -- icon = icons.line_bold, -- this should be omitted if indicator style is not 'icon'
-                style = "underline", -- | "icon" | "underline" | "none",
+                icon = '▎', -- this should be omitted if indicator style is not 'icon'
+                style = "icon", -- | "icon" | "underline" | "none",
             },
             -- buffer_close_icon = icons.close,
             -- modified_icon = icons.circle,
