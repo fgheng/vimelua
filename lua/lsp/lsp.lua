@@ -19,6 +19,13 @@ local _M = {
             -- }
             -- vim.lsp.config("*", opts)
             local servers = require("config").servers.lsp_servers
+            -- local servers = {}
+            -- for _, v in ipairs(require("config").servers.lsp_servers) do
+            --     if v ~= "jdtls" then
+            --         table.insert(servers, v)
+            --     end
+            -- end
+
             vim.lsp.enable(servers)
         end,
     },

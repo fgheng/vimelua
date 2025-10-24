@@ -42,6 +42,7 @@ _M.treesitter = {
         "markdown",
         "markdown_inline",
         "regex",
+        "xml",
         -- "norg",
         -- "latex",
     },
@@ -63,7 +64,8 @@ _M.servers = {
         "buf_ls",
         "zk",
         "denols",
-        "jsonls"
+        "jsonls",
+        "lemminx"
         -- "basics_ls" -- npm install -g basics-language-server
     },
     linter = {

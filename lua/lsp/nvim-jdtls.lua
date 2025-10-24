@@ -16,7 +16,7 @@ return {
         -- local jdtls_path = jdtls_pkg:get_install_path()
         local jdtls_path = data_path .. "/mason/packages/jdtls/"
         -- 💀
-        local lancher_jar = jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"
+        local lancher_jar = jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.7.0.v20250519-0528.jar"
         -- 💀
         local CONFIG = "linux"
         if vim.fn.has "mac" == 1 then
@@ -73,8 +73,8 @@ return {
             init_options = {
                 bundles = {},
             },
-            capabilities = require("lsp.utils.utils").capabilities(),
-            on_attach = require("lsp.utils.utils").on_attach,
+            capabilities = require("utils.lsp_utils").capabilities,
+            on_attach = require("utils.lsp_utils").on_attach,
         }
 
         vim.api.nvim_create_autocmd("FileType", {
